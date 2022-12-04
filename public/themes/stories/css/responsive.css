@@ -33,6 +33,11 @@
 @media (max-width:991px){
     button.search-icon {display:block!important;}
     form.search-style-2 {display:none;}
+    .form-search-wrapper {display:none;}
+    .header-top .header-top-right .header-tools {display:none;}
+    .header-sticky .header-tools button.search-icon {display:none!important;}
+    .header-sticky .header-tools .header-social-network {display:block!important;}
+    .header-sticky .header-tools .off-canvas-toggle-cover {display:block!important;}
 }
 
 /* small mobile :768px. */

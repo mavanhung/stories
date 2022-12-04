@@ -54,7 +54,7 @@
             @endif --}}
             <div class="header-top">
                 <div class="container">
-                    <div class="row pt-20 pb-20">
+                    <div class="row pt-20 pb-20 align-items-center">
                         <div class="col-md-3 col-6">
                             @if (theme_option('logo'))
                                 <a href="{{ url('') }}"><img class="logo" src="{{ RvMedia::getImageUrl(theme_option('logo')) }}" alt="{{ setting('site_title') }}"></a>
@@ -71,12 +71,34 @@
                             @if(apply_filters('language_switcher'))
                                 <span class="vertical-divider mr-20 ml-20 d-none d-md-inline"></span>
                             @endif
-                            <form class="search-style-2" action="{{ is_plugin_active('blog') ? route('public.search') : '#' }}">
-                                <input type="text" name="q" id="" placeholder="{{ __('Enter search text') }}">
-                                <button type="submit">
-                                    <i class="elegant-icon icon_search"></i>
-                                </button>
-                            </form>
+                            <div class="form-search-wrapper">
+                                <div class="row align-items-center">
+                                    <div class="col-md-8 col-8 p-0">
+                                        <form class="search-style-2" action="{{ is_plugin_active('blog') ? route('public.search') : '#' }}">
+                                            <input type="text" name="q" id="" placeholder="{{ __('Enter search text') }}">
+                                            <button type="submit">
+                                                <i class="elegant-icon icon_search"></i>
+                                            </button>
+                                        </form>
+                                    </div>
+                                    <div class="col-md-4 col-4">
+                                        <div class="float-right header-tools text-muted font-small d-flex align-items-center">
+                                            <ul class="header-social-network d-inline-block list-inline mr-15">
+                                                @for ($i = 1; $i <= 5; $i++)
+                                                    @if (theme_option('social_' . $i . '_url') && theme_option('social_' . $i . '_name'))
+                                                        <li class="list-inline-item"><a class="social-icon text-xs-center" style="background: {{ theme_option('social_' . $i . '_color') }}" href="{{ theme_option('social_' . $i . '_url') }}" target="_blank" title="{{ theme_option('social_' . $i . '_name') }}"><i class="elegant-icon {{ theme_option('social_' . $i . '_icon') }}"></i></a></li>
+                                                    @endif
+                                                @endfor
+                                            </ul>
+                                            <div class="off-canvas-toggle-cover d-inline-block">
+                                                <div class="off-canvas-toggle hidden d-inline-block" id="off-canvas-toggle">
+                                                    <span></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <button class="search-icon d-none"><span class="mr-15 text-muted font-medium"><i class="elegant-icon icon_search mr-5"></i>{{ __('Search') }}</span></button>
                             @if (theme_option('action_button_text') && theme_option('action_button_url'))
                                 <a href="{{ url(theme_option('action_button_url')) }}" class="btn btn-radius bg-primary text-white d-none d-md-inline ml-15 font-small box-shadow">{{ theme_option('action_button_text') }}</a>
@@ -109,12 +131,21 @@
                                 @endif
                             @endfor
                         </ul>
+                        <button class="search-icon"><span class="mr-15 text-muted font-medium"><i class="elegant-icon icon_search"></i></span></button>
                         <div class="off-canvas-toggle-cover d-inline-block">
                             <div class="off-canvas-toggle hidden d-inline-block" id="off-canvas-toggle">
                                 <span></span>
                             </div>
                         </div>
                     </div>
+                    {{-- <div class="float-right header-tools text-muted font-small search-icon-sticky d-none">
+                        <button class="search-icon"><span class="mr-15 text-muted font-medium"><i class="elegant-icon icon_search"></i></span></button>
+                        <div class="off-canvas-toggle-cover d-inline-block">
+                            <div class="off-canvas-toggle hidden d-inline-block" id="off-canvas-toggle">
+                                <span></span>
+                            </div>
+                        </div>
+                    </div> --}}
                     <div class="clearfix"></div>
                 </div>
             </div>
@@ -125,6 +156,9 @@
                 <div class="pt-50 pb-50 ">
                     <div class="row mb-20">
                         <div class="col-12 align-self-center main-search-form-cover m-auto">
+                            <button class="search-icon">
+                                <i class="elegant-icon icon_close"></i>
+                            </button>
                             <p class="text-center"><span class="search-text-bg">{{ __('Search') }}</span></p>
                             <form action="{{ is_plugin_active('blog') ? route('public.search') : '#' }}" class="search-header">
                                 <div class="input-group w-100">

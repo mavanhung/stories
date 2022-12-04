@@ -19,7 +19,7 @@
 
     // Off canvas sidebar
     var OffCanvas = function() {
-        $('#off-canvas-toggle').on('click', function() {
+        $('.off-canvas-toggle').on('click', function() {
             $('body').toggleClass("canvas-opened");
         });
 
@@ -36,7 +36,7 @@
         $('button.search-icon').on('click', function() {
             $('body').toggleClass("open-search-form");
             $('.mega-menu-item').removeClass("open");
-            $("html, body").animate({ scrollTop: 0 }, "slow");
+            // $("html, body").animate({ scrollTop: 0 }, "slow");
         });
         $('.search-close').on('click', function() {
             $('body').removeClass("open-search-form");
