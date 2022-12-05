@@ -553,39 +553,44 @@ pre{border:1px solid #eee;font-size:1em;line-height:1.8;margin:15px 0;max-width:
 }
 
 form.search-style-2 {
-    position: relative;
+    display: flex;
+    align-items: center;
 }
+
 form.search-style-2 input {
     background-color: #fff;
-    border: 1px solid #eee;
-    border-radius: 25px;
+    border: 1px solid #ccc;
+    border-right: unset;
+    border-top-left-radius: 25px;
+    border-bottom-left-radius: 25px;
     color: var(--color-muted);
     min-height: 45px;
-    padding: 3px 60px 3px 20px;
+    padding: 3px 20px;
     width: 100%;
     height: 45px;
     transition: all .3s ease 0s;
+    position: relative;
 }
 form.search-style-2 input:focus {
     border: 1px solid var(--color-primary);
 }
 form.search-style-2 button {
-    background-color: transparent;
-    border: none;
+    background-color: #f8f8f8;
+    border: 1px solid #ccc;
     color: var(--color-primary);
     font-size: 20px;
     height: 45px;
-    width: 45px;
-    position: absolute;
-    right: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    border-radius: 50%;
+    padding: 0 25px;
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
     font-weight: 500;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: all .8s;
+}
+form.search-style-2 button:hover {
+    background-color: #f0f0f0;
 }
 form.search-style-2 button i {
     transform: rotateY(180deg);
