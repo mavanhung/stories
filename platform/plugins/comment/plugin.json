@@ -1,0 +1,9 @@
+{
+    "name": "Comment",
+    "namespace": "Botble\\Comment\\",
+    "provider": "Botble\\Comment\\Providers\\CommentServiceProvider",
+    "author": "Mã Hưng",
+    "url": "https://botble.com",
+    "version": "1.0",
+    "description": "Comment post"
+}
