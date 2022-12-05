@@ -2,6 +2,7 @@
 
 namespace Botble\Base\Traits;
 
+use Botble\Base\Supports\Helper;
 use Illuminate\Support\ServiceProvider;
 
 /**
@@ -206,5 +207,15 @@ trait LoadAndPublishDataTrait
     protected function getAssetsPath(): string
     {
         return $this->getBasePath() . $this->getDashedNamespace() . '/public/';
+    }
+
+    /**
+     * @return $this
+     */
+    public function loadHelpers(): self
+    {
+        Helper::autoload(base_path('platform/') . $this->getDashedNamespace() . '/helpers');
+
+        return $this;
     }
 }

@@ -61,6 +61,7 @@ class AclServiceProvider extends ServiceProvider
         $this->app->register(EventServiceProvider::class);
 
         $this->setNamespace('core/acl')
+            ->loadHelpers()
             ->loadAndPublishConfigurations(['general', 'permissions'])
             ->loadAndPublishViews()
             ->loadAndPublishTranslations()
