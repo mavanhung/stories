@@ -57,6 +57,8 @@ return [
             $theme->asset()->usePath()->add('widgets', 'css/widgets.css', [], [], $version);
             $theme->asset()->usePath()->add('responsive', 'css/responsive.css', [], [], $version);
             $theme->asset()->usePath()->add('custom', 'css/custom.css', [], [], $version);
+            $theme->asset()->usePath()->add('comments', 'css/comments.css', [], [], $version);
+            $theme->asset()->add('font-awesome', 'https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css');
 
             if (BaseHelper::siteLanguageDirection() == 'rtl') {
                 $theme->asset()->usePath()->add('rtl', 'css/rtl.css', [], [], $version);
