@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "861ba207d7dcb3f35486d4c80fc24cda",
+    "content-hash": "d70c7371e91e8df5ce47c33b519d0f06",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1062,6 +1062,36 @@
             }
         },
         {
+            "name": "botble/theme-generator",
+            "version": "dev-main",
+            "dist": {
+                "type": "path",
+                "url": "./platform/packages/theme-generator",
+                "reference": "3a0ceeb8cad2ce16acc0bf212be7c19cd3246e73"
+            },
+            "require": {
+                "botble/platform": "*@dev",
+                "botble/theme": "*@dev"
+            },
+            "type": "package",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Botble\\ThemeGenerator\\Providers\\ThemeGeneratorServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Botble\\ThemeGenerator\\": "src"
+                }
+            },
+            "description": "Theme generator",
+            "transport-options": {
+                "relative": true
+            }
+        },
+        {
             "name": "botble/widget",
             "version": "dev-main",
             "dist": {
@@ -1091,6 +1121,36 @@
                 }
             },
             "description": "Widget package for Botble CMS application",
+            "transport-options": {
+                "relative": true
+            }
+        },
+        {
+            "name": "botble/widget-generator",
+            "version": "dev-main",
+            "dist": {
+                "type": "path",
+                "url": "./platform/packages/widget-generator",
+                "reference": "5773203cfacf59dce93ff659efb80cb44ada40cc"
+            },
+            "require": {
+                "botble/platform": "*@dev",
+                "botble/widget": "*@dev"
+            },
+            "type": "package",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Botble\\WidgetGenerator\\Providers\\WidgetGeneratorServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Botble\\WidgetGenerator\\": "src"
+                }
+            },
+            "description": "Widget generator",
             "transport-options": {
                 "relative": true
             }
@@ -12650,8 +12710,11 @@
         "botble/dev-tool": 20,
         "botble/plugin-generator": 20,
         "botble/plugin-management": 20,
+        "botble/theme-generator": 20,
         "botble/shortcode": 20,
-        "botble/theme": 20
+        "botble/theme": 20,
+        "botble/widget": 20,
+        "botble/widget-generator": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,

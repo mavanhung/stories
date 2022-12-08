@@ -1119,6 +1119,39 @@
             "install-path": "../botble/theme"
         },
         {
+            "name": "botble/theme-generator",
+            "version": "dev-main",
+            "version_normalized": "dev-main",
+            "dist": {
+                "type": "path",
+                "url": "./platform/packages/theme-generator",
+                "reference": "3a0ceeb8cad2ce16acc0bf212be7c19cd3246e73"
+            },
+            "require": {
+                "botble/platform": "*@dev",
+                "botble/theme": "*@dev"
+            },
+            "type": "package",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Botble\\ThemeGenerator\\Providers\\ThemeGeneratorServiceProvider"
+                    ]
+                }
+            },
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "Botble\\ThemeGenerator\\": "src"
+                }
+            },
+            "description": "Theme generator",
+            "transport-options": {
+                "relative": true
+            },
+            "install-path": "../botble/theme-generator"
+        },
+        {
             "name": "botble/widget",
             "version": "dev-main",
             "version_normalized": "dev-main",
@@ -1154,6 +1187,39 @@
                 "relative": true
             },
             "install-path": "../botble/widget"
+        },
+        {
+            "name": "botble/widget-generator",
+            "version": "dev-main",
+            "version_normalized": "dev-main",
+            "dist": {
+                "type": "path",
+                "url": "./platform/packages/widget-generator",
+                "reference": "5773203cfacf59dce93ff659efb80cb44ada40cc"
+            },
+            "require": {
+                "botble/platform": "*@dev",
+                "botble/widget": "*@dev"
+            },
+            "type": "package",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Botble\\WidgetGenerator\\Providers\\WidgetGeneratorServiceProvider"
+                    ]
+                }
+            },
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "Botble\\WidgetGenerator\\": "src"
+                }
+            },
+            "description": "Widget generator",
+            "transport-options": {
+                "relative": true
+            },
+            "install-path": "../botble/widget-generator"
         },
         {
             "name": "brick/math",
@@ -2319,12 +2385,12 @@
             "type": "library",
             "installation-source": "dist",
             "autoload": {
-                "psr-0": {
-                    "HTMLPurifier": "library/"
-                },
                 "files": [
                     "library/HTMLPurifier.composer.php"
                 ],
+                "psr-0": {
+                    "HTMLPurifier": "library/"
+                },
                 "exclude-from-classmap": [
                     "/library/HTMLPurifier/Language/"
                 ]
