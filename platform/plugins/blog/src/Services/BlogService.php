@@ -2,21 +2,22 @@
 
 namespace Botble\Blog\Services;
 
-use Botble\Base\Enums\BaseStatusEnum;
+use Theme;
+use RvMedia;
+use Eloquent;
+use SeoHelper;
+use Botble\Blog\Models\Tag;
+use Illuminate\Support\Arr;
+use Botble\Blog\Models\Post;
 use Botble\Base\Supports\Helper;
 use Botble\Blog\Models\Category;
-use Botble\Blog\Models\Post;
-use Botble\Blog\Models\Tag;
-use Botble\Blog\Repositories\Interfaces\CategoryInterface;
-use Botble\Blog\Repositories\Interfaces\PostInterface;
-use Botble\Blog\Repositories\Interfaces\TagInterface;
+use Botble\Comment\Models\Comment;
 use Botble\SeoHelper\SeoOpenGraph;
-use Eloquent;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
-use RvMedia;
-use SeoHelper;
-use Theme;
+use Botble\Base\Enums\BaseStatusEnum;
+use Botble\Blog\Repositories\Interfaces\TagInterface;
+use Botble\Blog\Repositories\Interfaces\PostInterface;
+use Botble\Blog\Repositories\Interfaces\CategoryInterface;
 
 class BlogService
 {
@@ -44,6 +45,8 @@ class BlogService
                 $post = app(PostInterface::class)
                     ->getFirstBy($condition, ['*'],
                         ['categories', 'tags', 'slugable', 'categories.slugable', 'tags.slugable']);
+
+                $commentsCount = Comment::where('posts_id', $slug->reference_id)->get()->count();
 
                 if (empty($post)) {
                     abort(404);
@@ -84,7 +87,7 @@ class BlogService
                 return [
                     'view'         => 'post',
                     'default_view' => 'plugins/blog::themes.post',
-                    'data'         => compact('post'),
+                    'data'         => compact('post', 'commentsCount'),
                     'slug'         => $post->slug,
                 ];
             case Category::class:

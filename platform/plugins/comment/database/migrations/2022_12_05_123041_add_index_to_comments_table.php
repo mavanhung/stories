@@ -14,7 +14,7 @@ class AddIndexToCommentsTable extends Migration
     public function up()
     {
         Schema::table('comments', function (Blueprint $table) {
-            $table->index(['customer_id', 'posts_id', 'status', 'created_at']);
+            $table->index(['posts_id', 'status', 'created_at']);
         });
     }
 
@@ -27,7 +27,7 @@ class AddIndexToCommentsTable extends Migration
     {
         Schema::table('comments', function (Blueprint $table) {
             Schema::table('comments', function (Blueprint $table) {
-                $table->dropIndex(['customer_id', 'posts_id', 'status', 'created_at']);
+                $table->dropIndex(['posts_id', 'status', 'created_at']);
             });
         });
     }

@@ -1,7 +1,8 @@
 <div class="be-comment-block bg-white">
     <h2 class="comments-title">Gửi bình luận</h2>
-    <form action="" method="post" class="form-block mb-50" enctype="multipart/form-data">
+    <form action="{{ route('theme.ajax-post-comment') }}" method="post" class="form-comment-post form-block mb-50" enctype="multipart/form-data">
         @csrf
+        <input type="hidden" name="posts_id" value="{{ $post->id }}">
         <div class="row">
             <div class="col-xs-12 col-sm-4">
                 <div class="form-group fl_icon">
@@ -23,22 +24,66 @@
             </div>
             <div class="col-xs-12 col-sm-12">
                 <div class="form-group">
-                    <textarea name="comment" class="form-input" required placeholder="Nội dụng"></textarea>
+                    <input id="saveCommentAuthor" type="checkbox" name="comment_author">
+                    <label for="saveCommentAuthor" class="font-medium ml-5 mb-0 d-inline">Lưu thông tin trong trình duyệt này cho lần bình luận kế tiếp của tôi.</label>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12">
+                <div class="form-group">
+                    <textarea name="comment" class="form-input" required placeholder="Nội dung"></textarea>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12">
+                <div class="form-group">
+                    <script type="text/x-custom-template" id="review-image-template">
+                        <span class="image-viewer__item" data-id="__id__">
+                            <img src="https://nest.botble.com/vendor/core/core/base/images/placeholder.png" alt="Preview" class="img-responsive d-block">
+                            <span class="image-viewer__icon-remove">
+                                <i class="fa fa-times"></i>
+                            </span>
+                        </span>
+                    </script>
+                    <div class="image-upload__viewer d-flex">
+                        <div class="image-viewer__list position-relative">
+                            <div class="image-upload__uploader-container">
+                                <div class="d-table">
+                                    <div class="image-upload__uploader">
+                                        <i class="fa fa-camera image-upload__icon"></i>
+                                        <div class="image-upload__text">Upload photos</div>
+                                        <input type="file"
+                                            name="images[]" data-max-files="3" accept="image/png,image/jpeg,image/jpg"
+                                            multiple="multiple" data-max-size="2048"
+                                            data-max-size-message="The __attribute__ must not be greater than __max__ kilobytes."
+                                            class="image-upload__file-input">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="loading">
+                                <div class="half-circle-spinner">
+                                    <div class="circle circle-1"></div>
+                                    <div class="circle circle-2"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <span class="help-block d-inline-block">Bạn có thể tải lên tối đa 3 ảnh, kích thước tối đa của mỗi ảnh là 2048 kilobyte</span>
+                    </div>
                 </div>
             </div>
             <div class="col-xs-12 col-sm-4">
                 <div class="form-group d-flex">
                     <p class="star-title">Đánh giá:</p>
                     <div class="rating">
-                        <input type="radio" name="rating" id="rating-5" value="1">
+                        <input type="radio" name="star" id="rating-5" value="5" checked>
                         <label for="rating-5"></label>
-                        <input type="radio" name="rating" id="rating-4" value="2">
+                        <input type="radio" name="star" id="rating-4" value="4">
                         <label for="rating-4"></label>
-                        <input type="radio" name="rating" id="rating-3" value="3">
+                        <input type="radio" name="star" id="rating-3" value="3">
                         <label for="rating-3"></label>
-                        <input type="radio" name="rating" id="rating-2" value="4">
+                        <input type="radio" name="star" id="rating-2" value="2">
                         <label for="rating-2"></label>
-                        <input type="radio" name="rating" id="rating-1" value="5">
+                        <input type="radio" name="star" id="rating-1" value="1">
                         <label for="rating-1"></label>
                         <div class="emoji-wrapper">
                             <div class="emoji">
@@ -51,12 +96,12 @@
                                         cy="199.829" rx="56.146" ry="56.13" fill="#fff" />
                                     <ellipse transform="rotate(-148.804 180.87 175.82)" cx="180.871" cy="175.822"
                                         rx="28.048" ry="28.08" fill="#3e4347" />
-                                    <ellipse transform="rotate(-113.778 194.434 165.995)" cx="194.433" cy="165.993"
-                                        rx="8.016" ry="5.296" fill="#5a5f63" />
+                                    <ellipse transform="rotate(-113.778 194.434 165.995)" cx="194.433"
+                                        cy="165.993" rx="8.016" ry="5.296" fill="#5a5f63" />
                                     <ellipse transform="scale(-1) rotate(31.21 715.397 -1237.664)" cx="345.695"
                                         cy="199.819" rx="56.146" ry="56.13" fill="#fff" />
-                                    <ellipse transform="rotate(-148.804 360.25 175.837)" cx="360.252" cy="175.84"
-                                        rx="28.048" ry="28.08" fill="#3e4347" />
+                                    <ellipse transform="rotate(-148.804 360.25 175.837)" cx="360.252"
+                                        cy="175.84" rx="28.048" ry="28.08" fill="#3e4347" />
                                     <ellipse transform="scale(-1) rotate(66.227 254.508 -573.138)" cx="373.794"
                                         cy="165.987" rx="8.016" ry="5.296" fill="#5a5f63" />
                                     <path
@@ -210,72 +255,33 @@
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 text-right">
-                <a class="btn btn-primary">Gửi bình luận</a>
+                <a class="btn btn-primary btn-send-comment">Gửi bình luận</a>
             </div>
         </div>
     </form>
-    <h2 class="comments-title">Bình luận (3)</h2>
-    <div class="be-comment">
-        <div class="be-img-comment">
-            <a href="blog-detail-2.html">
+    <h2 class="comments-title">Bình luận ({{ $commentsCount }})</h2>
+    <div class="be-comment-wrapper">
+        {{-- <div class="be-comment">
+            <div class="be-img-comment">
                 <img src="{{ Theme::asset()->url('images/avatar.jpg') }}" alt="avatar user" class="be-ava-comment">
-            </a>
-        </div>
-        <div class="be-comment-content">
-
-            <span class="be-comment-name">
-                <a href="blog-detail-2.html">Ravi Sah</a>
-            </span>
-            <span class="be-comment-time">
-                <i class="fa fa-clock-o"></i>
-                May 27, 2015 at 3:14am
-            </span>
-
-            <p class="be-comment-text">
-                Pellentesque gravida tristique ultrices.
-                Sed blandit varius mauris, vel volutpat urna hendrerit id.
-                Curabitur rutrum dolor gravida turpis tristique efficitur.
-            </p>
-        </div>
-    </div>
-    <div class="be-comment">
-        <div class="be-img-comment">
-            <a href="blog-detail-2.html">
-                <img src="{{ Theme::asset()->url('images/avatar.jpg') }}" alt="avatar user" class="be-ava-comment">
-            </a>
-        </div>
-        <div class="be-comment-content">
-            <span class="be-comment-name">
-                <a href="blog-detail-2.html">Phoenix, the Creative Studio</a>
-            </span>
-            <span class="be-comment-time">
-                <i class="fa fa-clock-o"></i>
-                May 27, 2015 at 3:14am
-            </span>
-            <p class="be-comment-text">
-                Nunc ornare sed dolor sed mattis. In scelerisque dui a arcu mattis, at maximus eros commodo. Cras
-                magna nunc, cursus lobortis luctus at, sollicitudin vel neque. Duis eleifend lorem non ant. Proin ut
-                ornare lectus, vel eleifend est. Fusce hendrerit dui in turpis tristique blandit.
-            </p>
-        </div>
-    </div>
-    <div class="be-comment">
-        <div class="be-img-comment">
-            <a href="blog-detail-2.html">
-                <img src="{{ Theme::asset()->url('images/avatar.jpg') }}" alt="avatar user" class="be-ava-comment">
-            </a>
-        </div>
-        <div class="be-comment-content">
-            <span class="be-comment-name">
-                <a href="blog-detail-2.html">Cüneyt ŞEN</a>
-            </span>
-            <span class="be-comment-time">
-                <i class="fa fa-clock-o"></i>
-                May 27, 2015 at 3:14am
-            </span>
-            <p class="be-comment-text">
-                Cras magna nunc, cursus lobortis luctus at, sollicitudin vel neque. Duis eleifend lorem non ant
-            </p>
-        </div>
+                <span class="be-comment-name">Ravi Sah</span>
+            </div>
+            <div class="be-comment-content">
+                <div class="be-comment-rate">
+                    <span class="be-comment-time">
+                        <i class="fa fa-clock-o"></i>
+                        May 27, 2015 at 3:14am
+                    </span>
+                    <div class="comment-rate d-inline-block">
+                        <div class="comment-rating" style="width: 40%;"></div>
+                    </div>
+                </div>
+                <p class="be-comment-text">
+                    Pellentesque gravida tristique ultrices.
+                    Sed blandit varius mauris, vel volutpat urna hendrerit id.
+                    Curabitur rutrum dolor gravida turpis tristique efficitur.
+                </p>
+            </div>
+        </div> --}}
     </div>
 </div>

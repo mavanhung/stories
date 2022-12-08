@@ -14,8 +14,9 @@ class AddPostsIdToCommentsTable extends Migration
     public function up()
     {
         Schema::table('comments', function (Blueprint $table) {
-            $table->integer('customer_id')->unsigned();
             $table->integer('posts_id')->unsigned();
+            $table->string('email', 255);
+            $table->string('phone', 255);
             $table->float('star');
             $table->text('comment');
             $table->text('images')->nullable();

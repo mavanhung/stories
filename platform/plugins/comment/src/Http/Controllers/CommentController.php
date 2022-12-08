@@ -60,6 +60,8 @@ class CommentController extends BaseController
      */
     public function store(CommentRequest $request, BaseHttpResponse $response)
     {
+        $request->merge(['images' => json_encode(array_filter($request->input('images')))]);
+
         $comment = $this->commentRepository->createOrUpdate($request->input());
 
         event(new CreatedContentEvent(COMMENT_MODULE_SCREEN_NAME, $request, $comment));
@@ -96,6 +98,10 @@ class CommentController extends BaseController
     public function update($id, CommentRequest $request, BaseHttpResponse $response)
     {
         $comment = $this->commentRepository->findOrFail($id);
+
+        $request->merge([
+            'images' => json_encode(array_filter($request->input('images'))),
+        ]);
 
         $comment->fill($request->input());
 

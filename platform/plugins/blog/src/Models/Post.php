@@ -122,4 +122,8 @@ class Post extends BaseModel
             $post->tags()->detach();
         });
     }
+
+    public function comments() {
+        return $this->hasMany(Comment::class, 'posts_id');
+    }
 }

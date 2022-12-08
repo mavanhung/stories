@@ -49,11 +49,26 @@ class CommentTable extends TableAbstract
     {
         $data = $this->table
             ->eloquent($this->query())
+            ->editColumn('posts_id', function ($item) {
+                return $item->posts_id;
+            })
             ->editColumn('name', function ($item) {
                 if (!Auth::user()->hasPermission('comment.edit')) {
                     return $item->name;
                 }
                 return Html::link(route('comment.edit', $item->id), $item->name);
+            })
+            ->editColumn('email', function ($item) {
+                return $item->email;
+            })
+            ->editColumn('phone', function ($item) {
+                return $item->phone;
+            })
+            // ->editColumn('star', function ($item) {
+            //     return $item->star;
+            // })
+            ->editColumn('comment', function ($item) {
+                return $item->comment;
             })
             ->editColumn('checkbox', function ($item) {
                 return $this->getCheckbox($item->id);
@@ -63,12 +78,14 @@ class CommentTable extends TableAbstract
             })
             ->editColumn('status', function ($item) {
                 return $item->status->toHtml();
-            })
-            ->addColumn('operations', function ($item) {
-                return $this->getOperations('comment.edit', 'comment.destroy', $item);
             });
 
-        return $this->toJson($data);
+        return apply_filters(BASE_FILTER_GET_LIST_DATA, $data, $this->repository->getModel())
+        ->addColumn('operations', function ($item) {
+            return $this->getOperations('comment.edit', 'comment.destroy', $item);
+        })
+        ->escapeColumns([])
+        ->make(true);
     }
 
     /**
@@ -79,7 +96,12 @@ class CommentTable extends TableAbstract
         $query = $this->repository->getModel()
             ->select([
                'id',
+               'posts_id',
                'name',
+               'email',
+               'phone',
+            //    'star',
+               'comment',
                'created_at',
                'status',
            ]);
@@ -97,8 +119,28 @@ class CommentTable extends TableAbstract
                 'title' => trans('core/base::tables.id'),
                 'width' => '20px',
             ],
+            'posts_id' => [
+                'title' => trans('plugins/comment::comment.post'),
+                'class' => 'text-start',
+            ],
             'name' => [
                 'title' => trans('core/base::tables.name'),
+                'class' => 'text-start',
+            ],
+            'email' => [
+                'title' => trans('plugins/comment::comment.email'),
+                'class' => 'text-start',
+            ],
+            'phone' => [
+                'title' => trans('plugins/comment::comment.phone'),
+                'class' => 'text-start',
+            ],
+            // 'star' => [
+            //     'title' => trans('plugins/comment::comment.star'),
+            //     'class' => 'text-start',
+            // ],
+            'comment' => [
+                'title' => trans('plugins/comment::comment.comment'),
                 'class' => 'text-start',
             ],
             'created_at' => [
@@ -138,6 +180,11 @@ class CommentTable extends TableAbstract
                 'title'    => trans('core/base::tables.name'),
                 'type'     => 'text',
                 'validate' => 'required|max:120',
+            ],
+            'email' => [
+                'title'    => trans('plugins/comment::comment.email'),
+                'type'     => 'text',
+                'validate' => 'required|email|max:120',
             ],
             'status' => [
                 'title'    => trans('core/base::tables.status'),

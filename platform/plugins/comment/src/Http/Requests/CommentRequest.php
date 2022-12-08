@@ -17,7 +17,12 @@ class CommentRequest extends Request
     public function rules()
     {
         return [
+            'posts_id'   => 'required|numeric',
             'name'   => 'required',
+            'email'   => 'required|email',
+            'phone'   => 'required|numeric',
+            'star'   => 'required|numeric',
+            'comment'   => 'required|max:120',
             'status' => Rule::in(BaseStatusEnum::values()),
         ];
     }

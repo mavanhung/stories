@@ -22,8 +22,9 @@ class Comment extends BaseModel
      */
     protected $fillable = [
         'name',
+        'email',
+        'phone',
         'status',
-        'customer_id',
         'posts_id',
         'star',
         'comment',

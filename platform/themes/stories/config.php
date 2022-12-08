@@ -59,6 +59,7 @@ return [
             $theme->asset()->usePath()->add('custom', 'css/custom.css', [], [], $version);
             $theme->asset()->usePath()->add('comments', 'css/comments.css', [], [], $version);
             $theme->asset()->add('font-awesome', 'https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css');
+            $theme->asset()->add('fancybox', 'https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css');
 
             if (BaseHelper::siteLanguageDirection() == 'rtl') {
                 $theme->asset()->usePath()->add('rtl', 'css/rtl.css', [], [], $version);
@@ -80,7 +81,9 @@ return [
             $theme->asset()->container('footer')->usePath()->add('perfect-scrollbar', 'js/vendor/perfect-scrollbar.js');
             $theme->asset()->container('footer')->usePath()->add('waypoints', 'js/vendor/jquery.waypoints.min.js');
             $theme->asset()->container('footer')->usePath()->add('jquery.theia.sticky', 'js/vendor/jquery.theia.sticky.js');
+            $theme->asset()->container('footer')->add('fancybox-js', 'https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js');
 
+            $theme->asset()->container('footer')->usePath()->add('comment', 'js/comment.js', ['jquery'], [], $version);
             $theme->asset()->container('footer')->usePath()->add('main', 'js/main.js', ['jquery'], [], $version);
             $theme->asset()->container('footer')->usePath()->add('backend', 'js/backend.js', ['jquery'], [], $version);
 
