@@ -15,6 +15,8 @@
             @endif
         @endforeach
     </div>
+    @if (theme_option('facebook_comment_enabled_in_post', 'yes') == 'yes')
     <br>
-    {!! apply_filters(BASE_FILTER_PUBLIC_COMMENT_AREA, Theme::partial('comments')) !!}
+    {!! apply_filters(BASE_FILTER_PUBLIC_COMMENT_AREA, Theme::partial('comments-facebook')) !!}
+    @endif
 </div>
