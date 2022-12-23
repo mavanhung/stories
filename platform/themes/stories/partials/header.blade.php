@@ -75,7 +75,7 @@
                                 <div class="row align-items-center">
                                     <div class="col-md-8 col-8 p-0">
                                         <form class="search-style-2" action="{{ is_plugin_active('blog') ? route('public.search') : '#' }}">
-                                            <input type="text" name="q" id="" placeholder="{{ __('Enter search text') }}">
+                                            <input type="text" name="q" id="" value="{{ app('request')->input('q') }}" placeholder="{{ __('Enter search text') }}">
                                             <button type="submit">
                                                 <i class="elegant-icon icon_search"></i>
                                             </button>
@@ -162,7 +162,7 @@
                             <p class="text-center"><span class="search-text-bg">{{ __('Search') }}</span></p>
                             <form action="{{ is_plugin_active('blog') ? route('public.search') : '#' }}" class="search-header">
                                 <div class="input-group w-100">
-                                    <input type="text" name="q" class="form-control" placeholder="{{ __('Enter search text') }}">
+                                    <input type="text" name="q" value="{{ app('request')->input('q') }}" class="form-control" placeholder="{{ __('Enter search text') }}">
                                     <div class="input-group-append">
                                         <button class="btn btn-search bg-white" type="submit">
                                             <i class="elegant-icon icon_search"></i>

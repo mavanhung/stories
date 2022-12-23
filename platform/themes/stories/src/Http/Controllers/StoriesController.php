@@ -75,22 +75,24 @@ class StoriesController extends PublicController
                 ->setMessage('Bài viết không tồn tại.');
         }
         $results = [];
-        if ($request->hasFile('images')) {
-            $images = (array)$request->file('images', []);
-            foreach ($images as $image) {
-                $result = RvMedia::handleUpload($image, 0, 'comments');
-                if ($result['error'] != false) {
-                    return $response->setError()->setMessage($result['message']);
-                }
-                $results[] = $result;
-            }
-        }
+        // if ($request->hasFile('images')) {
+        //     $images = (array)$request->file('images', []);
+        //     foreach ($images as $image) {
+        //         $result = RvMedia::handleUpload($image, 0, 'comments');
+        //         if ($result['error'] != false) {
+        //             return $response->setError()->setMessage($result['message']);
+        //         }
+        //         $results[] = $result;
+        //     }
+        // }
 
-        $request->merge([
-            'images' => $results ? json_encode(array_filter(collect($results)->pluck('data.url')->values()->toArray())) : null,
-        ]);
+        // $request->merge([
+        //     'images' => $results ? json_encode(array_filter(collect($results)->pluck('data.url')->values()->toArray())) : null,
+        // ]);
 
         $comment = $this->commentRepository->createOrUpdate($request->input());
+        $comment->addMultipleMediaFromRequest($request->file('images'))->toMediaCollection('comments');
+        dd($comment->getFirstMedia('comments')->getUrl());
 
         return $response->setData(Theme::partial('components.comment-single', compact('comment')));
         // return $response->setMessage('Thêm bình luận thành công!');

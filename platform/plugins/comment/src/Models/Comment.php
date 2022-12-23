@@ -2,13 +2,15 @@
 
 namespace Botble\Comment\Models;
 
+use Botble\Base\Models\BaseModel;
 use Botble\Base\Traits\EnumCastable;
 use Botble\Base\Enums\BaseStatusEnum;
-use Botble\Base\Models\BaseModel;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class Comment extends BaseModel
+class Comment extends BaseModel implements HasMedia
 {
-    use EnumCastable;
+    use EnumCastable, InteractsWithMedia;
 
     /**
      * The database table used by the model.
@@ -37,4 +39,13 @@ class Comment extends BaseModel
     protected $casts = [
         'status' => BaseStatusEnum::class,
     ];
+
+    // public function registerMediaCollections(): void
+    // {
+    //     $this->addMediaCollection('comments')->singleFile();
+    // }
+
+    // public function getImageAttribute(){
+    //     return $this->getFirstMedia('comments') ? $this->getFirstMedia('comments')->getUrl() : '';
+    // }
 }
