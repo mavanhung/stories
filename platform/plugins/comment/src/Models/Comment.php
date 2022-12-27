@@ -5,12 +5,9 @@ namespace Botble\Comment\Models;
 use Botble\Base\Models\BaseModel;
 use Botble\Base\Traits\EnumCastable;
 use Botble\Base\Enums\BaseStatusEnum;
-use Spatie\MediaLibrary\HasMedia;
-use Spatie\MediaLibrary\InteractsWithMedia;
-
-class Comment extends BaseModel implements HasMedia
+class Comment extends BaseModel
 {
-    use EnumCastable, InteractsWithMedia;
+    use EnumCastable;
 
     /**
      * The database table used by the model.
