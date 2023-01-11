@@ -17,7 +17,6 @@ use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Storage;
 use Botble\Language\Models\LanguageMeta;
 use Symfony\Component\DomCrawler\Crawler;
-use Spatie\LaravelImageOptimizer\Facades\ImageOptimizer;
 
 trait Functions
 {
@@ -59,9 +58,8 @@ trait Functions
             $response = curl_exec($curl);
             curl_close($curl);
             Storage::disk('public')->put($storagePath, $response);
-            // ImageOptimizer::optimize('storage/news');
-            // app(\Spatie\ImageOptimizer\OptimizerChain::class)->optimize($storagePath);
             return true;
+            // return $response;
         } catch (\Throwable $th) {
             $this->error('Có lỗi xảy ra: '.$th->getMessage().', file: '.$th->getFile().', dòng: '.$th->getLine());
             Log::channel('Crawlers')->error([
@@ -117,10 +115,22 @@ trait Functions
                 //Tải và lưu hình ảnh thumbnail
                 if(!blank($data['thumbnail'])){
                     if(strpos($data['thumbnail'], 'https://') === 0) {
+                        // Lưu hình ảnh ở local storage
                         $thumbnailName = array_reverse(explode ('/', $data['thumbnail']))[0];
                         $storagePath = 'news/'.$post->id.'/'.$thumbnailName;
                         $storagePathThumbnail = 'storage/news/'.$post->id.'/'.$thumbnailName;
                         $this->saveImage($data['thumbnail'], $storagePath, $thumbnailName);
+                        // Kết thúc lưu hình ảnh ở local storage
+
+                        // Lưu hình ảnh ở AWS S3
+                        // $thumbnailName = array_reverse(explode ('/', $data['thumbnail']))[0];
+                        // $storagePath = 'news/'.$post->id.'/'.$thumbnailName;
+                        // $response = $this->saveImage($data['thumbnail'], $storagePath, $thumbnailName);
+                        // $path = Storage::disk('s3')->put($storagePath, $response);
+                        // $path = Storage::disk('s3')->url($storagePath);
+                        // $storagePathThumbnail = $path;
+                        // Kết thúc lưu hình ảnh ở AWS S3
+
                         //Update lại thumbnail bài viết
                         $post->update([
                             'image' => $storagePath
@@ -130,12 +140,22 @@ trait Functions
                 //Tải hình ảnh trong bài viết và cập nhật lại đường dẫn trong nội dung
                 foreach ($data['images'] as $keyImage => $image) {
                     if(strpos($image, 'https://') === 0) {
+                        // Lưu hình ảnh ở local storage
                         $imageName = array_reverse(explode ('/', $image))[0];
                         $storagePath = 'news/'.$post->id.'/'.$imageName;
                         $storagePathReplace = 'storage/news/'.$post->id.'/'.$imageName;
                         $this->saveImage($image, $storagePath, $imageName);
-                        // $data['content'] = str_replace($image, Storage::url($storagePath), $data['content'] );
                         $data['content'] = str_replace($image, $storagePathReplace, $data['content'] );
+                        // Kết thúc lưu hình ảnh ở local storage
+
+                        // Lưu hình ảnh ở AWS S3
+                        // $imageName = array_reverse(explode ('/', $image))[0];
+                        // $storagePath = 'news/'.$post->id.'/'.$imageName;
+                        // $response = $this->saveImage($image, $storagePath, $imageName);
+                        // $path = Storage::disk('s3')->put($storagePath, $response);
+                        // $path = Storage::disk('s3')->url($storagePath);
+                        // $data['content'] = str_replace($image, $path, $data['content'] );
+                        // Kết thúc lưu hình ảnh ở AWS S3
                     }else {
                         $data['content'] = str_replace($image, !blank($storagePathThumbnail) ? $storagePathThumbnail : '', $data['content'] );
                     }

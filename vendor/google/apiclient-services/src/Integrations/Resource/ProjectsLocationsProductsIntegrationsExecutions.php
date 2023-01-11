@@ -19,6 +19,7 @@ namespace Google\Service\Integrations\Resource;
 
 use Google\Service\Integrations\GoogleCloudIntegrationsV1alphaCancelExecutionRequest;
 use Google\Service\Integrations\GoogleCloudIntegrationsV1alphaCancelExecutionResponse;
+use Google\Service\Integrations\GoogleCloudIntegrationsV1alphaDownloadExecutionResponse;
 use Google\Service\Integrations\GoogleCloudIntegrationsV1alphaExecution;
 use Google\Service\Integrations\GoogleCloudIntegrationsV1alphaListExecutionsResponse;
 
@@ -27,7 +28,7 @@ use Google\Service\Integrations\GoogleCloudIntegrationsV1alphaListExecutionsResp
  * Typical usage is:
  *  <code>
  *   $integrationsService = new Google\Service\Integrations(...);
- *   $executions = $integrationsService->executions;
+ *   $executions = $integrationsService->projects_locations_products_integrations_executions;
  *  </code>
  */
 class ProjectsLocationsProductsIntegrationsExecutions extends \Google\Service\Resource
@@ -47,6 +48,21 @@ class ProjectsLocationsProductsIntegrationsExecutions extends \Google\Service\Re
     $params = ['name' => $name, 'postBody' => $postBody];
     $params = array_merge($params, $optParams);
     return $this->call('cancel', [$params], GoogleCloudIntegrationsV1alphaCancelExecutionResponse::class);
+  }
+  /**
+   * Download the execution. (executions.download)
+   *
+   * @param string $name Required. The execution resource name. Format: projects/{
+   * gcp_project_id}/locations/{location}/products/{product}/integrations/{integra
+   * tion_id}/executions/{execution_id}
+   * @param array $optParams Optional parameters.
+   * @return GoogleCloudIntegrationsV1alphaDownloadExecutionResponse
+   */
+  public function download($name, $optParams = [])
+  {
+    $params = ['name' => $name];
+    $params = array_merge($params, $optParams);
+    return $this->call('download', [$params], GoogleCloudIntegrationsV1alphaDownloadExecutionResponse::class);
   }
   /**
    * Get an execution in the specified project. (executions.get)

@@ -20,12 +20,12 @@ namespace Symfony\Component\Config\Builder;
  */
 class Property
 {
-    private $name;
-    private $originalName;
-    private $array = false;
-    private $scalarsAllowed = false;
-    private $type = null;
-    private $content;
+    private string $name;
+    private string $originalName;
+    private bool $array = false;
+    private bool $scalarsAllowed = false;
+    private ?string $type = null;
+    private ?string $content = null;
 
     public function __construct(string $originalName, string $name)
     {

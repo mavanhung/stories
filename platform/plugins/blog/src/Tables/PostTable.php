@@ -90,7 +90,9 @@ class PostTable extends TableAbstract
                     return RvMedia::getImageUrl($item->image, 'thumb', false, RvMedia::getDefaultImage());
                 }
 
-                return Html::image(RvMedia::getImageUrl($item->image, 'thumb', false, RvMedia::getDefaultImage()),
+                // return Html::image(RvMedia::getImageUrl($item->image, 'thumb', false, RvMedia::getDefaultImage()),
+                //     $item->name, ['width' => 50]);
+                return Html::image(RvMedia::getImageUrl($item->image, null, false, RvMedia::getDefaultImage()),
                     $item->name, ['width' => 50]);
             })
             ->editColumn('checkbox', function ($item) {

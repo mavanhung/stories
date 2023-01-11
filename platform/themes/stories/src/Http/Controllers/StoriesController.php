@@ -7,6 +7,7 @@ use RvMedia;
 use Illuminate\Http\Request;
 use Botble\Comment\Models\Comment;
 use Botble\Base\Enums\BaseStatusEnum;
+use Illuminate\Support\Facades\Storage;
 use Botble\Base\Http\Responses\BaseHttpResponse;
 use Botble\Comment\Http\Requests\CommentRequest;
 use Botble\Comment\Http\Resources\PaginateResource;
@@ -74,7 +75,7 @@ class StoriesController extends PublicController
                 ->setError()
                 ->setMessage('Bài viết không tồn tại.');
         }
-        $results = [];
+        // $results = [];
         // if ($request->hasFile('images')) {
         //     $images = (array)$request->file('images', []);
         //     foreach ($images as $image) {
@@ -90,11 +91,22 @@ class StoriesController extends PublicController
         //     'images' => $results ? json_encode(array_filter(collect($results)->pluck('data.url')->values()->toArray())) : null,
         // ]);
 
+        $results = [];
+        if ($request->hasFile('images')) {
+            $images = (array)$request->file('images', []);
+            foreach ($images as $image) {
+                $path = Storage::disk('s3')->put('comments', $image);
+                $path = Storage::disk('s3')->url($path);
+                $results[] = $path;
+            }
+        }
+
+        $request->merge([
+            'images' => $results ? json_encode($results) : null,
+        ]);
+
         $comment = $this->commentRepository->createOrUpdate($request->input());
-        $comment->addMultipleMediaFromRequest($request->file('images'))->toMediaCollection('comments');
-        dd($comment->getFirstMedia('comments')->getUrl());
 
         return $response->setData(Theme::partial('components.comment-single', compact('comment')));
-        // return $response->setMessage('Thêm bình luận thành công!');
     }
 }

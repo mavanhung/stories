@@ -12,9 +12,7 @@ Route::group(['namespace' => 'Theme\Stories\Http\Controllers', 'middleware' => [
         ],function() {
             Route::get('get-panel-inner', 'StoriesController@ajaxGetPanelInner')->name('theme.ajax-get-panel-inner');
             Route::get('comment/{id}', 'StoriesController@ajaxGetComment')->name('theme.ajax-get-comment');
-            Route::middleware('optimizeImages')->group(function () {
-                Route::post('comment', 'StoriesController@ajaxPostComment')->name('theme.ajax-post-comment');
-            });
+            Route::post('comment', 'StoriesController@ajaxPostComment')->name('theme.ajax-post-comment');
         });
     });
 });

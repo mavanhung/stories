@@ -39,7 +39,7 @@
                 @endif
                 <!--figure-->
                 <article class="entry-wraper mb-50">
-                    <div>
+                    <div class="post-content-wrapper">
                         @if (defined('GALLERY_MODULE_SCREEN_NAME') && !empty($galleries = gallery_meta_data($post)))
                             {!! render_object_gallery($galleries, ($post->categories()->first() ? $post->categories()->first()->name : __('Uncategorized'))) !!}
                         @endif

@@ -783,6 +783,7 @@ class Form
      *
      * @param $name
      * @param $class
+     * @return $this
      */
     public function addCustomField($name, $class)
     {
@@ -791,6 +792,8 @@ class Form
         }
 
         $this->formHelper->addCustomField($name, $class);
+
+        return $this;
     }
 
     /**
@@ -1279,7 +1282,8 @@ class Form
      * Redirects to a destination when form is invalid.
      *
      * @param  string|null $destination The target url.
-     * @return HttpResponseException
+     * @return void
+     * @throws HttpResponseException
      */
     public function redirectIfNotValid($destination = null)
     {

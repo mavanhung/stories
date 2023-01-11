@@ -86,6 +86,7 @@ return [
             $theme->asset()->container('footer')->usePath()->add('comment', 'js/comment.js', ['jquery'], [], $version);
             $theme->asset()->container('footer')->usePath()->add('main', 'js/main.js', ['jquery'], [], $version);
             $theme->asset()->container('footer')->usePath()->add('backend', 'js/backend.js', ['jquery'], [], $version);
+            $theme->asset()->container('footer')->usePath()->add('custom', 'js/custom.js', ['jquery'], [], $version);
 
             if (function_exists('shortcode')) {
                 $theme->composer(['index', 'page', 'post'], function (\Botble\Shortcode\View\View $view) {

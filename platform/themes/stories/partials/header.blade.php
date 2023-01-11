@@ -11,7 +11,7 @@
 
         <style>
             :root {
-                --color-primary: {{ theme_option('primary_color', '#5869DA') }};
+                --color-primary: {{ theme_option('primary_color', '#3ba956') }};
                 --color-secondary: {{ theme_option('secondary_color', '#2d3d8b') }};
                 --color-danger: {{ theme_option('danger_color', '#e3363e') }};
                 --primary-font: '{{ theme_option('primary_font', 'Noto Sans JP') }}', sans-serif;

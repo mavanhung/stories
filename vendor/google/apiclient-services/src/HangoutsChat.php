@@ -38,15 +38,24 @@ class HangoutsChat extends \Google\Service
   /** View, add, and remove members from conversations in Google Chat. */
   const CHAT_MEMBERSHIPS =
       "https://www.googleapis.com/auth/chat.memberships";
+  /** View members in Google Chat conversations.. */
+  const CHAT_MEMBERSHIPS_READONLY =
+      "https://www.googleapis.com/auth/chat.memberships.readonly";
   /** View, compose, send, update, and delete messages, and add, view, and delete reactions to messages.. */
   const CHAT_MESSAGES =
       "https://www.googleapis.com/auth/chat.messages";
   /** Compose and send messages in Google Chat. */
   const CHAT_MESSAGES_CREATE =
       "https://www.googleapis.com/auth/chat.messages.create";
-  /** view messages and reactions in Google Chat. */
+  /** View messages and reactions in Google Chat. */
   const CHAT_MESSAGES_READONLY =
       "https://www.googleapis.com/auth/chat.messages.readonly";
+  /** Create conversations and spaces and view or update metadata (including history settings) in Google Chat. */
+  const CHAT_SPACES =
+      "https://www.googleapis.com/auth/chat.spaces";
+  /** View chat and spaces in Google Chat. */
+  const CHAT_SPACES_READONLY =
+      "https://www.googleapis.com/auth/chat.spaces.readonly";
 
   public $dms;
   public $dms_conversations;
@@ -437,6 +446,24 @@ class HangoutsChat extends \Google\Service
                   'location' => 'path',
                   'type' => 'string',
                   'required' => true,
+                ],
+              ],
+            ],'patch' => [
+              'path' => 'v1/{+name}',
+              'httpMethod' => 'PATCH',
+              'parameters' => [
+                'name' => [
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ],
+                'allowMissing' => [
+                  'location' => 'query',
+                  'type' => 'boolean',
+                ],
+                'updateMask' => [
+                  'location' => 'query',
+                  'type' => 'string',
                 ],
               ],
             ],'update' => [

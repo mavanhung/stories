@@ -62,10 +62,6 @@ class RepositoryWebrefDetailedEntityScores extends \Google\Model
   /**
    * @var float
    */
-  public $newConfidenceExperimentalDontUse;
-  /**
-   * @var float
-   */
   public $newsTopicalityScore;
   /**
    * @var float
@@ -73,6 +69,7 @@ class RepositoryWebrefDetailedEntityScores extends \Google\Model
   public $normalizedTopicality;
   protected $referencePageScoresType = RepositoryWebrefReferencePageScores::class;
   protected $referencePageScoresDataType = '';
+  public $referencePageScores;
   /**
    * @var float
    */
@@ -217,20 +214,6 @@ class RepositoryWebrefDetailedEntityScores extends \Google\Model
   public function getNbScore()
   {
     return $this->nbScore;
-  }
-  /**
-   * @param float
-   */
-  public function setNewConfidenceExperimentalDontUse($newConfidenceExperimentalDontUse)
-  {
-    $this->newConfidenceExperimentalDontUse = $newConfidenceExperimentalDontUse;
-  }
-  /**
-   * @return float
-   */
-  public function getNewConfidenceExperimentalDontUse()
-  {
-    return $this->newConfidenceExperimentalDontUse;
   }
   /**
    * @param float

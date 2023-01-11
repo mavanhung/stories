@@ -82,7 +82,7 @@ class Assets extends BaseAssets
      * @return string
      * @throws Throwable
      */
-    public function renderHeader($lastStyles = [])
+    public function renderHeader($lastStyles = []): string
     {
         do_action(BASE_ACTION_ENQUEUE_SCRIPTS);
 
@@ -93,7 +93,7 @@ class Assets extends BaseAssets
      * @return string
      * @throws Throwable
      */
-    public function renderFooter()
+    public function renderFooter(): string
     {
         $bodyScripts = $this->getScripts(self::ASSETS_SCRIPT_POSITION_FOOTER);
 

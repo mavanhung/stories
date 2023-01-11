@@ -23,6 +23,9 @@ class GoogleCloudContactcenterinsightsV1alpha1BulkAnalyzeConversationsRequest ex
    * @var float
    */
   public $analysisPercentage;
+  protected $annotatorSelectorType = GoogleCloudContactcenterinsightsV1alpha1AnnotatorSelector::class;
+  protected $annotatorSelectorDataType = '';
+  public $annotatorSelector;
   /**
    * @var string
    */
@@ -45,6 +48,20 @@ class GoogleCloudContactcenterinsightsV1alpha1BulkAnalyzeConversationsRequest ex
   public function getAnalysisPercentage()
   {
     return $this->analysisPercentage;
+  }
+  /**
+   * @param GoogleCloudContactcenterinsightsV1alpha1AnnotatorSelector
+   */
+  public function setAnnotatorSelector(GoogleCloudContactcenterinsightsV1alpha1AnnotatorSelector $annotatorSelector)
+  {
+    $this->annotatorSelector = $annotatorSelector;
+  }
+  /**
+   * @return GoogleCloudContactcenterinsightsV1alpha1AnnotatorSelector
+   */
+  public function getAnnotatorSelector()
+  {
+    return $this->annotatorSelector;
   }
   /**
    * @param string

@@ -30,8 +30,6 @@
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.12",
         "league/flysystem-aws-s3-v3": "^1.0",
-        "spatie/laravel-image-optimizer": "^1.6",
-        "spatie/laravel-medialibrary": "^9.12",
         "wikimedia/composer-merge-plugin": "^2.0"
     },
     "require-dev": {
@@ -94,7 +92,8 @@
         "optimize-autoloader": true,
         "allow-plugins": {
             "wikimedia/composer-merge-plugin": true
-        }
+        },
+        "platform-check": false
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
