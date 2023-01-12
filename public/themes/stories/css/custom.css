@@ -261,6 +261,13 @@ body.show-admin-bar .header-sticky.sticky-bar {
     padding: 8px 0
 }
 
+.widget_categories ul.font-medium li {
+    border-bottom: 1px dotted rgba(0, 0, 0, .15);
+    display: table;
+    width: 100%;
+    padding: 8px 0
+}
+
 .widget_categories ul.font-small li a {
     text-align: left;
     padding: 0

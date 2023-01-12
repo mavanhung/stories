@@ -15,7 +15,7 @@
     <div class="col-md-8 align-self-center">
         <div class="post-content">
             @if ($post->categories->first())
-                <div class="entry-meta meta-0 font-small mb-10">
+                <div class="entry-meta meta-0 font-medium mb-10">
                     <a href="{{ $post->categories->first()->url }}"><span class="post-cat text-{{ ['warning', 'primary', 'info', 'success'][array_rand(['warning', 'primary', 'info', 'success'])] }}">{{ $post->categories->first()->name }}</span></a>
                 </div>
             @endif

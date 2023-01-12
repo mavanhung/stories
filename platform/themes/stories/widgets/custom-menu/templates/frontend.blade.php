@@ -4,7 +4,7 @@
             <h5 class="mt-5 mb-30">{{ $config['name'] }}</h5>
         </div>
         {!!
-            Menu::generateMenu(['slug' => $config['menu_id'], 'options' => ['class' => 'font-small']])
+            Menu::generateMenu(['slug' => $config['menu_id'], 'options' => ['class' => 'font-medium']])
         !!}
     </div>
 </div>

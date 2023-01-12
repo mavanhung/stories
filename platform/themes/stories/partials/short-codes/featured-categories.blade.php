@@ -16,7 +16,7 @@
                         </div>
                         <div class="post-content media-body">
                             <h6> <a href="{{ $category->url }}">{{ $category->name }}</a> </h6>
-                            <p class="text-muted font-small">{{ Str::limit($category->description, 65) }}</p>
+                            <p class="text-muted font-medium">{{ Str::limit($category->description, 65) }}</p>
                         </div>
                     </div>
                 @endforeach

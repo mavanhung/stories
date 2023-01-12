@@ -9,7 +9,7 @@
                 <div class="col-md-4 align-self-center">
                     <h5 class="widget-title">{!! clean($title) !!}</h5>
                 </div>
-                <div class="col-md-8 text-md-right font-small align-self-center">
+                <div class="col-md-8 text-md-right font-medium align-self-center">
                     <p class="d-inline-block mr-5 mb-0"><i class="elegant-icon  icon_tag_alt mr-5 text-muted"></i>{{ __('Hot tags') }}:</p>
                     <ul class="list-inline d-inline-block tags">
                         @foreach(get_popular_tags(4) as $tag)
