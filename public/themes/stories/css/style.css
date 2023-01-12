@@ -1171,7 +1171,8 @@ header .search-icon .ti-close,
 .header-top {
     border-bottom-width: 1px;
     border-bottom-style: solid;
-    border-bottom-color: var(--mutted-border-color)
+    border-bottom-color: var(--mutted-border-color);
+    background-color: #3ad16d;
 }
 
 .header-top-right {
