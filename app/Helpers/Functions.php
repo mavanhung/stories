@@ -82,8 +82,8 @@ trait Functions
                 $post = Post::create([
                     'name' => $data['name'],
                     'description' => $data['description'],
-                    // 'status' => 'pending',
-                    'status' => 'published',
+                    'status' => 'pending',
+                    // 'status' => 'published',
                     'author_id' => 1,
                     'author_type' => User::class,
                     'format_type' => 'default'
