@@ -61,8 +61,10 @@
                             @endif --}}
                             <a class="logo__custom" href="{{ url('') }}">
                                 <img src="{{ Theme::asset()->url('images/logo.png') }}" alt="logo">
-                                <span>xoaichua</span>
-                                <small>review</small>
+                                <div class="logo__custom-text">
+                                    <span>xoaichua</span>
+                                    <small>review</small>
+                                </div>
                             </a>
                         </div>
                         <div class="col-md-9 col-6 text-right header-top-right">

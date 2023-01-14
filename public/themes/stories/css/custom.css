@@ -415,26 +415,26 @@ body.show-admin-bar .header-sticky.sticky-bar {
     top: -5%;
 }
 
-.logo__custom {
-    display: flex;
-    align-items: center;
-    position: relative;
-    width: max-content;
-    cursor: pointer;
-}
-
 .logo__custom img {
     max-width: 44px;
+    position: absolute;
+    top: -4px;
 }
 
-.logo__custom span {
+.logo__custom .logo__custom-text {
+    position: relative;
+    display: inline-block;
+    padding-left: 40px;
+    margin-bottom: 5px;
+}
+
+.logo__custom .logo__custom-text span {
     font-size: 36px;
     color: white;
-    margin-top: 5px;
     letter-spacing: 1px;
 }
 
-.logo__custom small {
+.logo__custom .logo__custom-text small {
     color: white;
     position: absolute;
     bottom: -4px;
