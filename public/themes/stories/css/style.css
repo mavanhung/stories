@@ -2304,7 +2304,22 @@ form.search-style-2 button:hover i {
     display: block !important;
 }
 
+.header-sticky.sticky-bar .header-tools .off-canvas-toggle span,
+.header-sticky.sticky-bar .header-tools .off-canvas-toggle span::before,
+.header-sticky.sticky-bar .header-tools .off-canvas-toggle span::after {
+    background-color: var(--color-muted)!important;
+}
+
 .header-sticky .header-tools button.search-icon i {
     font-size: 16px;
     font-weight: bold;
+}
+
+@media only screen and (max-width: 991px) {
+    .header-top .header-top-right button.search-icon span {
+        color: var(--color-white)!important;
+    }
+    .off-canvas-toggle span, .off-canvas-toggle span::before, .off-canvas-toggle span::after {
+        background-color: var(--color-muted)!important;
+    }
 }
