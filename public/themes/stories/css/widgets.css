@@ -603,7 +603,7 @@ span.has-dot::before {
 
 .hover-up:hover {
     transform: translateY(-5px);
-    box-shadow: var(--box-shadow-hover), 0 0 0 transparent;
+    /* box-shadow: var(--box-shadow-hover), 0 0 0 transparent; */
 }
 
 .hover-up-2:hover {

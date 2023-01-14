@@ -414,3 +414,31 @@ body.show-admin-bar .header-sticky.sticky-bar {
     right: 0;
     top: -5%;
 }
+
+.logo__custom {
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: max-content;
+    cursor: pointer;
+}
+
+.logo__custom img {
+    max-width: 44px;
+}
+
+.logo__custom span {
+    font-size: 36px;
+    color: white;
+    margin-top: 5px;
+    letter-spacing: 1px;
+}
+
+.logo__custom small {
+    color: white;
+    position: absolute;
+    bottom: -4px;
+    right: 0px;
+    font-size: 12px;
+    letter-spacing: 4px;
+}

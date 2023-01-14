@@ -53,7 +53,7 @@
                     infinite: !0,
                     dots: !1,
                     arrows: !0,
-                    autoplay: !1,
+                    autoplay: !0,
                     autoplaySpeed: 3e3,
                     fade: !0,
                     fadeSpeed: 1500,
