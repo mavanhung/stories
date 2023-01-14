@@ -56,9 +56,14 @@
                 <div class="container">
                     <div class="row pt-20 pb-20 align-items-center">
                         <div class="col-md-3 col-6">
-                            @if (theme_option('logo'))
+                            {{-- @if (theme_option('logo'))
                                 <a href="{{ url('') }}"><img class="logo" src="{{ RvMedia::getImageUrl(theme_option('logo')) }}" alt="{{ setting('site_title') }}"></a>
-                            @endif
+                            @endif --}}
+                            <a class="logo__custom" href="{{ url('') }}">
+                                <img src="{{ Theme::asset()->url('images/logo.png') }}" alt="logo">
+                                <span>xoaichua</span>
+                                <small>review</small>
+                            </a>
                         </div>
                         <div class="col-md-9 col-6 text-right header-top-right">
                             {!! Menu::renderMenuLocation('header-menu', [
