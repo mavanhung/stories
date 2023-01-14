@@ -845,7 +845,7 @@ header .search-icon .ti-close,
 .search-text-bg {
     font-size: 80px;
     text-transform: uppercase;
-    opacity: 0.6;
+    color: var(--color-primary);
 }
 
 .main-search-form-cover {
@@ -902,6 +902,24 @@ header .search-icon .ti-close,
     top: 0;
     font-size: 36px;
     cursor: pointer;
+    transition: all 0.3s;
+}
+
+.main-search-form-cover .icon_close:hover {
+    opacity: 0.6;
+}
+
+.main-search-form-cover form.search-header .input-group-append button.btn-search {
+    display: flex;
+    align-items: center;
+}
+
+.main-search-form-cover form.search-header .input-group-append button.btn-search i {
+    font-weight: 600;
+}
+
+.main-search-form-cover form.search-header .input-group-append button.btn-search:hover i {
+    color: var(--color-primary);
 }
 
 /*Main header*/

@@ -19,16 +19,38 @@ if (is_plugin_active('blog')) {
 
     add_shortcode('blog-categories-posts', __('Blog categories posts'), __('Blog categories posts'),
         function ($shortCode) {
-            $category = app(CategoryInterface::class)
-                ->findById($shortCode->category_id, ['slugable', 'posts' => function ($query) {
-                    $query->latest()->with(['slugable', 'categories', 'categories.slugable'])->limit(4);
-                }]);
+            // $category = app(CategoryInterface::class)
+            //     ->findById($shortCode->category_id, ['slugable', 'posts' => function ($query) {
+            //         $query->latest()->with(['slugable', 'categories', 'categories.slugable'])->limit(4);
+            //     }]);
 
-            if (!$category) {
-                return null;
+            // if (!$category) {
+            //     return null;
+            // }
+
+            // return Theme::partial('short-codes.blog-categories-posts', compact('category'));
+
+
+            $attributes = $shortCode->toArray();
+
+            $categories = collect([]);
+
+            for ($i = 1; $i <= count($attributes); $i++) {
+                if (!Arr::has($attributes, 'category_id_' . $i)) {
+                    continue;
+                }
+
+                $category = app(CategoryInterface::class)
+                            ->findById(Arr::get($attributes, 'category_id_' . $i), ['slugable', 'posts' => function ($query) {
+                                $query->latest()->with(['slugable', 'categories', 'categories.slugable'])->limit(4);
+                            }]);
+
+                if ($category) {
+                    $categories[] = $category;
+                }
             }
 
-            return Theme::partial('short-codes.blog-categories-posts', compact('category'));
+            return Theme::partial('short-codes.blog-categories-posts', compact('categories'));
         });
 
     shortcode()->setAdminConfig('blog-categories-posts', function () {
