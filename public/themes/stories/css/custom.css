@@ -374,3 +374,43 @@ body.show-admin-bar .header-sticky.sticky-bar {
     border-bottom: 1px solid;
     border-bottom-color: var(--mutted-border-color);
 }
+
+.carausel-3-columns-wrapper {
+    position: relative;
+}
+
+.carausel-3-columns-wrapper .slick-arrow {
+    position: absolute;
+    border: unset;
+    background-color: transparent;
+    cursor: pointer;
+    z-index: 1;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-color: var(--color-primary);
+    box-shadow: 0 2px 4px var(--button-shadow-color-normal), 0 0 0 transparent;
+}
+
+.carausel-3-columns-wrapper .slick-arrow:hover {
+    opacity: 0.6;
+    transition: all 0.3s linear;
+}
+
+.carausel-3-columns-wrapper .slick-arrow i {
+    font-size: 18px;
+    color: var(--color-white);
+}
+
+.carausel-3-columns-wrapper .slick-prev {
+    right: 40px;
+    top: -5%;
+}
+
+.carausel-3-columns-wrapper .slick-next {
+    right: 0;
+    top: -5%;
+}
