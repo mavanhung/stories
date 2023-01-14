@@ -52,7 +52,7 @@
                                         <div class="image-upload__text">Upload photos</div>
                                         <input type="file"
                                             name="images[]" data-max-files="3" accept="image/png,image/jpeg,image/jpg"
-                                            multiple="multiple" data-max-size="2048"
+                                            multiple="multiple" data-max-size="1024"
                                             data-max-size-message="The __attribute__ must not be greater than __max__ kilobytes."
                                             class="image-upload__file-input">
                                     </div>
@@ -67,7 +67,8 @@
                         </div>
                     </div>
                     <div>
-                        <span class="help-block d-inline-block">Bạn có thể tải lên tối đa 3 ảnh, kích thước tối đa của mỗi ảnh là 2048 kilobyte</span>
+                        <span class="help-block d-inline-block">Bạn có thể tải lên tối đa 3 hình ảnh, kích thước tối đa của mỗi ảnh là 1024 kilobyte</span>
+                        <span class="help-block d-inline-block">Nếu kích thước hình ảnh tải lên quá lớn, bạn có thể giảm giảm kích thước hình ảnh tại <a class="btn-tinypng" target="_blank" href="https://tinypng.com/">ĐÂY</a></span>
                     </div>
                 </div>
             </div>

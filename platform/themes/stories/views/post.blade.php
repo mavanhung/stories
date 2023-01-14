@@ -20,11 +20,44 @@
                     </div>
                 </div>
                 <div class="col-md-6 text-right d-none d-md-inline">
-                    <ul class="header-social-network d-inline-block list-inline mr-15">
+                    {{-- <ul class="header-social-network d-inline-block list-inline mr-15">
                         <li class="list-inline-item text-muted"><span>{{ __('Share this') }}: </span></li>
                         <li class="list-inline-item"><a class="social-icon fb text-xs-center" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode($post->url) }}&title={{ $post->description }}"><i class="elegant-icon social_facebook"></i></a></li>
                         <li class="list-inline-item"><a class="social-icon tw text-xs-center" target="_blank" href="https://twitter.com/intent/tweet?url={{ urlencode($post->url) }}&text={{ $post->description }}"><i class="elegant-icon social_twitter"></i></a></li>
                         <li class="list-inline-item"><a class="social-icon pt text-xs-center" target="_blank" href="https://www.linkedin.com/shareArticle?mini=true&url={{ urlencode($post->url) }}&summary={{ rawurldecode($post->description) }}"><i class="elegant-icon social_linkedin"></i></a></li>
+                    </ul> --}}
+                    <ul class="header-social-network header-social-network-custom list-inline mr-15">
+                        <li class="list-inline-item text-muted"><span>{{ __('Share this') }}: </span></li>
+                        {{-- zalo --}}
+                        <li class="list-inline-item">
+                            <a class="social-icon zalo text-xs-center" title="Share Zalo" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode($post->url) }}&title={{ $post->description }}">
+                                <img src="{{ Theme::asset()->url('images/icon/share_zalo.svg') }}" alt="shareZalo">
+                            </a>
+                        </li>
+                        {{-- facebook --}}
+                        <li class="list-inline-item">
+                            <a class="social-icon fb text-xs-center" title="Share Facebook" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode($post->url) }}&title={{ $post->description }}">
+                                <img src="{{ Theme::asset()->url('images/icon/share_facebook.svg') }}" alt="shareFacebook">
+                            </a>
+                        </li>
+                        {{-- messenger --}}
+                        <li class="list-inline-item">
+                            <a class="social-icon mess text-xs-center" title="Share Messenger" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode($post->url) }}&title={{ $post->description }}">
+                                <img src="{{ Theme::asset()->url('images/icon/share_messenger.svg') }}" alt="shareMessenger">
+                            </a>
+                        </li>
+                        {{-- twitter --}}
+                        <li class="list-inline-item">
+                            <a class="social-icon tw text-xs-center" title="Share Twitter" target="_blank" href="https://twitter.com/intent/tweet?url={{ urlencode($post->url) }}&text={{ $post->description }}">
+                                <img src="{{ Theme::asset()->url('images/icon/share_twitter.svg') }}" alt="shareTwitter">
+                            </a>
+                        </li>
+                        {{-- copy --}}
+                        <li class="list-inline-item">
+                            <a class="social-icon copy text-xs-center btn-copy" title="Share Copy Link" href="javascript:void(0);" data-href="{{ $post->url }}">
+                                <img src="{{ Theme::asset()->url('images/icon/share_copy.svg') }}" alt="shareCopy">
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -56,11 +89,44 @@
                         </div>
                     @endif
                     <div class="single-social-share clearfix wow fadeIn  animated" style="visibility: visible; animation-name: fadeIn;">
-                        <ul class="header-social-network d-inline-block list-inline float-md-right mt-md-0 mt-4">
+                        {{-- <ul class="header-social-network d-inline-block list-inline float-md-right mt-md-0 mt-4">
                             <li class="list-inline-item text-muted"><span>{{ __('Share this') }}: </span></li>
                             <li class="list-inline-item"><a class="social-icon fb text-xs-center" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode($post->url) }}&title={{ $post->description }}"><i class="elegant-icon social_facebook"></i></a></li>
                             <li class="list-inline-item"><a class="social-icon tw text-xs-center" target="_blank" href="https://twitter.com/intent/tweet?url={{ urlencode($post->url) }}&text={{ $post->description }}"><i class="elegant-icon social_twitter"></i></a></li>
                             <li class="list-inline-item"><a class="social-icon pt text-xs-center" target="_blank" href="https://www.linkedin.com/shareArticle?mini=true&url={{ urlencode($post->url) }}&summary={{ rawurldecode($post->description) }}"><i class="elegant-icon social_linkedin"></i></a></li>
+                        </ul> --}}
+                        <ul class="header-social-network header-social-network-custom list-inline mr-15">
+                            <li class="list-inline-item text-muted"><span>{{ __('Share this') }}: </span></li>
+                            {{-- zalo --}}
+                            <li class="list-inline-item">
+                                <a class="social-icon zalo text-xs-center" title="Share Zalo" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode($post->url) }}&title={{ $post->description }}">
+                                    <img src="{{ Theme::asset()->url('images/icon/share_zalo.svg') }}" alt="shareZalo">
+                                </a>
+                            </li>
+                            {{-- facebook --}}
+                            <li class="list-inline-item">
+                                <a class="social-icon fb text-xs-center" title="Share Facebook" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode($post->url) }}&title={{ $post->description }}">
+                                    <img src="{{ Theme::asset()->url('images/icon/share_facebook.svg') }}" alt="shareFacebook">
+                                </a>
+                            </li>
+                            {{-- messenger --}}
+                            <li class="list-inline-item">
+                                <a class="social-icon mess text-xs-center" title="Share Messenger" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode($post->url) }}&title={{ $post->description }}">
+                                    <img src="{{ Theme::asset()->url('images/icon/share_messenger.svg') }}" alt="shareMessenger">
+                                </a>
+                            </li>
+                            {{-- twitter --}}
+                            <li class="list-inline-item">
+                                <a class="social-icon tw text-xs-center" title="Share Twitter" target="_blank" href="https://twitter.com/intent/tweet?url={{ urlencode($post->url) }}&text={{ $post->description }}">
+                                    <img src="{{ Theme::asset()->url('images/icon/share_twitter.svg') }}" alt="shareTwitter">
+                                </a>
+                            </li>
+                            {{-- copy --}}
+                            <li class="list-inline-item">
+                                <a class="social-icon copy text-xs-center btn-copy" title="Share Copy Link" href="javascript:void(0);" data-href="{{ $post->url }}">
+                                    <img src="{{ Theme::asset()->url('images/icon/share_copy.svg') }}" alt="shareCopy">
+                                </a>
+                            </li>
                         </ul>
                     </div>
                     @if ($post->author->id)
@@ -103,10 +169,42 @@
                                                         <a class="img-link" href="{{ $relatedItem->url }}"></a>
                                                     </div>
                                                     <ul class="social-share">
-                                                        <li><a href="#"><i class="elegant-icon social_share"></i></a></li>
+                                                        {{-- <li><a href="#"><i class="elegant-icon social_share"></i></a></li>
                                                         <li><a class="fb" href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode($relatedItem->url) }}&title={{ $relatedItem->description }}" title="{{ __('Share on Facebook') }}" target="_blank"><i class="elegant-icon social_facebook"></i></a></li>
                                                         <li><a class="tw" href="https://twitter.com/intent/tweet?url={{ urlencode($relatedItem->url) }}&text={{ $relatedItem->description }}" target="_blank" title="{{ __('Tweet now') }}"><i class="elegant-icon social_twitter"></i></a></li>
-                                                        <li><a class="pt" href="https://www.linkedin.com/shareArticle?mini=true&url={{ urlencode($relatedItem->url) }}&summary={{ rawurldecode($relatedItem->description) }}" target="_blank" title="{{ __('Share on Linkedin') }}"><i class="elegant-icon social_linkedin"></i></a></li>
+                                                        <li><a class="pt" href="https://www.linkedin.com/shareArticle?mini=true&url={{ urlencode($relatedItem->url) }}&summary={{ rawurldecode($relatedItem->description) }}" target="_blank" title="{{ __('Share on Linkedin') }}"><i class="elegant-icon social_linkedin"></i></a></li> --}}
+
+                                                        <li><a href="#"><i class="elegant-icon social_share"></i></a></li>
+                                                        {{-- zalo --}}
+                                                        <li>
+                                                            <a class="zalo" title="Share Zalo" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode($relatedItem->url) }}&title={{ $relatedItem->description }}">
+                                                                <img src="{{ Theme::asset()->url('images/icon/share_zalo_bg_white.webp') }}" alt="shareZalo">
+                                                            </a>
+                                                        </li>
+                                                        {{-- facebook --}}
+                                                        <li>
+                                                            <a class="fb" title="Share Facebook" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode($relatedItem->url) }}&title={{ $relatedItem->description }}">
+                                                                <img src="{{ Theme::asset()->url('images/icon/share_facebook.svg') }}" alt="shareFacebook">
+                                                            </a>
+                                                        </li>
+                                                        {{-- messenger --}}
+                                                        <li>
+                                                            <a class="mess" title="Share Messenger" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode($relatedItem->url) }}&title={{ $relatedItem->description }}">
+                                                                <img src="{{ Theme::asset()->url('images/icon/share_messenger.svg') }}" alt="shareMessenger">
+                                                            </a>
+                                                        </li>
+                                                        {{-- twitter --}}
+                                                        <li>
+                                                            <a class="tw" title="Share Twitter" target="_blank" href="https://twitter.com/intent/tweet?url={{ urlencode($relatedItem->url) }}&text={{ $relatedItem->description }}">
+                                                                <img src="{{ Theme::asset()->url('images/icon/share_twitter.svg') }}" alt="shareTwitter">
+                                                            </a>
+                                                        </li>
+                                                        {{-- copy --}}
+                                                        <li>
+                                                            <a class="copy btn-copy" title="Share Copy Link" href="javascript:void(0);" data-href="{{ $relatedItem->url }}">
+                                                                <img src="{{ Theme::asset()->url('images/icon/share_copy.svg') }}" alt="shareCopy">
+                                                            </a>
+                                                        </li>
                                                     </ul>
                                                 </div>
                                             </div>

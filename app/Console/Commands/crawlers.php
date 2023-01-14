@@ -40,13 +40,11 @@ class crawlers extends Command
      */
     public function handle()
     {
-        // dd(Storage::url('news/eny.jpg'));
-
         // $storagePath = 'crawlers/binh-sua-pigeon-1.jpg';
         // $data = $this->get_file_curl('https://phongreviews.com/wp-content/uploads/2021/07/binh-sua-pigeon-1.jpg', 'binh-sua-pigeon-1');
         // Storage::disk('public')->put($storagePath, $data);
-        // $this->crawlersPhongReviews();
-        $this->crawlersPhongReviewsDetail(18, 'https://phongreviews.com/sua-duong-the-victoria-secret/', 'https://phongreviews.com/wp-content/uploads/2021/07/binh-sua-pigeon-1.jpg');
+        $this->crawlersPhongReviews();
+        // $this->crawlersPhongReviewsDetail(22, 'https://phongreviews.com/may-scan-hp/', 'https://phongreviews.com/wp-content/uploads/2021/08/may-scan-hp-8-1536x960.jpg');
         return 0;
     }
 }

@@ -9,10 +9,42 @@
                                 <a class="img-link" href="{{ $post->url }}"></a>
                             </div>
                             <ul class="social-share">
-                                <li><a href="#"><i class="elegant-icon social_share"></i></a></li>
+                                {{-- <li><a href="#"><i class="elegant-icon social_share"></i></a></li>
                                 <li><a class="fb" href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode($post->url) }}&title={{ $post->description }}" title="{{ __('Share on Facebook') }}" target="_blank"><i class="elegant-icon social_facebook"></i></a></li>
                                 <li><a class="tw" href="https://twitter.com/intent/tweet?url={{ urlencode($post->url) }}&text={{ $post->description }}" target="_blank" title="{{ __('Tweet now') }}"><i class="elegant-icon social_twitter"></i></a></li>
-                                <li><a class="pt" href="https://www.linkedin.com/shareArticle?mini=true&url={{ urlencode($post->url) }}&summary={{ rawurldecode($post->description) }}" target="_blank" title="{{ __('Share on Linkedin') }}"><i class="elegant-icon social_linkedin"></i></a></li>
+                                <li><a class="pt" href="https://www.linkedin.com/shareArticle?mini=true&url={{ urlencode($post->url) }}&summary={{ rawurldecode($post->description) }}" target="_blank" title="{{ __('Share on Linkedin') }}"><i class="elegant-icon social_linkedin"></i></a></li> --}}
+
+                                <li><a href="#"><i class="elegant-icon social_share"></i></a></li>
+                                {{-- zalo --}}
+                                <li>
+                                    <a class="zalo" title="Share Zalo" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode($post->url) }}&title={{ $post->description }}">
+                                        <img src="{{ Theme::asset()->url('images/icon/share_zalo_bg_white.webp') }}" alt="shareZalo">
+                                    </a>
+                                </li>
+                                {{-- facebook --}}
+                                <li>
+                                    <a class="fb" title="Share Facebook" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode($post->url) }}&title={{ $post->description }}">
+                                        <img src="{{ Theme::asset()->url('images/icon/share_facebook.svg') }}" alt="shareFacebook">
+                                    </a>
+                                </li>
+                                {{-- messenger --}}
+                                <li>
+                                    <a class="mess" title="Share Messenger" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode($post->url) }}&title={{ $post->description }}">
+                                        <img src="{{ Theme::asset()->url('images/icon/share_messenger.svg') }}" alt="shareMessenger">
+                                    </a>
+                                </li>
+                                {{-- twitter --}}
+                                <li>
+                                    <a class="tw" title="Share Twitter" target="_blank" href="https://twitter.com/intent/tweet?url={{ urlencode($post->url) }}&text={{ $post->description }}">
+                                        <img src="{{ Theme::asset()->url('images/icon/share_twitter.svg') }}" alt="shareTwitter">
+                                    </a>
+                                </li>
+                                {{-- copy --}}
+                                <li>
+                                    <a class="copy btn-copy" title="Share Copy Link" href="javascript:void(0);" data-href="{{ $post->url }}">
+                                        <img src="{{ Theme::asset()->url('images/icon/share_copy.svg') }}" alt="shareCopy">
+                                    </a>
+                                </li>
                             </ul>
                         </div>
                     </div>

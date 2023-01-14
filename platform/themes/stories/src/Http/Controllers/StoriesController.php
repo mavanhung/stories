@@ -2,6 +2,7 @@
 
 namespace Theme\Stories\Http\Controllers;
 
+use App\Helpers\Functions;
 use Theme;
 use RvMedia;
 use Illuminate\Http\Request;
@@ -14,9 +15,11 @@ use Botble\Comment\Http\Resources\PaginateResource;
 use Botble\Theme\Http\Controllers\PublicController;
 use Botble\Blog\Repositories\Interfaces\PostInterface;
 use Botble\Comment\Repositories\Interfaces\CommentInterface;
+use Log;
 
 class StoriesController extends PublicController
 {
+    use Functions;
     /**
      * @var CommentInterface
      */
@@ -67,46 +70,55 @@ class StoriesController extends PublicController
      * @return BaseHttpResponse
      */
     public function ajaxPostComment(CommentRequest $request, BaseHttpResponse $response) {
-        $exists = $this->postRepository->count([
-            'id'  => $request->input('posts_id'),
-        ]);
-        if ($exists <= 0) {
-            return $response
-                ->setError()
-                ->setMessage('Bài viết không tồn tại.');
-        }
-        // $results = [];
-        // if ($request->hasFile('images')) {
-        //     $images = (array)$request->file('images', []);
-        //     foreach ($images as $image) {
-        //         $result = RvMedia::handleUpload($image, 0, 'comments');
-        //         if ($result['error'] != false) {
-        //             return $response->setError()->setMessage($result['message']);
-        //         }
-        //         $results[] = $result;
-        //     }
-        // }
-
-        // $request->merge([
-        //     'images' => $results ? json_encode(array_filter(collect($results)->pluck('data.url')->values()->toArray())) : null,
-        // ]);
-
-        $results = [];
-        if ($request->hasFile('images')) {
-            $images = (array)$request->file('images', []);
-            foreach ($images as $image) {
-                $path = Storage::disk('s3')->put('comments', $image);
-                $path = Storage::disk('s3')->url($path);
-                $results[] = $path;
+        try {
+            $exists = $this->postRepository->count([
+                'id'  => $request->input('posts_id'),
+            ]);
+            if ($exists[1] <= 0) {
+                return $response
+                    ->setError()
+                    ->setMessage('Bài viết không tồn tại.');
             }
+            // $results = [];
+            // if ($request->hasFile('images')) {
+            //     $images = (array)$request->file('images', []);
+            //     foreach ($images as $image) {
+            //         $result = RvMedia::handleUpload($image, 0, 'comments');
+            //         if ($result['error'] != false) {
+            //             return $response->setError()->setMessage($result['message']);
+            //         }
+            //         $results[] = $result;
+            //     }
+            // }
+
+            // $request->merge([
+            //     'images' => $results ? json_encode(array_filter(collect($results)->pluck('data.url')->values()->toArray())) : null,
+            // ]);
+
+            $results = [];
+            if ($request->hasFile('images')) {
+                $images = (array)$request->file('images', []);
+                foreach ($images as $image) {
+                    $path = Storage::disk('s3')->put('comments', $image);
+                    $path = Storage::disk('s3')->url($path);
+                    $results[] = $path;
+                }
+            }
+
+            $request->merge([
+                'images' => $results ? json_encode($results) : null,
+            ]);
+
+            $comment = $this->commentRepository->createOrUpdate($request->input());
+
+            return $response->setData(Theme::partial('components.comment-single', compact('comment')));
+        } catch (\Throwable $th) {
+            $message = "Có lỗi xảy ra comment: " . $th->getMessage() . ", dòng: " . $th->getLine() . ", file: " . $th->getFile();
+            $this->sendNotificationTelegram($message);
+            Log::error("Có lỗi xảy ra: {$th->getMessage()}, dòng: {$th->getLine()}, file: {$th->getFile()}");
+            return $response
+                    ->setError()
+                    ->setMessage('Đã có lỗi xảy ra, vui lòng thử lại sau');
         }
-
-        $request->merge([
-            'images' => $results ? json_encode($results) : null,
-        ]);
-
-        $comment = $this->commentRepository->createOrUpdate($request->input());
-
-        return $response->setData(Theme::partial('components.comment-single', compact('comment')));
     }
 }

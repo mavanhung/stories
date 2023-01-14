@@ -26,4 +26,11 @@ class CommentRequest extends Request
             'status' => Rule::in(BaseStatusEnum::values()),
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'comment.required' => 'Trường nội dung không được bỏ trống',
+        ];
+    }
 }

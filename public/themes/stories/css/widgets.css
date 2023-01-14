@@ -328,6 +328,7 @@ figure .post-format {
 .post-thumb-80 img {
     width: 90px;
     height: 80px;
+    object-fit: cover;
 }
 
 .post-thumb-64 img {
@@ -773,6 +774,16 @@ figure .social-share li:first-child,
     pointer-events: none;
 }
 
+figure .social-share li:first-child,
+.post-thumb .social-share li:first-child a {
+    background: #007aff;
+}
+
+figure .social-share li:first-child,
+.post-thumb .social-share li:first-child a i {
+    line-height: unset;
+}
+
 figure .social-share li a,
 .post-thumb .social-share li a {
     display: block;
@@ -813,19 +824,19 @@ figure .social-share:hover li:last-child,
     transition-duration: 0.2s;
 }
 
-.post-thumb .social-share li a {
+/* .post-thumb .social-share li a {
     background: #007aff;
-}
+} */
 
-.post-thumb .social-share li a.fb,
+/* .post-thumb .social-share li a.fb,
 .header-social-network .list-inline-item a.fb {
     background: #3b5999;
-}
+} */
 
-.post-thumb .social-share li a.tw,
+/* .post-thumb .social-share li a.tw,
 .header-social-network .list-inline-item a.tw {
     background: #55acee;
-}
+} */
 
 .post-thumb .social-share li a.pt,
 .header-social-network .list-inline-item a.pt {

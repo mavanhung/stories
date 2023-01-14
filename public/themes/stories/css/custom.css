@@ -308,6 +308,7 @@ body.show-admin-bar .header-sticky.sticky-bar {
     display: block;
     margin-left: auto;
     margin-right: auto;
+    cursor: pointer;
 }
 
 .single-content .post-content-wrapper h1,
@@ -323,4 +324,53 @@ body.show-admin-bar .header-sticky.sticky-bar {
 
 .single-content .post-content-wrapper a{
     color: #3ba956;
+}
+
+.header-social-network-custom {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+
+.header-social-network-custom .list-inline-item a {
+    width: 22px;
+    height: 22px;
+    background-color: transparent;
+    border-radius: 3px;
+}
+
+.header-social-network-custom .list-inline-item a.tw {
+    background: transparent;
+}
+
+.priced_block {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.priced_block .btn_offer_block:hover {
+    opacity: 0.8;
+}
+
+.priced_block .btn_offer_block {
+    display: inline-block;
+    color: #fff!important;
+    background-color: #3ba956;
+    padding: 10px 35px;
+    border-radius: 35px;
+    font-weight: 600;
+}
+
+.btn-tinypng {
+    color: #3ba956;
+    font-weight: 600;
+}
+
+.btn-tinypng:hover {
+    opacity: 0.6;
+}
+
+.header-sticky {
+    border-bottom: 1px solid;
+    border-bottom-color: var(--mutted-border-color);
 }

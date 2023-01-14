@@ -162,6 +162,7 @@ trait Functions
                 }
                 $data['content'] = str_replace('src=""', '', $data['content'] );
                 $data['content'] = str_replace('https://phongreviews.com', '', $data['content'] );
+                $data['content'] = str_replace('Phong Reviews', 'Xoài Chua', $data['content'] );
                 $post->update([
                     'content' => $data['content']
                 ]);
@@ -187,91 +188,106 @@ trait Functions
         // url_item là danh sách url chi tiết tin của danh mục đó
         $UrlList = [
             // [
-            //     'category_id' => 18,
+            //     'category_id' => 22,
+            //     'page' => 100,
             //     'url' => [
             //         'https://phongreviews.com/chuyen-muc/cong-nghe/'
             //     ]
             // ],
+            // [
+            //     'category_id' => 19,
+            //     'page' => 200,
+            //     'url' => [
+            //         'https://phongreviews.com/chuyen-muc/suc-khoe/'
+            //     ]
+            // ],
             [
-                'category_id' => 17,
+                'category_id' => 20,
+                'page' => 2,
                 'url' => [
-                    'https://phongreviews.com/chuyen-muc/suc-khoe/'
+                    'https://phongreviews.com/chuyen-muc/do-gia-dung/'
                 ]
             ],
             // [
             //     'category_id' => 1,
-            //     'url' => [
-            //         'https://phongreviews.com/chuyen-muc/do-gia-dung/'
-            //     ]
-            // ],
-            // [
-            //     'category_id' => 1,
+            //     'page' => 200,
             //     'url' => [
             //         'https://phongreviews.com/chuyen-muc/nha-cua-doi-song/'
             //     ]
             // ],
             // [
             //     'category_id' => 1,
+            //     'page' => 200,
             //     'url' => [
             //         'https://phongreviews.com/chuyen-muc/the-thao-da-ngoai/'
             //     ]
             // ],
             // [
             //     'category_id' => 1,
+            //     'page' => 200,
             //     'url' => [
             //         'https://phongreviews.com/chuyen-muc/me-be/'
             //     ]
             // ],
             // [
             //     'category_id' => 1,
+            //     'page' => 200,
             //     'url' => [
             //         'https://phongreviews.com/chuyen-muc/kinh-nghiem/'
             //     ]
             // ],
             // [
             //     'category_id' => 1,
+            //     'page' => 200,
             //     'url' => [
             //         'https://phongreviews.com/chuyen-muc/hoc-tap/'
             //     ]
             // ],
-            [
-                'category_id' => 14,
-                'url' => [
-                    'https://phongreviews.com/chuyen-muc/am-thuc/'
-                ]
-            ],
-            [
-                'category_id' => 11,
-                'url' => [
-                    'https://phongreviews.com/chuyen-muc/du-lich/'
-                ]
-            ],
+            // [
+            //     'category_id' => 14,
+            //     'page' => 200,
+            //     'url' => [
+            //         'https://phongreviews.com/chuyen-muc/am-thuc/'
+            //     ]
+            // ],
+            // [
+            //     'category_id' => 11,
+            //     'page' => 200,
+            //     'url' => [
+            //         'https://phongreviews.com/chuyen-muc/du-lich/'
+            //     ]
+            // ],
             // [
             //     'category_id' => 1,
+            //     'page' => 200,
             //     'url' => [
             //         'https://phongreviews.com/chuyen-muc/giai-tri/'
             //     ]
             // ],
             // [
             //     'category_id' => 1,
+            //     'page' => 200,
             //     'url' => [
             //         'https://phongreviews.com/chuyen-muc/giai-tri/sach-va-truyen/'
             //     ]
             // ],
             // [
             //     'category_id' => 1,
+            //     'page' => 200,
             //     'url' => [
             //         'https://phongreviews.com/chuyen-muc/giai-tri/review-phim/'
             //     ]
             // ],
             // [
-            //     'category_id' => 1,
+            //     'category_id' => 31,
+            //     'page' => 2,
             //     'url' => [
             //         'https://phongreviews.com/chuyen-muc/kinh-nghiem/anh-dep/'
             //     ]
             // ],
             // [
             //     'category_id' => 18,
+            //     'page' => 200,
             //     'url' => [
             //         'https://phongreviews.com/chuyen-muc/than-so-hoc/'
             //     ]
@@ -279,32 +295,68 @@ trait Functions
         ];
         $client = new Client();
 
+        //Lấy đường dẫn theo page cài sẵn vì đường dẫn trên phongreviews không đủ chỉ có 5 page
         foreach ($UrlList as $key => $value) {
-            $crawler = $client->request('GET', $value['url'][0]);
-            $result = $crawler->filter('nav.elementor-pagination a.page-numbers')->each(
-                function (Crawler $node) {
-                    $url = $node->filter('a')->attr('href');
-                    return $url;
-                }
-            );
-            $UrlList[$key]['url'] = array_merge($UrlList[$key]['url'],  $result);
+            $pageUrl = [];
+            for ($i=2; $i <= $value['page']; $i++) {
+                $pageUrl[] = $value['url'][0].'page/'.$i.'/';
+            }
+            $UrlList[$key]['url'] = array_merge($UrlList[$key]['url'],  $pageUrl);
         }
 
+        //Lấy đường dẫn theo page (k xài cách này nữa)
+        // foreach ($UrlList as $key => $value) {
+        //     $crawler = $client->request('GET', $value['url'][0]);
+        //     $result = $crawler->filter('nav.elementor-pagination a.page-numbers')->each(
+        //         function (Crawler $node) {
+        //             $url = $node->filter('a')->attr('href');
+        //             return $url;
+        //         }
+        //     );
+        //     $UrlList[$key]['url'] = array_merge($UrlList[$key]['url'],  $result);
+        // }
+
+        //Lấy đường dẫn chi tiết tin
         foreach ($UrlList as $key => $value) {
             $data = [];
             foreach ($value['url'] as $item) {
                 $crawler = $client->request('GET', $item);
-                $result = $crawler->filter('.elementor-widget-container article.elementor-post')->each(
-                    function (Crawler $node) {
-                        $url = $node->filter('a.elementor-post__thumbnail__link')->attr('href');
-                        $thumbnail = $node->filter('.elementor-post__thumbnail img')->attr('data-src');
-                        return [
-                            'href' => $url,
-                            'thumbnail' => $thumbnail
-                        ];
-                    }
-                );
-                $data = array_merge($data, $result);
+                $baseHref = $crawler->getBaseHref(); //Lấy getBaseHref của client trả về để so sánh với page url vì nếu quá page nó sẽ redirect về trang chủ phongreviews
+                if($item == $baseHref) {
+                    //Lấy đường dẫn và thumbnail của tin nổi bật page 1, từ page 2 sẽ ko có phần này
+                    $result1 = $crawler->filter('.elementor-widget-container .featured_grid .col-feat-grid')->each(
+                        function (Crawler $node) {
+                            $url = $node->filter('a.feat_overlay_link')->attr('href');
+                            $text = $node->filter('style')->text();
+                            $text = explode('(', $text);
+                            $thumbnail = '';
+                            if(count($text) > 1){
+                                $text = explode(')', $text[1]);
+                                if(count($text) > 1) {
+                                    $thumbnail = $text[0];
+                                }
+                            }
+                            return [
+                                'href' => $url,
+                                'thumbnail' => $thumbnail
+                            ];
+                        }
+                    );
+                    $data = array_merge($data, $result1);
+
+                    //Lấy đường dẫn và thumbnail
+                    $result2 = $crawler->filter('.elementor-widget-container article.elementor-post')->each(
+                        function (Crawler $node) {
+                            $url = $node->filter('a.elementor-post__thumbnail__link')->attr('href');
+                            $thumbnail = $node->filter('.elementor-post__thumbnail img')->attr('data-src');
+                            return [
+                                'href' => $url,
+                                'thumbnail' => $thumbnail
+                            ];
+                        }
+                    );
+                    $data = array_merge($data, $result2);
+                }
             }
             $UrlList[$key]['url_item'] = $data;
         }
@@ -441,5 +493,32 @@ trait Functions
             'images' => $listImage
         ];
         $this->saveDB($data);
+    }
+
+    public function crawlersChanhtuoi()
+    {
+        // Ghi chú
+        // category_id là id danh Mục
+        // url là danh sách url page
+        // url_item là danh sách url chi tiết tin của danh mục đó
+        $UrlList = [
+            [
+                'category_id' => 22,
+                'page' => 10,
+                'url' => [
+                    'https://chanhtuoi.com/kinh-nghiem/tai-chinh'
+                ]
+            ],
+        ];
+        $client = new Client();
+
+        //Lấy đường dẫn
+        foreach ($UrlList as $key => $value) {
+            $pageUrl = [];
+            for ($i=2; $i <= $value['page']; $i++) {
+                $pageUrl[] = $value['url'][0].'page/'.$i.'/';
+            }
+            $UrlList[$key]['url'] = array_merge($UrlList[$key]['url'],  $pageUrl);
+        }
     }
 }

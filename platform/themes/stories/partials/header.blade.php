@@ -107,7 +107,7 @@
                     </div>
                 </div>
             </div>
-            <div class="header-sticky">
+            <div id="hdFixed" class="header-sticky">
                 <div class="container align-self-center">
                     <div class="mobile_menu d-lg-none d-block"></div>
                     <div class="main-nav d-none d-lg-block float-left">

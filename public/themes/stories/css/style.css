@@ -447,6 +447,16 @@ sup {
     background: #024dff;
 }
 
+@keyframes smoothScroll {
+	0% {
+		transform: translateY(-70px);
+	}
+	100% {
+		transform: translateY(0px);
+	}
+}
+
+
 /*sticky*/
 .sticky-bar {
     left: 0;
@@ -457,10 +467,12 @@ sup {
     -webkit-box-shadow: 0px 0px 40px 0px rgba(0, 0, 0, 0.05);
     box-shadow: 0px 0px 40px 0px rgba(0, 0, 0, 0.05);
     z-index: 1008;
-    -webkit-animation: 300ms ease-in-out 0s normal none 1 running fadeInDown;
-    animation: 300ms ease-in-out 0s normal none 1 running fadeInDown;
+    /* -webkit-animation: 300ms ease-in-out 0s normal none 1 running fadeInDown;
+    animation: 300ms ease-in-out 0s normal none 1 running fadeInDown; */
     -webkit-box-shadow: 0px 0px 40px 0px rgba(0, 0, 0, 0.05);
     background: #fff;
+    transition: all .5s ease;
+    animation: smoothScroll 1s forwards;
 }
 
 .sticky-bar .divider-2 {
@@ -652,6 +664,10 @@ button.search-icon {
     color: #fff !important;
 }
 
+.header-social-network .list-inline-item a i {
+    line-height: unset;
+}
+
 .header-social-network .list-inline-item:not(:last-child) {
     margin-right: 7px
 }
@@ -795,6 +811,7 @@ button.search-icon {
 /*Search form*/
 body.open-search-form {
     overflow: hidden;
+    position: relative;
 }
 
 header .search-icon .ti-close,
@@ -818,9 +835,11 @@ header .search-icon .ti-close,
     height: 100vh;
     transform: scaleY(1);
     transform-origin: top;
-    position: absolute;
+    position: fixed;
     background: #fff;
-    z-index: 2;
+    z-index: 1009;
+    top: 0;
+    left: 0;
 }
 
 .search-text-bg {
@@ -1261,7 +1280,7 @@ header .search-icon .ti-close,
 .pagination-area .page-link,
 #scrollUp {
     border: 0;
-    font-size: 13px;
+    font-size: 15px;
     box-shadow: none;
     outline: 0;
     color: #889097;
@@ -2231,9 +2250,9 @@ form.search-style-2 input {
     position: relative;
 }
 
-form.search-style-2 input:focus {
+/* form.search-style-2 input:focus {
     border: 1px solid var(--color-primary);
-}
+} */
 
 form.search-style-2 button {
     background-color: #f8f8f8;
