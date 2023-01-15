@@ -442,3 +442,28 @@ body.show-admin-bar .header-sticky.sticky-bar {
     font-size: 12px;
     letter-spacing: 4px;
 }
+
+.post-module-2-readmore {
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: var(--color-primary);
+    transition: all 0.3s linear;
+}
+
+.post-module-2-readmore:hover {
+    opacity: 0.6;
+}
+
+.widget-latest-posts .read__more {
+    color: var(--color-primary);
+    transition: all 0.3s linear;
+}
+
+.widget-latest-posts .read__more:hover {
+    opacity: 0.6;
+}
+
+.widget-latest-posts ul.list-post li:last-child {
+    margin-bottom: 10px!important;
+}

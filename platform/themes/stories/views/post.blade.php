@@ -6,12 +6,12 @@
             <h1 class="entry-title mb-50 font-weight-900">
                 {{ $post->name }}
             </h1>
-            <div class="row">
+            <div class="row align-items-center">
                 <div class="col-md-6">
                     <div class="entry-meta align-items-center meta-2 font-small color-muted">
                         <p class="mb-5">
                             <span class="author-avatar"><img class="img-circle" src="{{ $post->author->avatar_url }}" alt="{{ $post->author->getFullName() }}"></span>
-                            {{ __('By') }} <span class="author-name font-weight-bold">{{ $post->author->getFullName() }}</span>
+                            <span class="author-name font-weight-bold">{{ $post->author->getFullName() }}</span>
                         </p>
                         {{-- <span class="mr-10"> {{ $post->created_at->format('M d, Y') }}</span> --}}
                         <span class="mr-10"> {{ $post->created_at->format('d/m/Y') }}</span>
@@ -144,13 +144,6 @@
                         </div>
                     @endif
 
-                    {!! apply_filters(BASE_FILTER_PUBLIC_COMMENT_AREA, Theme::partial('comments', ['post' => $post, 'commentsCount' => $commentsCount])) !!}
-
-                    @if (theme_option('facebook_comment_enabled_in_post', 'yes') == 'yes')
-                        <br />
-                        {!! apply_filters(BASE_FILTER_PUBLIC_COMMENT_AREA, Theme::partial('comments-facebook')) !!}
-                    @endif
-
                     <!--related posts-->
                     @php $relatedPosts = get_related_posts($post->id, 4); @endphp
                     @if ($relatedPosts->count() > 0)
@@ -233,6 +226,14 @@
                             </div>
                         </div>
                     @endif
+
+                    {!! apply_filters(BASE_FILTER_PUBLIC_COMMENT_AREA, Theme::partial('comments', ['post' => $post, 'commentsCount' => $commentsCount])) !!}
+
+                    @if (theme_option('facebook_comment_enabled_in_post', 'yes') == 'yes')
+                        <br />
+                        {!! apply_filters(BASE_FILTER_PUBLIC_COMMENT_AREA, Theme::partial('comments-facebook')) !!}
+                    @endif
+
                     <!--More posts-->
                     @if ($relatedPosts->count() > 2)
                         <div class="single-more-articles border-radius-5">

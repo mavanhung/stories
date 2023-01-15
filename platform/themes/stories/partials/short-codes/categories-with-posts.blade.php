@@ -29,6 +29,9 @@
                                 @endforeach
                             </ul>
                         </div>
+                        <div class="text-center">
+                            <a class="read__more" href="{{ $category->slugable->key }}">Xem thêm</a>
+                        </div>
                     </div>
                 </div>
             @endforeach

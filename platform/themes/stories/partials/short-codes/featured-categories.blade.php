@@ -1,4 +1,4 @@
-<div class="site-bottom pt-50 pb-50">
+<div class="site-bottom pb-50">
     <div class="container">
         <div class="carausel-3-columns-wrapper sidebar-widget widget-latest-posts mb-30 mt-20 wow fadeInUp animated">
             <div class="widget-header-2 position-relative mb-30">

@@ -1481,7 +1481,7 @@ h1.page-404 {
 /*SINGLE POST*/
 .entry-meta .author-avatar {
     float: left;
-    margin: -3px 15px 0 0;
+    margin: 2px 15px 0 0;
 }
 
 .entry-meta .author-avatar img {

@@ -7,9 +7,9 @@
 
 /* Normal desktop :992px. */
 @media (min-width:992px) {
-    .widget-area {
+    /* .widget-area {
         padding-left: 30px;
-    }
+    } */
 
     .col-1-5 {
         -ms-flex: 0 0 20%;

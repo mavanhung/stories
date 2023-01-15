@@ -294,7 +294,6 @@ button.box-shadow {
 }
 
 .entry-meta.meta-2 .author-name {
-    text-transform: uppercase;
     font-weight: 600;
     display: inline-block;
     margin-top: 7px;
