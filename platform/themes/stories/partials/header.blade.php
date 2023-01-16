@@ -93,7 +93,7 @@
                                             <ul class="header-social-network d-inline-block list-inline mr-15">
                                                 @for ($i = 1; $i <= 5; $i++)
                                                     @if (theme_option('social_' . $i . '_url') && theme_option('social_' . $i . '_name'))
-                                                        <li class="list-inline-item"><a class="social-icon text-xs-center" style="background: {{ theme_option('social_' . $i . '_color') }}" href="{{ theme_option('social_' . $i . '_url') }}" target="_blank" title="{{ theme_option('social_' . $i . '_name') }}"><i class="elegant-icon {{ theme_option('social_' . $i . '_icon') }}"></i></a></li>
+                                                        <li class="list-inline-item"><a class="social-icon text-xs-center" style="background: {{ theme_option('social_' . $i . '_color') }}" href="{{ theme_option('social_' . $i . '_url') }}" target="_blank" title="{{ theme_option('social_' . $i . '_name') }}" rel="nofollow"><i class="elegant-icon {{ theme_option('social_' . $i . '_icon') }}"></i></a></li>
                                                     @endif
                                                 @endfor
                                             </ul>
@@ -134,7 +134,7 @@
                         <ul class="header-social-network d-inline-block list-inline mr-15">
                             @for ($i = 1; $i <= 5; $i++)
                                 @if (theme_option('social_' . $i . '_url') && theme_option('social_' . $i . '_name'))
-                                    <li class="list-inline-item"><a class="social-icon text-xs-center" style="background: {{ theme_option('social_' . $i . '_color') }}" href="{{ theme_option('social_' . $i . '_url') }}" target="_blank" title="{{ theme_option('social_' . $i . '_name') }}"><i class="elegant-icon {{ theme_option('social_' . $i . '_icon') }}"></i></a></li>
+                                    <li class="list-inline-item"><a class="social-icon text-xs-center" style="background: {{ theme_option('social_' . $i . '_color') }}" href="{{ theme_option('social_' . $i . '_url') }}" target="_blank" title="{{ theme_option('social_' . $i . '_name') }}" rel="nofollow"><i class="elegant-icon {{ theme_option('social_' . $i . '_icon') }}"></i></a></li>
                                 @endif
                             @endfor
                         </ul>
