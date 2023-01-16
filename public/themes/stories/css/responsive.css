@@ -183,6 +183,22 @@
     .featured-slider-2-nav {
         display: none
     }
+
+    .logo__custom img {
+        max-width: 38px;
+    }
+
+    .logo__custom .logo__custom-text {
+        margin-bottom: 0;
+    }
+
+    .logo__custom .logo__custom-text span {
+        font-size: 28px;
+    }
+
+    .logo__custom .logo__custom-text small {
+        bottom: -6px;
+    }
 }
 
 /*Masonry layout*/
@@ -195,6 +211,15 @@
 
     .grid-line {
         display: none
+    }
+}
+
+@media (min-width:991px) and (max-width:1200px) {
+    .font-menu {
+        font-size: 14px;
+    }
+    .main-menu>li {
+        padding: 0 5px;
     }
 }
 

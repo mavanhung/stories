@@ -79,7 +79,7 @@ if (is_plugin_active('blog')) {
                         return $query
                             ->latest()
                             ->with(['slugable'])
-                            ->limit(3);
+                            ->limit(5);
                     },
                 ],
             ]);

@@ -333,8 +333,8 @@ body.show-admin-bar .header-sticky.sticky-bar {
 }
 
 .header-social-network-custom .list-inline-item a {
-    width: 22px;
-    height: 22px;
+    width: 20px;
+    height: 20px;
     background-color: transparent;
     border-radius: 3px;
 }

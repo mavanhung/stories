@@ -50,7 +50,7 @@
             <h5 class="post-title mb-20 font-weight-900">
                 <a href="{{ $post->url }}">{{ $post->name }}</a>
             </h5>
-            <div class="entry-meta meta-1 float-left font-small text-uppercase">
+            <div class="entry-meta meta-1 float-left font-small">
                 <span class="post-on">{{ $post->created_at->format('d/m/Y') }}</span>
                 {{-- <span class="time-reading has-dot">{{ number_format(strlen($post->content) / 200) }} {{ __('mins read') }}</span> --}}
                 <span class="post-by has-dot">{{ number_format($post->views) }} {{ __('views') }}</span>

@@ -212,7 +212,7 @@
                                                         <a href="{{ $relatedItem->url }}">{{ $relatedItem->name }}</a>
                                                         <span class="post-format-icon"><i class="elegant-icon icon_star_alt"></i></span>
                                                     </h5>
-                                                    <div class="entry-meta meta-1 float-left font-small text-uppercase">
+                                                    <div class="entry-meta meta-1 float-left font-small">
                                                         <span class="post-on">{{ $relatedItem->created_at->format('d/m/Y') }}</span>
                                                         {{-- <span class="time-reading has-dot">{{ number_format(strlen($relatedItem->content) / 200) }} {{ __('mins read') }}</span> --}}
                                                         <span class="post-by has-dot">{{ number_format($relatedItem->views) }} {{ __('views') }}</span>
@@ -253,7 +253,7 @@
                                                 </div>
                                                 <div class="post-content media-body">
                                                     <h6 class="post-title mb-15 text-limit-2-row font-medium"><a href="{{ $relatedItem->url }}">{{ $relatedItem->name }}</a></h6>
-                                                    <div class="entry-meta meta-1 float-left font-x-small text-uppercase">
+                                                    <div class="entry-meta meta-1 float-left font-x-small">
                                                         <span class="post-on">{{ $relatedItem->created_at->format('d/m/Y') }}</span>
                                                         <span class="post-by has-dot">{{ number_format($relatedItem->views) }} {{ __('views') }}</span>
                                                     </div>

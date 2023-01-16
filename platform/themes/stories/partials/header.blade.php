@@ -121,7 +121,7 @@
                         <nav>
                             {!! Menu::renderMenuLocation('main-menu', [
                                 'view'    => 'menu',
-                                'options' => ['class' => 'main-menu d-none d-lg-inline font-medium'],
+                                'options' => ['class' => 'main-menu d-none d-lg-inline font-menu'],
                             ]) !!}
 
                             {!! Menu::renderMenuLocation('main-menu', [

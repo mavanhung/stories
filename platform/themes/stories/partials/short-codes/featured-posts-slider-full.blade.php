@@ -41,7 +41,7 @@
                             </div>
                             <div class="post-content media-body text-white">
                                 <h5 class="post-title mb-15 text-limit-2-row">{{ $post->name }}</h5>
-                                <div class="entry-meta meta-1 float-left font-x-small text-uppercase">
+                                <div class="entry-meta meta-1 float-left font-x-small">
                                     <span class="post-on text-white">{{ $post->created_at->diffForHumans() }}</span>
                                     <span class="hit-count has-dot text-white">{{ number_format($post->views) }} {{ __('views') }}</span>
                                 </div>

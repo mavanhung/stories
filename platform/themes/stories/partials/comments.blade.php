@@ -68,7 +68,7 @@
                     </div>
                     <div>
                         <span class="help-block d-inline-block">Bạn có thể tải lên tối đa 3 hình ảnh, kích thước tối đa của mỗi ảnh là 1024 kilobyte</span>
-                        <span class="help-block d-inline-block">Nếu kích thước hình ảnh tải lên quá lớn, bạn có thể giảm giảm kích thước hình ảnh tại <a class="btn-tinypng" target="_blank" href="https://tinypng.com/">ĐÂY</a></span>
+                        <span class="help-block d-inline-block">Nếu kích thước hình ảnh tải lên quá lớn, bạn có thể giảm kích thước hình ảnh tại <a class="btn-tinypng" target="_blank" href="https://tinypng.com/">ĐÂY</a></span>
                     </div>
                 </div>
             </div>

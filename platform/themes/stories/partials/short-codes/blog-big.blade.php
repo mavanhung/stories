@@ -57,7 +57,7 @@
                             <div class="post-excerpt mb-25 font-small text-muted">
                                 <p>{{ $post->description }}</p>
                             </div>
-                            <div class="entry-meta meta-1 float-left font-small text-uppercase">
+                            <div class="entry-meta meta-1 float-left font-small">
                                 <span class="post-on">{{ $post->created_at->format('d/m/Y') }}</span>
                                 {{-- <span class="time-reading has-dot">{{ number_format(strlen($post->content) / 200) }} {{ __('mins read') }}</span> --}}
                                 <span class="post-by has-dot">{{ number_format($post->views) }} {{ __('views') }}</span>

@@ -55,9 +55,9 @@ return [
             // You may use this event to set up your assets.
             $theme->asset()->usePath()->add('style', 'css/style.css', [], [], $version);
             $theme->asset()->usePath()->add('widgets', 'css/widgets.css', [], [], $version);
-            $theme->asset()->usePath()->add('responsive', 'css/responsive.css', [], [], $version);
             $theme->asset()->usePath()->add('custom', 'css/custom.css', [], [], $version);
             $theme->asset()->usePath()->add('comments', 'css/comments.css', [], [], $version);
+            $theme->asset()->usePath()->add('responsive', 'css/responsive.css', [], [], $version);
             $theme->asset()->add('font-awesome', 'https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css');
             $theme->asset()->add('fancybox', 'https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css');
 

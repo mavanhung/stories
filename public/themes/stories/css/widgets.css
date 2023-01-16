@@ -786,13 +786,18 @@ figure .social-share li:first-child,
 figure .social-share li a,
 .post-thumb .social-share li a {
     display: block;
-    width: 24px;
-    height: 24px;
+    width: 20px;
+    height: 20px;
     line-height: 24px;
     text-align: center;
     border-radius: 50%;
     font-size: 11px;
     color: #fff;
+}
+
+.post-thumb .social-share li:first-child a {
+    width: 24px;
+    height: 24px;
 }
 
 figure .social-share:hover li:nth-child(1),
@@ -804,7 +809,7 @@ figure .social-share:hover li:nth-child(1),
 figure .social-share:hover li,
 .post-thumb .social-share:hover li {
     opacity: 1;
-    max-width: 24px;
+    max-width: 20px;
 }
 
 figure .social-share:hover li:last-child,
