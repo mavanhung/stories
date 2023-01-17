@@ -64,7 +64,7 @@ $(document).ready(function () {
     $(document).on("click", ".fb-share-button", function () {
         var url = $(this).attr("data-href");
         var title = $(this).attr("data-title");
-        url = 'https://www.facebook.com/sharer/sharer.php?u=' + url;
+        url = 'https://www.facebook.com/sharer/sharer.php?u=' + url + '&title=' + title;
         popupCenter({url: url, title: title, w: 626, h: 436});
     });
 
