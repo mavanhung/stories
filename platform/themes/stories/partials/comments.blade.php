@@ -68,7 +68,7 @@
                     </div>
                     <div>
                         <span class="help-block d-inline-block">Bạn có thể tải lên tối đa 3 hình ảnh, kích thước tối đa của mỗi ảnh là 1024 kilobyte</span>
-                        <span class="help-block d-inline-block">Nếu kích thước hình ảnh tải lên quá lớn, bạn có thể giảm kích thước hình ảnh tại <a class="btn-tinypng" target="_blank" href="https://tinypng.com/">ĐÂY</a></span>
+                        <span class="help-block d-inline-block">Nếu kích thước hình ảnh tải lên quá lớn, bạn có thể giảm kích thước hình ảnh tại <a class="btn-tinypng" title="tinypng" target="_blank" rel="nofollow" href="https://tinypng.com/">ĐÂY</a></span>
                     </div>
                 </div>
             </div>
@@ -256,7 +256,7 @@
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 text-right">
-                <a class="btn btn-primary btn-send-comment">Gửi bình luận</a>
+                <a class="btn btn-primary btn-send-comment" title="Gửi bình luận">Gửi bình luận</a>
             </div>
         </div>
     </form>

@@ -793,6 +793,7 @@ figure .social-share li a,
     border-radius: 50%;
     font-size: 11px;
     color: #fff;
+    cursor: pointer;
 }
 
 .post-thumb .social-share li:first-child a {

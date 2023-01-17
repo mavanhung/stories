@@ -42,7 +42,7 @@ if (is_plugin_active('blog')) {
 
                 $category = app(CategoryInterface::class)
                             ->findById(Arr::get($attributes, 'category_id_' . $i), ['slugable', 'posts' => function ($query) {
-                                $query->latest()->with(['slugable', 'categories', 'categories.slugable'])->limit(4);
+                                $query->where('status', BaseStatusEnum::PUBLISHED)->latest()->with(['slugable', 'categories', 'categories.slugable'])->limit(4);
                             }]);
 
                 if ($category) {
@@ -77,6 +77,7 @@ if (is_plugin_active('blog')) {
                     'slugable',
                     'posts' => function ($query) {
                         return $query
+                            ->where('status', BaseStatusEnum::PUBLISHED)
                             ->latest()
                             ->with(['slugable'])
                             ->limit(5);

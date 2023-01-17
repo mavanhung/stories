@@ -57,9 +57,9 @@
                     <div class="row pt-20 pb-20 align-items-center">
                         <div class="col-md-3 col-6">
                             {{-- @if (theme_option('logo'))
-                                <a href="{{ url('') }}"><img class="logo" src="{{ RvMedia::getImageUrl(theme_option('logo')) }}" alt="{{ setting('site_title') }}"></a>
+                                <a href="{{ url('') }}" title="logo"><img class="logo" src="{{ RvMedia::getImageUrl(theme_option('logo')) }}" alt="{{ setting('site_title') }}"></a>
                             @endif --}}
-                            <a class="logo__custom" href="{{ url('') }}">
+                            <a class="logo__custom" href="{{ url('') }}" title="logo">
                                 <img src="{{ Theme::asset()->url('images/logo.png') }}" alt="logo">
                                 <div class="logo__custom-text">
                                     <span>xoaichua</span>

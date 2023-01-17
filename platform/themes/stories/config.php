@@ -82,6 +82,7 @@ return [
             $theme->asset()->container('footer')->usePath()->add('waypoints', 'js/vendor/jquery.waypoints.min.js');
             $theme->asset()->container('footer')->usePath()->add('jquery.theia.sticky', 'js/vendor/jquery.theia.sticky.js');
             $theme->asset()->container('footer')->add('fancybox-js', 'https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js');
+            $theme->asset()->container('footer')->add('zalo-js', 'https://sp.zalo.me/plugins/sdk.js');
 
             $theme->asset()->container('footer')->usePath()->add('comment', 'js/comment.js', ['jquery'], [], $version);
             $theme->asset()->container('footer')->usePath()->add('main', 'js/main.js', ['jquery'], [], $version);
