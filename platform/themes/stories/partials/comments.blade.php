@@ -25,7 +25,7 @@
             <div class="col-xs-12 col-sm-12">
                 <div class="form-group">
                     <input id="saveCommentAuthor" type="checkbox" name="comment_author">
-                    <label for="saveCommentAuthor" class="font-medium ml-5 mb-0 d-inline">Lưu thông tin trong trình duyệt này cho lần bình luận kế tiếp của tôi.</label>
+                    <label for="saveCommentAuthor" class="font-small ml-5 mb-0 d-inline">Lưu thông tin trong trình duyệt này cho lần bình luận kế tiếp của tôi.</label>
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12">
