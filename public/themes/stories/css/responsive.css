@@ -105,6 +105,10 @@
     .header-sticky .header-tools .off-canvas-toggle-cover {
         display: block !important;
     }
+
+    .slicknav_nav {
+        box-shadow: 0px 15px 20px -15px #000;
+    }
 }
 
 /* small mobile :768px. */
