@@ -223,6 +223,10 @@
     .carausel-3-columns-wrapper .carausel-3-columns h6 {
         font-size: 18px;
     }
+
+    .widget-header-1 h5, .widget-header-2 h5 {
+        font-size: 16px;
+    }
 }
 
 /*Masonry layout*/
