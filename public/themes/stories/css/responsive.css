@@ -199,6 +199,30 @@
     .logo__custom .logo__custom-text small {
         bottom: -6px;
     }
+
+    .font-x-small {
+        font-size: 14px;
+    }
+
+    .font-small {
+        font-size: 16px;
+    }
+
+    .font-medium {
+        font-size: 18px;
+    }
+
+    .post-card-1 .post-content {
+        padding: 20px!important;
+    }
+
+    .text-limit-2-row {
+        -webkit-line-clamp: 3!important;
+    }
+
+    .carausel-3-columns-wrapper .carausel-3-columns h6 {
+        font-size: 18px;
+    }
 }
 
 /*Masonry layout*/
