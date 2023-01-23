@@ -189,79 +189,79 @@ trait Functions
         // url là danh sách url page
         // url_item là danh sách url chi tiết tin của danh mục đó
         $UrlList = [
-            [
-                'category_id' => 22,
-                'page' => 25,
-                'url' => [
-                    'https://phongreviews.com/chuyen-muc/cong-nghe/'
-                ]
-            ],
+            // [
+            //     'category_id' => 22,
+            //     'page' => 25,
+            //     'url' => [
+            //         'https://phongreviews.com/chuyen-muc/cong-nghe/'
+            //     ]
+            // ],
             // [
             //     'category_id' => 19,
-            //     'page' => 3,
+            //     'page' => 142,
             //     'url' => [
             //         'https://phongreviews.com/chuyen-muc/suc-khoe/'
             //     ]
             // ],
-            // [
-            //     'category_id' => 20,
-            //     'page' => 2,
-            //     'url' => [
-            //         'https://phongreviews.com/chuyen-muc/do-gia-dung/'
-            //     ]
-            // ],
-            // [
-            //     'category_id' => 23,
-            //     'page' => 2,
-            //     'url' => [
-            //         'https://phongreviews.com/chuyen-muc/nha-cua-doi-song/'
-            //     ]
-            // ],
-            // [
-            //     'category_id' => 37,
-            //     'page' => 2,
-            //     'url' => [
-            //         'https://phongreviews.com/chuyen-muc/the-thao-da-ngoai/'
-            //     ]
-            // ],
-            // [
-            //     'category_id' => 21,
-            //     'page' => 2,
-            //     'url' => [
-            //         'https://phongreviews.com/chuyen-muc/me-be/'
-            //     ]
-            // ],
+            [
+                'category_id' => 20,
+                'page' => 52,
+                'url' => [
+                    'https://phongreviews.com/chuyen-muc/do-gia-dung/'
+                ]
+            ],
+            [
+                'category_id' => 23,
+                'page' => 29,
+                'url' => [
+                    'https://phongreviews.com/chuyen-muc/nha-cua-doi-song/'
+                ]
+            ],
+            [
+                'category_id' => 37,
+                'page' => 4,
+                'url' => [
+                    'https://phongreviews.com/chuyen-muc/the-thao-da-ngoai/'
+                ]
+            ],
+            [
+                'category_id' => 21,
+                'page' => 24,
+                'url' => [
+                    'https://phongreviews.com/chuyen-muc/me-be/'
+                ]
+            ],
             // [
             //     'category_id' => 1,
-            //     'page' => 200,
+            //     'page' => 27,
             //     'url' => [
             //         'https://phongreviews.com/chuyen-muc/kinh-nghiem/'
             //     ]
             // ],
             // [
             //     'category_id' => 1,
-            //     'page' => 200,
+            //     'page' => 3,
             //     'url' => [
             //         'https://phongreviews.com/chuyen-muc/hoc-tap/'
             //     ]
             // ],
             // [
             //     'category_id' => 14,
-            //     'page' => 200,
+            //     'page' => 73,
             //     'url' => [
             //         'https://phongreviews.com/chuyen-muc/am-thuc/'
             //     ]
             // ],
             // [
             //     'category_id' => 11,
-            //     'page' => 200,
+            //     'page' => 17,
             //     'url' => [
             //         'https://phongreviews.com/chuyen-muc/du-lich/'
             //     ]
             // ],
             // [
             //     'category_id' => 1,
-            //     'page' => 200,
+            //     'page' => 24,
             //     'url' => [
             //         'https://phongreviews.com/chuyen-muc/giai-tri/'
             //     ]
