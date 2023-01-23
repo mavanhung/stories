@@ -168,6 +168,7 @@ trait Functions
                     'content' => $data['content']
                 ]);
             }
+            dump('save done');
             DB::commit();
             return true;
         } catch (\Throwable $th) {
@@ -371,6 +372,7 @@ trait Functions
 
     public function crawlersPhongReviewsDetail($categoryId, $url, $urlThumbnail)
     {
+        dump($url);
         $client = new Client();
         $crawler = $client->request('GET', $url);
 
