@@ -167,8 +167,8 @@ trait Functions
                 $post->update([
                     'content' => $data['content']
                 ]);
+                dump('save done');
             }
-            dump('save done');
             DB::commit();
             return true;
         } catch (\Throwable $th) {
