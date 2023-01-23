@@ -1,0 +1,9 @@
+{
+    "name": "Tiki",
+    "namespace": "Botble\\Tiki\\",
+    "provider": "Botble\\Tiki\\Providers\\TikiServiceProvider",
+    "author": "N/A",
+    "url": "N/A",
+    "version": "1.0",
+    "description": "The description for module tiki"
+}
