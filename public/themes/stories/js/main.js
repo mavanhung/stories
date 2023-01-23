@@ -210,7 +210,7 @@
                         });
                     }
                 })(),
-                (n = e("select")).length && n.niceSelect(),
+                // (n = e("select")).length && n.niceSelect(),
                 (function () {
                     if (
                         ((e.fn.vwScroller = function (s) {

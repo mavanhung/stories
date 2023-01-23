@@ -60,6 +60,7 @@ return [
             $theme->asset()->usePath()->add('responsive', 'css/responsive.css', [], [], $version);
             $theme->asset()->add('font-awesome', 'https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css');
             $theme->asset()->add('fancybox', 'https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css');
+            $theme->asset()->add('select2', 'https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css');
 
             if (BaseHelper::siteLanguageDirection() == 'rtl') {
                 $theme->asset()->usePath()->add('rtl', 'css/rtl.css', [], [], $version);
@@ -67,8 +68,8 @@ return [
 
             $theme->asset()->container('footer')->usePath()->add('modernizr', 'js/vendor/modernizr-3.5.0.min.js');
             $theme->asset()->container('footer')->usePath()->add('jquery', 'js/vendor/jquery-3.5.1.min.js');
-            // $theme->asset()->container('footer')->usePath()->add('popper', 'js/vendor/popper.min.js');
-            // $theme->asset()->container('footer')->usePath()->add('bootstrap', 'js/vendor/bootstrap.min.js');
+            $theme->asset()->container('footer')->usePath()->add('popper', 'js/vendor/popper.min.js');
+            $theme->asset()->container('footer')->usePath()->add('bootstrap', 'js/vendor/bootstrap.min.js');
             $theme->asset()->container('footer')->usePath()->add('jquery.slicknav', 'js/vendor/jquery.slicknav.js');
             $theme->asset()->container('footer')->usePath()->add('slick-js', 'js/vendor/slick.min.js');
             $theme->asset()->container('footer')->usePath()->add('wow-js', 'js/vendor/wow.min.js');
@@ -76,6 +77,7 @@ return [
             $theme->asset()->container('footer')->usePath()->add('jquery.vticker', 'js/vendor/jquery.vticker-min.js');
             $theme->asset()->container('footer')->usePath()->add('jquery.scrollUp', 'js/vendor/jquery.scrollUp.min.js');
             $theme->asset()->container('footer')->usePath()->add('jquery.nice-select', 'js/vendor/jquery.nice-select.min.js');
+            $theme->asset()->container('footer')->add('jquery.select2', 'https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js');
             $theme->asset()->container('footer')->usePath()->add('jquery.magnific-popup', 'js/vendor/jquery.magnific-popup.js');
             $theme->asset()->container('footer')->usePath()->add('jquery.sticky', 'js/vendor/jquery.sticky.js');
             $theme->asset()->container('footer')->usePath()->add('perfect-scrollbar', 'js/vendor/perfect-scrollbar.js');

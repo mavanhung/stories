@@ -79,6 +79,7 @@ trait Functions
                         ->where('reference_type', Post::class)
                         ->first();
             if(blank($slug)) {
+                $data['description'] = str_replace('Phong Reviews', 'Xoài Chua', $data['description']);
                 $post = Post::create([
                     'name' => $data['name'],
                     'description' => $data['description'],
