@@ -190,46 +190,46 @@ trait Functions
         $UrlList = [
             [
                 'category_id' => 22,
-                'page' => 3,
+                'page' => 25,
                 'url' => [
                     'https://phongreviews.com/chuyen-muc/cong-nghe/'
                 ]
             ],
-            [
-                'category_id' => 19,
-                'page' => 3,
-                'url' => [
-                    'https://phongreviews.com/chuyen-muc/suc-khoe/'
-                ]
-            ],
-            [
-                'category_id' => 20,
-                'page' => 2,
-                'url' => [
-                    'https://phongreviews.com/chuyen-muc/do-gia-dung/'
-                ]
-            ],
-            [
-                'category_id' => 23,
-                'page' => 2,
-                'url' => [
-                    'https://phongreviews.com/chuyen-muc/nha-cua-doi-song/'
-                ]
-            ],
-            [
-                'category_id' => 37,
-                'page' => 2,
-                'url' => [
-                    'https://phongreviews.com/chuyen-muc/the-thao-da-ngoai/'
-                ]
-            ],
-            [
-                'category_id' => 21,
-                'page' => 2,
-                'url' => [
-                    'https://phongreviews.com/chuyen-muc/me-be/'
-                ]
-            ],
+            // [
+            //     'category_id' => 19,
+            //     'page' => 3,
+            //     'url' => [
+            //         'https://phongreviews.com/chuyen-muc/suc-khoe/'
+            //     ]
+            // ],
+            // [
+            //     'category_id' => 20,
+            //     'page' => 2,
+            //     'url' => [
+            //         'https://phongreviews.com/chuyen-muc/do-gia-dung/'
+            //     ]
+            // ],
+            // [
+            //     'category_id' => 23,
+            //     'page' => 2,
+            //     'url' => [
+            //         'https://phongreviews.com/chuyen-muc/nha-cua-doi-song/'
+            //     ]
+            // ],
+            // [
+            //     'category_id' => 37,
+            //     'page' => 2,
+            //     'url' => [
+            //         'https://phongreviews.com/chuyen-muc/the-thao-da-ngoai/'
+            //     ]
+            // ],
+            // [
+            //     'category_id' => 21,
+            //     'page' => 2,
+            //     'url' => [
+            //         'https://phongreviews.com/chuyen-muc/me-be/'
+            //     ]
+            // ],
             // [
             //     'category_id' => 1,
             //     'page' => 200,
