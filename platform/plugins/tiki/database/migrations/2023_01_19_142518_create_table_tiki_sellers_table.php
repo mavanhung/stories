@@ -16,10 +16,10 @@ class CreateTableTikiSellersTable extends Migration
         Schema::create('tiki_sellers', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name')->comment('name');
-            $table->string('seller_name')->index()->comment('seller name');
+            $table->string('seller_name')->index()->nullable()->comment('seller name');
             $table->string('store_name')->nullable()->comment('store name');
-            $table->integer('seller_id')->index()->comment('seller id');
-            $table->integer('store_id')->nullable()->index()->comment('store id');
+            $table->integer('seller_id')->index()->nullable()->comment('seller id');
+            $table->integer('store_id')->nullable()->comment('store id');
             $table->string('store_level')->nullable()->comment('store level');
             $table->string('seller_type')->nullable()->comment('seller type');
             $table->string('storefront_label')->nullable()->comment('storefront label');
