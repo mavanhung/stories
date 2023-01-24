@@ -28,7 +28,7 @@ class CreateTableTikiDiscountCodesTable extends Migration
             $table->bigInteger('discount_amount')->index()->nullable();
             $table->bigInteger('min_amount')->index()->nullable();
             $table->bigInteger('rule_id')->nullable();
-            $table->text('short_description')->index()->nullable()->comment('mô tả ngắn điều kiện');
+            $table->string('short_description')->index()->nullable()->comment('mô tả ngắn điều kiện');
             $table->text('long_description')->nullable()->comment('mô tả chi tiết điều kiện');
             $table->dateTime('expired_at')->index()->nullable()->comment('Hạn sử dụng');
             $table->string('icon_url')->nullable()->comment('hình ảnh mã giảm giá');
