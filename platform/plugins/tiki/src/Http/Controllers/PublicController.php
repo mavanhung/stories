@@ -36,7 +36,7 @@ class PublicController extends Controller
             }
         }
         if(isset($qs) || isset($sellerId)) {
-            $discountCodes = $discountCodeRepository->getSearch($qs, $sellerId, 9);
+            $discountCodes = $discountCodeRepository->getSearch($qs, $sellerId, 9, 9);
         }else {
             $discountCodes = $discountCodeRepository->getDiscountCode(9);
         }
@@ -57,7 +57,7 @@ class PublicController extends Controller
     public function searchSeller(Request $request, SellerInterface $sellerRepository)
     {
         $query = $request->input('q');
-        $sellers = $sellerRepository->searchSeller($query, 0, 9);
+        $sellers = $sellerRepository->searchSeller($query, 0, 12);
 
         return response()->json([
             'incomplete_results' => true,
