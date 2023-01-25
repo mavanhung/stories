@@ -145,7 +145,6 @@ class tikiDiscountCode extends Command
             if(!blank($data['logo'])){
                 $logoName = array_reverse(explode ('/', $data['logo']))[0];
                 $storagePath = 'tiki/seller/logo/'.$logoName;
-                $logoUrl = 'storage/tiki/seller/logo/'.$logoName;
                 $this->saveImage($data['logo'], $storagePath);
             }
 
@@ -159,7 +158,7 @@ class tikiDiscountCode extends Command
                     'store_level' => $data['store_level'] ?? null,
                     'seller_type' => $data['seller_type'] ?? null,
                     'storefront_label' => $data['storefront_label'] ?? null,
-                    'logo' => $logoUrl ?? null,
+                    'logo' => $storagePath ?? null,
                     'seller_url' => $data['seller_url'] ?? null,
                     'url_slug' => $data['url_slug'] ?? null,
                     'live_at' => $data['live_at'] ?? null,
@@ -175,7 +174,7 @@ class tikiDiscountCode extends Command
                     'store_level' => $data['store_level'] ?? null,
                     'seller_type' => $data['seller_type'] ?? null,
                     'storefront_label' => $data['storefront_label'] ?? null,
-                    'logo' => $logoUrl ?? null,
+                    'logo' => $storagePath ?? null,
                     'seller_url' => $data['seller_url'] ?? null,
                     'url_slug' => $data['url_slug'] ?? null,
                     'live_at' => $data['live_at'] ?? null,

@@ -468,16 +468,20 @@ body.show-admin-bar .header-sticky.sticky-bar {
     margin-bottom: 10px !important;
 }
 
+/* coupon card item */
+
 .coupon-card {
-    /* background: linear-gradient(135deg, #7158fe, #9d4de6); */
-    background-color: #3ad16d;
-    color: #fff;
-    text-align: center;
-    padding: 20px 25px;
+    background-color: var(--color-white);
+    padding: 20px;
     border-radius: 15px;
     box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.15);
     position: relative;
 
+}
+
+.coupon-card .top {
+    display: flex;
+    column-gap: 30px;
 }
 
 .logo {
@@ -487,20 +491,29 @@ body.show-admin-bar .header-sticky.sticky-bar {
 
 }
 
-.coupon-card h2 {
+.coupon-card .seller-name {
     font-size: 20px;
-    font-weight: 400;
-    line-height: 26px;
+    font-weight: 600;
 }
 
-.coupon-card h3 {
+.coupon-card .label {
     font-size: 18px;
     font-weight: 400;
-    line-height: 26px;
+    margin-bottom: 0;
 }
 
-.coupon-card .description {
+.coupon-card .short-description {
     font-size: 16px;
+}
+
+.coupon-card .short-description a i {
+    font-size: 18px;
+    margin-left: 5px;
+    color: #3ad16d;
+}
+
+.coupon-card .short-description a:hover i {
+    opacity: 0.8;
 }
 
 .coupon-card p {
@@ -517,46 +530,18 @@ body.show-admin-bar .header-sticky.sticky-bar {
 }
 
 .cpnCode {
-    border: 1px dashed #fff;
+    border: 1px dashed #3ad16d;
     padding: 10px 20px;
     border-right: 0;
 
 }
 
 .cpnBtn {
-    border: 1px solid #fff;
-    background: #fff;
+    border: 1px solid #3ad16d;
+    background: #3ad16d;
     padding: 10px 20px;
-    color: #7158fe;
+    color: var(--color-white);
     cursor: pointer;
-}
-
-.circle1,
-.circle2 {
-    background: var(--color-white);
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-
-}
-
-.circle1 {
-    left: -20px;
-}
-
-.circle2 {
-    right: -20px;
-}
-
-.coupon-card .hidden {
-    display: none;
-}
-
-.popover.bs-popover-bottom {
-    top: -35px !important;
 }
 
 ul.long-description li {
@@ -883,7 +868,7 @@ ul.long-description li {
     -moz-border-radius: 6px;
     border: none;
     font-size: 24px;
-    background: #81B44C;
+    background: #3ad16d;
     text-align: center;
     color: white;
     text-transform: uppercase;
@@ -898,7 +883,7 @@ ul.long-description li {
 }
 
 .form-search-discount-code-wrapper .form-area button.serach-btn:hover {
-    background: #638A3A;
+    opacity: 0.8;
     -webkit-box-shadow: -2px -2px 4px -4px rgba(0, 0, 0, 0.02), 0 3px 9px 0 rgba(0, 0, 0, 0.1), 0 2px 4px 0 rgba(0, 0, 0, 0.14);
     box-shadow: -2px -2px 4px -4px rgba(0, 0, 0, 0.02), 0 3px 9px 0 rgba(0, 0, 0, 0.1), 0 2px 4px 0 rgba(0, 0, 0, 0.14);
 }
@@ -927,4 +912,21 @@ ul.long-description li {
         margin-top: -12px;
         margin-bottom: 20px;
     }
+}
+
+.select2-dropdown {
+    border: 1px solid #EFEFEF!important;
+}
+.select2-results__option {
+    cursor: pointer;
+    transition: all 0.2s linear;
+}
+.select2-results__option:hover {
+    background-color: #1694CA;
+    color: var(--color-white);
+}
+
+.pagination {
+    flex-wrap: wrap;
+    row-gap: 5px;
 }

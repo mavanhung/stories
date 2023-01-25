@@ -8,6 +8,7 @@ register_page_template([
     'full-width'    => __('Full width'),
     'homepage'      => __('Homepage'),
     'right-sidebar' => __('Right sidebar'),
+    'discount-code' => __('Discount code'),
 ]);
 
 register_sidebar([

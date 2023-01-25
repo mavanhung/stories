@@ -14,4 +14,12 @@ class DiscountCodeCacheDecorator extends CacheAbstractDecorator implements Disco
     {
         return $this->getDataIfExistCache(__FUNCTION__, func_get_args());
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getSearch($query, $sellerId, $limit = 10, $paginate = 10)
+    {
+        return $this->getDataIfExistCache(__FUNCTION__, func_get_args());
+    }
 }

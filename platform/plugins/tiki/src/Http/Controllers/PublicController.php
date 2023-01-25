@@ -2,13 +2,17 @@
 
 namespace Botble\Tiki\Http\Controllers;
 
-use Botble\Tiki\Repositories\Interfaces\DiscountCodeInterface;
-use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
+use Theme;
 use Response;
 use SeoHelper;
 use SlugHelper;
-use Theme;
+use Illuminate\Http\Request;
+use Botble\Tiki\Models\Seller;
+use Illuminate\Routing\Controller;
+use Botble\Tiki\Http\Resources\SellerResource;
+use Botble\Base\Http\Responses\BaseHttpResponse;
+use Botble\Tiki\Repositories\Interfaces\SellerInterface;
+use Botble\Tiki\Repositories\Interfaces\DiscountCodeInterface;
 
 class PublicController extends Controller
 {
@@ -17,18 +21,48 @@ class PublicController extends Controller
      * @param DiscountCodeInterface $discountCodeRepository
      * @return Response
      */
-    public function getIndex(Request $request, DiscountCodeInterface $discountCodeRepository)
+    public function getIndex(Request $request, DiscountCodeInterface $discountCodeRepository, SellerInterface $sellerRepository)
     {
         SeoHelper::setTitle('Mã giảm giá Tiki')
             ->setDescription('Mã giảm giá Tiki');
 
-        $discountCodes = $discountCodeRepository->getDiscountCode(30);
+        $qs = $request->input('qs');
+        $sellerId = $request->input('seller');
+        $seller = '';
+        if(isset($sellerId)) {
+            $seller = Seller::where('seller_id', $sellerId)->select('seller_id', 'seller_name', 'logo')->first();
+            if(!blank($seller)) {
+                $seller = json_encode(new SellerResource($seller));
+            }
+        }
+        if(isset($qs) || isset($sellerId)) {
+            $discountCodes = $discountCodeRepository->getSearch($qs, $sellerId, 9);
+        }else {
+            $discountCodes = $discountCodeRepository->getDiscountCode(9);
+        }
 
         Theme::breadcrumb()
             ->add(__('Home'), url('/'))
             ->add(__('Mã giảm giá Tiki'), route('public.index'));
 
-        return Theme::scope('tiki-discount-code', compact('discountCodes'))
+        return Theme::layout('discount-code')->scope('tiki-discount-code', compact('discountCodes', 'seller'))
             ->render();
+    }
+
+    /**
+     * @param Request $request
+     * @param SellerInterface $sellerRepository
+     * @return Response
+     */
+    public function searchSeller(Request $request, SellerInterface $sellerRepository)
+    {
+        $query = $request->input('q');
+        $sellers = $sellerRepository->searchSeller($query, 0, 12);
+
+        return response()->json([
+            'incomplete_results' => true,
+            'items' => SellerResource::collection($sellers),
+            'total_count' => $sellers->total()
+        ]);
     }
 }

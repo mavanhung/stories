@@ -121,31 +121,95 @@ $(document).ready(function () {
         }, 3000);
     });
 
-    $(".info")
-        .popover({
-            html: true,
-            trigger: "manual",
-            placement: "bottom",
-            content: function () {
-                return $(this).parents('.coupon-card').find('.info_msg').html();
-            },
-        })
-        .on("mouseenter", function () {
-            var _this = this;
-            $(this).popover("show");
-            $(".popover").on("mouseleave", function () {
-                $(_this).popover("hide");
-            });
-        })
-        .on("mouseleave", function () {
-            var _this = this;
-            setTimeout(function () {
-                if (!$(".popover:hover").length) {
-                    $(_this).popover("hide");
-                }
-            }, 100);
-        });
 
-    //Discount code select2
-    $('.select2').select2();
+    //Select2
+    var sellerDefault = $('.select2').data('default');
+    $(".select2").select2({
+        data: [sellerDefault],
+        ajax: {
+            // url: "https://api.github.com/search/repositories",
+            url: "/ajax/tiki-seller",
+            dataType: "json",
+            delay: 250,
+            data: function (params) {
+                return {
+                    q: params.term, // search term
+                    page: params.page,
+                };
+            },
+            processResults: function (data, params) {
+                // parse the results into the format expected by Select2
+                // since we are using custom formatting functions we do not need to
+                // alter the remote JSON data, except to indicate that infinite
+                // scrolling can be used
+                params.page = params.page || 1;
+
+                return {
+                    results: data.items,
+                    pagination: {
+                        more: params.page * 30 < data.total_count,
+                    },
+                };
+            },
+            // cache: true,
+        },
+        language: {
+            inputTooShort: function() {
+                return 'Nhập tên cửa hàng cần tìm';
+            },
+            searching: function() {
+                return 'Đang tìm kiếm...';
+            },
+            loadingMore: function() {
+                return 'Đang tải thêm kết quả...';
+            },
+            errorLoading: function () {
+                return 'Không thể tải kết quả';
+            },
+            noResults: function () {
+                return "Không tìm thấy kết quả"
+            },
+        },
+        placeholder: 'Tất cả',
+        // placeholder: {
+        //     id: '',
+        //     text: "Tất cả"
+        // },
+        minimumInputLength: 1,
+        templateResult: formatRepo,
+        templateSelection: formatRepoSelection,
+    });
+
+
+    function formatRepo(repo) {
+        if (repo.loading) {
+            return repo.text;
+        }
+
+        var $container = $(
+            "<div class='select2-result-repository clearfix d-flex'>" +
+                "<div class='select2-result-repository__avatar'><img width='50' src='" +
+                repo.logo +
+                "' /></div>" +
+                "<div class='select2-result-repository__meta ml-10 d-flex align-items-center'>" +
+                "<div class='select2-result-repository__title'></div>" +
+                "</div>" +
+                "</div>"
+        );
+
+        $container
+            .find(".select2-result-repository__title")
+            .text(repo.seller_name);
+
+        return $container;
+    }
+
+    function formatRepoSelection(repo) {
+        return repo.seller_name || repo.text;
+    }
+
+    $(document).on('click', '#refresh_btn', function(e) {
+        $('input[name="qs"]').val('');
+        $('.select2').val(null).trigger('change');
+    });
 });

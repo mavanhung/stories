@@ -36,6 +36,11 @@ Route::group(['namespace' => 'Botble\Tiki\Http\Controllers', 'middleware' => ['w
                 'as'   => 'public.index',
                 'uses' => 'PublicController@getIndex',
             ]);
+            Route::group([
+                'prefix' => 'ajax'
+            ],function() {
+                Route::get('tiki-seller', 'PublicController@searchSeller')->name('theme.ajax-tiki-seller');
+            });
         });
     }
 });

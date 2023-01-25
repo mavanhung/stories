@@ -12,4 +12,13 @@ interface DiscountCodeInterface extends RepositoryInterface
      * @return mixed
      */
     public function getDiscountCode(int $limit = 5, array $with = []);
+
+    /**
+     * @param string $query
+     * @param int $sellerId
+     * @param int $limit
+     * @param int $paginate
+     * @return mixed
+     */
+    public function getSearch($query, $sellerId, $limit = 10, $paginate = 10);
 }

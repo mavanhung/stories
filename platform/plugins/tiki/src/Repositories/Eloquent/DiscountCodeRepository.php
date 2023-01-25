@@ -16,9 +16,11 @@ class DiscountCodeRepository extends RepositoriesAbstract implements DiscountCod
         $data = $this->model
             ->where([
                 'tiki_discount_codes.status'      => BaseStatusEnum::PUBLISHED,
-                'tiki_discount_codes.is_crawler_home' => 1,
+                // 'tiki_discount_codes.is_crawler_home' => 1,
             ])
+            ->where('expired_at', '>', now())
             ->with(array_merge(['seller'], $with))
+            ->orderBy('tiki_discount_codes.is_crawler_home', 'desc')
             ->orderBy('tiki_discount_codes.created_at', 'desc');
 
         return $this->applyBeforeExecuteQuery($data)->paginate($perPage);
@@ -27,11 +29,20 @@ class DiscountCodeRepository extends RepositoriesAbstract implements DiscountCod
     /**
      * {@inheritDoc}
      */
-    public function getSearch($query, $limit = 10, $paginate = 10)
+    public function getSearch($query, $sellerId, $limit = 10, $paginate = 10)
     {
-        $data = $this->model->where('tiki_discount_codes.status', BaseStatusEnum::PUBLISHED);
-        foreach (explode(' ', $query) as $term) {
-            $data = $data->where('posts.name', 'LIKE', '%' . $term . '%');
+        $data = $this->model->where('status', BaseStatusEnum::PUBLISHED)
+                            ->where('expired_at', '>', now())
+                            ->where(function($q) use ($query) {
+                                $q->where('label', 'LIKE', '%' . $query . '%')
+                                  ->orWhere('tiki_discount_codes.long_description', 'LIKE', '%' . $query . '%')
+                                  ->orWhereHas('seller', function ($q) use ($query) {
+                                    $q->where('seller_name', 'LIKE', '%' . $query . '%');
+                                  });
+                            });
+
+        if(isset($sellerId)) {
+            $data = $data->where('tiki_discount_codes.seller_id', $sellerId);
         }
 
         $data = $data->select('tiki_discount_codes.*')
