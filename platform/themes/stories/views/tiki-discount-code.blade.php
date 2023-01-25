@@ -69,6 +69,14 @@
             </form>
         </div>
         <div class="row">
+            <div class="col-6">
+                <p>Tổng số mã: {{ $discountCodes->total() }}</p>
+            </div>
+            <div class="col-6 text-right">
+                <p>Ngày cập nhật: {{ date('d/m/Y', strtotime(now())) }}</p>
+            </div>
+        </div>
+        <div class="row">
             @foreach ($discountCodes as $discountCode)
                 <div class="col-md-4">
                     @includeIf('theme.stories::views.templates.discount-code', ['discountCode' => $discountCode])
