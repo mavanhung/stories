@@ -57,7 +57,7 @@ class PublicController extends Controller
     public function searchSeller(Request $request, SellerInterface $sellerRepository)
     {
         $query = $request->input('q');
-        $sellers = $sellerRepository->searchSeller($query, 0, 12);
+        $sellers = $sellerRepository->searchSeller($query, 0, 9);
 
         return response()->json([
             'incomplete_results' => true,
