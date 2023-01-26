@@ -232,6 +232,11 @@ class PostTable extends TableAbstract
     public function getBulkChanges(): array
     {
         return [
+            'posts.id'       => [
+                'title'    => trans('core/base::tables.id'),
+                'type'     => 'text',
+                'validate' => 'required|max:120',
+            ],
             'posts.name'       => [
                 'title'    => trans('core/base::tables.name'),
                 'type'     => 'text',

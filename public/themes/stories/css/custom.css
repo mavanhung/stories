@@ -492,13 +492,16 @@ body.show-admin-bar .header-sticky.sticky-bar {
 }
 
 .coupon-card .seller-name {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 600;
+    color: #212529;
+    line-height: 18px;
 }
 
 .coupon-card .label {
     font-size: 18px;
     font-weight: 400;
+    margin-top: 5px;
     margin-bottom: 0;
 }
 

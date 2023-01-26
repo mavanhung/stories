@@ -211,5 +211,6 @@ $(document).ready(function () {
     $(document).on('click', '#refresh_btn', function(e) {
         $('input[name="qs"]').val('');
         $('.select2').val(null).trigger('change');
+        window.showAlert("alert-success", "Làm mới bộ lọc thành công");
     });
 });

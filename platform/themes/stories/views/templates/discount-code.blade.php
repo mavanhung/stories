@@ -4,7 +4,7 @@
             <img src="{{ RvMedia::getImageUrl($discountCode->icon_url, null, false, RvMedia::getDefaultImage()) }}" class="logo">
         </div>
         <div class="right">
-            <h2 class="seller-name">{{ $discountCode->seller ? $discountCode->seller->seller_name : 'Tiki' }}</h2>
+            <a class="seller-name" href="{{ $discountCode->seller ? $discountCode->seller->seller_url : 'javascript:void(0);' }}" target="_blank">{{ $discountCode->seller ? $discountCode->seller->seller_name : 'Tiki' }}</a>
             <h3 class="label">{{ $discountCode->label }}</h3>
             <p class="short-description">
                 {{ $discountCode->short_description }}
