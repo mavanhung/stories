@@ -10,7 +10,7 @@ class DiscountCodeCacheDecorator extends CacheAbstractDecorator implements Disco
     /**
      * {@inheritDoc}
      */
-    public function getDiscountCode(int $limit = 5, array $with = [])
+    public function getDiscountCode($paginate = 5, array $with = [])
     {
         return $this->getDataIfExistCache(__FUNCTION__, func_get_args());
     }

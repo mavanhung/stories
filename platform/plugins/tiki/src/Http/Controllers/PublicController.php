@@ -36,9 +36,9 @@ class PublicController extends Controller
             }
         }
         if(isset($qs) || isset($sellerId)) {
-            $discountCodes = $discountCodeRepository->getSearch($qs, $sellerId, 9, 9);
+            $discountCodes = $discountCodeRepository->getSearch($qs, $sellerId, 10, 12);
         }else {
-            $discountCodes = $discountCodeRepository->getDiscountCode(9);
+            $discountCodes = $discountCodeRepository->getDiscountCode(12);
         }
 
         Theme::breadcrumb()
@@ -57,7 +57,7 @@ class PublicController extends Controller
     public function searchSeller(Request $request, SellerInterface $sellerRepository)
     {
         $query = $request->input('q');
-        $sellers = $sellerRepository->searchSeller($query, 0, 12);
+        $sellers = $sellerRepository->searchSeller($query, 0, 10);
 
         return response()->json([
             'incomplete_results' => true,

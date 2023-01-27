@@ -11,7 +11,7 @@ interface DiscountCodeInterface extends RepositoryInterface
      * @param array $with
      * @return mixed
      */
-    public function getDiscountCode(int $limit = 5, array $with = []);
+    public function getDiscountCode($paginate = 10, array $with = []);
 
     /**
      * @param string $query

@@ -484,11 +484,10 @@ body.show-admin-bar .header-sticky.sticky-bar {
     column-gap: 30px;
 }
 
-.logo {
+.seller_logo {
     width: 80px;
     border-radius: 8px;
     margin-bottom: 15px;
-
 }
 
 .coupon-card .seller-name {

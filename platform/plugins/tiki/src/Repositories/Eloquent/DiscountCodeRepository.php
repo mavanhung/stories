@@ -11,7 +11,7 @@ class DiscountCodeRepository extends RepositoriesAbstract implements DiscountCod
     /**
      * {@inheritDoc}
      */
-    public function getDiscountCode($perPage = 12, $active = true, array $with = [])
+    public function getDiscountCode($perPage = 12, array $with = [])
     {
         $data = $this->model
             ->where([

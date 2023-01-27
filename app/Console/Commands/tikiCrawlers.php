@@ -236,6 +236,7 @@ class tikiCrawlers extends Command
 
             for($i = 0; $i < count($result); $i++) {
                 $this->sellerDetail($result[$i]);
+                dump($i);
                 // if($result[$i] == 'https://tiki.vn/cua-hang/balo-mr-vui') {
                 //     dd($i);
                 // }
