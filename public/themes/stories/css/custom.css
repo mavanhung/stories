@@ -379,8 +379,14 @@ body.show-admin-bar .header-sticky.sticky-bar {
     position: relative;
 }
 
+.carausel-3-columns-wrapper .carausel-3-columns{
+    padding: 5px 0;
+    overflow: hidden;
+}
+
 .carausel-3-columns-wrapper .slick-list {
     padding-top: 5px;
+    overflow: unset;
 }
 
 .carausel-3-columns-wrapper .slick-arrow {

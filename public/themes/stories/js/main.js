@@ -68,7 +68,7 @@
                     infinite: !0,
                     speed: 1e3,
                     arrows: !0,
-                    autoplay: !0,
+                    // autoplay: !0,
                     slidesToShow: 3,
                     slidesToScroll: 1,
                     loop: !0,
