@@ -46,7 +46,7 @@
 
 
 {{-- custom news --}}
-<div class="bg-grey pt-50 pb-50">
+<div class="bg-grey pt-35 pb-50">
     <div class="container">
         <div class="row">
             <div class="col-lg-8">
