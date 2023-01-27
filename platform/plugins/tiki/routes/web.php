@@ -32,10 +32,10 @@ Route::group(['namespace' => 'Botble\Tiki\Http\Controllers', 'middleware' => ['w
 
     if (defined('THEME_MODULE_SCREEN_NAME')) {
         Route::group(apply_filters(BASE_FILTER_GROUP_PUBLIC_ROUTE, []), function () {
-            Route::get('ma-giam-gia-tiki', [
-                'as'   => 'public.index',
-                'uses' => 'PublicController@getIndex',
-            ]);
+            // Route::get('ma-giam-gia-tiki', [
+            //     'as'   => 'public.index',
+            //     'uses' => 'PublicController@getIndex',
+            // ]);
             Route::group([
                 'prefix' => 'ajax'
             ],function() {

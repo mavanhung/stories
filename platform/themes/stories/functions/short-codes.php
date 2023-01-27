@@ -1,8 +1,12 @@
 <?php
 
-use Botble\Ads\Repositories\Interfaces\AdsInterface;
+use Illuminate\Http\Request;
+use Botble\Tiki\Models\Seller;
 use Botble\Base\Enums\BaseStatusEnum;
+use Botble\Tiki\Http\Resources\SellerResource;
+use Botble\Ads\Repositories\Interfaces\AdsInterface;
 use Botble\Blog\Repositories\Interfaces\CategoryInterface;
+use Botble\Tiki\Repositories\Interfaces\DiscountCodeInterface;
 
 if (is_plugin_active('blog')) {
     add_shortcode('featured-categories', __('Featured categories'), __('Add featured categories'), function ($shortCode) {
@@ -107,10 +111,6 @@ if (is_plugin_active('blog')) {
         return Theme::partial('short-codes.featured-posts-slider-full');
     });
 
-    add_shortcode('discount-code', __('Discount code'), __('Discount code'), function ($shortCode) {
-        return Theme::partial('short-codes.discount-code', ['title' => $shortCode->title]);
-    });
-
     add_shortcode('blog-list', __('Blog list'), __('Add blog posts list'), function ($shortCode) {
         $limit = $shortCode->limit ? $shortCode->limit : 12;
 
@@ -185,5 +185,29 @@ if (is_plugin_active('ads')) {
             ->get();
 
         return Theme::partial('short-codes.theme-ads-admin-config', compact('ads'));
+    });
+}
+
+add_shortcode('discount-code', __('Discount code'), __('Discount code'), function ($shortCode) {
+    return Theme::partial('short-codes.discount-code', ['title' => $shortCode->title]);
+});
+
+if (is_plugin_active('tiki')) {
+    add_shortcode('tiki-discount-code', __('Tiki discount code'), __('Tiki discount code'), function ($shortCode) {
+        $qs = app(Request::class)->input('qs');
+        $sellerId = app(Request::class)->input('seller');
+        $seller = '';
+        if(isset($sellerId)) {
+            $seller = app(Seller::class)->where('seller_id', $sellerId)->select('seller_id', 'seller_name', 'logo')->first();
+            if(!blank($seller)) {
+                $seller = json_encode(new SellerResource($seller));
+            }
+        }
+        if(isset($qs) || isset($sellerId)) {
+            $discountCodes = app(DiscountCodeInterface::class)->getSearch($qs, $sellerId, 10, 12);
+        }else {
+            $discountCodes = app(DiscountCodeInterface::class)->getDiscountCode(12);
+        }
+        return Theme::partial('short-codes.tiki-discount-code', compact('discountCodes', 'seller'));
     });
 }

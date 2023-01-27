@@ -21,33 +21,33 @@ class PublicController extends Controller
      * @param DiscountCodeInterface $discountCodeRepository
      * @return Response
      */
-    public function getIndex(Request $request, DiscountCodeInterface $discountCodeRepository, SellerInterface $sellerRepository)
-    {
-        SeoHelper::setTitle('Mã giảm giá Tiki')
-            ->setDescription('Mã giảm giá Tiki');
+    // public function getIndex(Request $request, DiscountCodeInterface $discountCodeRepository, SellerInterface $sellerRepository)
+    // {
+    //     SeoHelper::setTitle('Mã giảm giá Tiki')
+    //         ->setDescription('Mã giảm giá Tiki');
 
-        $qs = $request->input('qs');
-        $sellerId = $request->input('seller');
-        $seller = '';
-        if(isset($sellerId)) {
-            $seller = Seller::where('seller_id', $sellerId)->select('seller_id', 'seller_name', 'logo')->first();
-            if(!blank($seller)) {
-                $seller = json_encode(new SellerResource($seller));
-            }
-        }
-        if(isset($qs) || isset($sellerId)) {
-            $discountCodes = $discountCodeRepository->getSearch($qs, $sellerId, 10, 12);
-        }else {
-            $discountCodes = $discountCodeRepository->getDiscountCode(12);
-        }
+    //     $qs = $request->input('qs');
+    //     $sellerId = $request->input('seller');
+    //     $seller = '';
+    //     if(isset($sellerId)) {
+    //         $seller = Seller::where('seller_id', $sellerId)->select('seller_id', 'seller_name', 'logo')->first();
+    //         if(!blank($seller)) {
+    //             $seller = json_encode(new SellerResource($seller));
+    //         }
+    //     }
+    //     if(isset($qs) || isset($sellerId)) {
+    //         $discountCodes = $discountCodeRepository->getSearch($qs, $sellerId, 10, 12);
+    //     }else {
+    //         $discountCodes = $discountCodeRepository->getDiscountCode(12);
+    //     }
 
-        Theme::breadcrumb()
-            ->add(__('Home'), url('/'))
-            ->add(__('Mã giảm giá Tiki'), route('public.index'));
+    //     Theme::breadcrumb()
+    //         ->add(__('Home'), url('/'))
+    //         ->add(__('Mã giảm giá Tiki'), route('public.index'));
 
-        return Theme::layout('discount-code')->scope('tiki-discount-code', compact('discountCodes', 'seller'))
-            ->render();
-    }
+    //     return Theme::layout('discount-code')->scope('tiki-discount-code', compact('discountCodes', 'seller'))
+    //         ->render();
+    // }
 
     /**
      * @param Request $request
