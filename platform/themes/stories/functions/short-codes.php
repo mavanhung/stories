@@ -107,6 +107,10 @@ if (is_plugin_active('blog')) {
         return Theme::partial('short-codes.featured-posts-slider-full');
     });
 
+    add_shortcode('discount-code', __('Discount code'), __('Discount code'), function ($shortCode) {
+        return Theme::partial('short-codes.discount-code', ['title' => $shortCode->title]);
+    });
+
     add_shortcode('blog-list', __('Blog list'), __('Add blog posts list'), function ($shortCode) {
         $limit = $shortCode->limit ? $shortCode->limit : 12;
 

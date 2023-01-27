@@ -6,19 +6,19 @@
             </div>
             <div class="carausel-3-columns">
                 @foreach (get_featured_categories(10, ['slugable', 'image']) as $category)
-                    <div class="carausel-3-columns-item d-flex bg-grey has-border p-25 hover-up-2 transition-normal border-radius-5">
-                        <div class="post-thumb post-thumb-64 d-flex mr-15 border-radius-5 img-hover-scale overflow-hidden">
-                            <a class="color-white" href="{{ $category->url }}">
+                    <a href="{{ $category->url }}" title="{{ $category->name}}">
+                        <div class="carausel-3-columns-item d-flex bg-grey has-border p-25 hover-up-2 transition-normal border-radius-5">
+                            <div class="post-thumb post-thumb-64 d-flex mr-15 border-radius-5 img-hover-scale">
                                 @if (count($category->image->meta_value) > 0)
                                 <img src="{{ RvMedia::getImageUrl($category->image->meta_value[0], 'thumb', false, RvMedia::getDefaultImage()) }}" alt="{{ $category->name }}">
                                 @endif
-                            </a>
+                            </div>
+                            <div class="post-content media-body">
+                                <h6 class="font-weight-bold">{{ $category->name }}</h6>
+                                <p class="text-muted font-medium">{{ Str::limit($category->description, 65) }}</p>
+                            </div>
                         </div>
-                        <div class="post-content media-body">
-                            <h6> <a href="{{ $category->url }}">{{ $category->name }}</a> </h6>
-                            <p class="text-muted font-medium">{{ Str::limit($category->description, 65) }}</p>
-                        </div>
-                    </div>
+                    </a>
                 @endforeach
             </div>
         </div>

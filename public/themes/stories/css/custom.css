@@ -379,6 +379,10 @@ body.show-admin-bar .header-sticky.sticky-bar {
     position: relative;
 }
 
+.carausel-3-columns-wrapper .slick-list {
+    padding-top: 5px;
+}
+
 .carausel-3-columns-wrapper .slick-arrow {
     position: absolute;
     border: unset;
@@ -931,4 +935,13 @@ ul.long-description li {
 .pagination {
     flex-wrap: wrap;
     row-gap: 5px;
+}
+
+.discount__code-item {
+    background-color: var(--color-white);
+}
+
+.discount__code-item .discount__code-body h5 {
+    font-weight: 600;
+    margin-bottom: 0;
 }
