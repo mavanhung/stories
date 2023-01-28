@@ -2,6 +2,8 @@
 
 namespace App\Console\Commands;
 
+use GuzzleHttp\Client;
+use App\Constants\DefineCode;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
