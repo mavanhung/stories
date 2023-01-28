@@ -2,6 +2,8 @@
 
 namespace App\Console\Commands;
 
+use GuzzleHttp\Client;
+use App\Constants\DefineCode;
 use Botble\Tiki\Models\Seller;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
@@ -42,47 +44,60 @@ class tikiDiscountCode extends Command
      */
     public function handle()
     {
-        $curl = curl_init();
 
-        curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://tiki.vn/khuyen-mai/ma-giam-gia',
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => '',
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 0,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => 'GET',
-        ));
+        try {
+            $this->sendNotificationTelegram('xxx');
+            $curl = curl_init();
 
-        $response = curl_exec($curl);
+            curl_setopt_array($curl, array(
+                CURLOPT_URL => 'https://tiki.vn/khuyen-mai/ma-giam-gia',
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_ENCODING => '',
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 0,
+                CURLOPT_FOLLOWLOCATION => true,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => 'GET',
+            ));
 
-        curl_close($curl);
+            $response = curl_exec($curl);
 
-        $arr = explode('<script id="__NEXT_DATA__" type="application/json">', $response);
+            curl_close($curl);
 
-        if(count($arr) > 0){
-            $arr = explode('</script>', $arr[1]);
-            if (count($arr) > 0) {
-                $data = json_decode($arr[0], true)['props']['initialProps']['pageProps']['pageData']['pages'][0]['widgets'];
-                $codes = [];
-                for ($i=0; $i < count($data); $i++) {
-                    $v = $data[$i];
-                    if($v['type'] == 'COUPON') {
-                        $payload = json_decode($data[$i]['payload'], true)['codes'];
-                        $codes = array_merge($codes, $payload);
+            $arr = explode('<script id="__NEXT_DATA__" type="application/json">', $response);
+
+            if(count($arr) > 0){
+                $arr = explode('</script>', $arr[1]);
+                if (count($arr) > 0) {
+                    $data = json_decode($arr[0], true)['props']['initialProps']['pageProps']['pageData']['pages'][0]['widgets'];
+                    $codes = [];
+                    for ($i=0; $i < count($data); $i++) {
+                        $v = $data[$i];
+                        if($v['type'] == 'COUPON') {
+                            $payload = json_decode($data[$i]['payload'], true)['codes'];
+                            $codes = array_merge($codes, $payload);
+                        }
+                    }
+                    for ($i=0; $i < count($codes); $i++) {
+                        $this->getCodeDetail($codes[$i]);
+                        // if('JAN300PXD' == $codes[$i]) {
+                        //     dd('have');
+                        // }
                     }
                 }
-                for ($i=0; $i < count($codes); $i++) {
-                    $this->getCodeDetail($codes[$i]);
-                    // if('JAN300PXD' == $codes[$i]) {
-                    //     dd('have');
-                    // }
-                }
             }
-        }
 
-        return 0;
+            return 0;
+        } catch (\Throwable $th) {
+            $message = 'Có lỗi xảy ra: '.$th->getMessage().', file: '.$th->getFile().', dòng: '.$th->getLine();
+            $this->error($message);
+            Log::channel('Tiki Crawlers')->error([
+                $th->getMessage(),
+                $th->getFile(),
+                $th->getLine()
+            ]);
+            $this->sendNotificationTelegram($message);
+        }
     }
 
     public function sendNotificationTelegram($message = '')

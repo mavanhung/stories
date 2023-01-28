@@ -2,6 +2,8 @@
 
 namespace App\Console\Commands;
 
+use GuzzleHttp\Client;
+use App\Constants\DefineCode;
 use Botble\Tiki\Models\Seller;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
