@@ -75,11 +75,11 @@
         <div class="row">
             <div class="col-lg-8">
                 <!--end single header-->
-                @if ($post->image)
+                {{-- @if ($post->image)
                     <figure class="image mb-30 m-auto text-center border-radius-10">
                         <img class="border-radius-10" src="{{ RvMedia::getImageUrl($post->image) }}" alt="post-title">
                     </figure>
-                @endif
+                @endif --}}
                 <!--figure-->
                 <article class="entry-wraper mb-50">
                     <div class="post-content-wrapper">
