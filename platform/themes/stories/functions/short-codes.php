@@ -159,6 +159,24 @@ add_shortcode('youtube-video', __('Youtube video'), __('Add youtube video'), fun
 
 shortcode()->setAdminConfig('youtube-video', Theme::partial('short-codes.youtube-video-admin-config'));
 
+//Shopee
+add_shortcode('shopee', __('Shopee'), __('Shopee'), function ($shortCode) {
+    return Theme::partial('short-codes.shopee', ['content' => $shortCode->content]);
+});
+shortcode()->setAdminConfig('shopee', Theme::partial('short-codes.shopee-admin-config'));
+
+//Lazada
+add_shortcode('lazada', __('Lazada'), __('Lazada'), function ($shortCode) {
+    return Theme::partial('short-codes.lazada', ['content' => $shortCode->content]);
+});
+shortcode()->setAdminConfig('lazada', Theme::partial('short-codes.lazada-admin-config'));
+
+//Tiki
+add_shortcode('tiki', __('Tiki'), __('Tiki'), function ($shortCode) {
+    return Theme::partial('short-codes.tiki', ['content' => $shortCode->content]);
+});
+shortcode()->setAdminConfig('tiki', Theme::partial('short-codes.tiki-admin-config'));
+
 if (is_plugin_active('ads')) {
     add_shortcode('theme-ads', __('Theme ads'), __('Theme ads'), function ($shortCode) {
         $ads = [];
