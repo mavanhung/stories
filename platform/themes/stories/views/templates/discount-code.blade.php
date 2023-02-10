@@ -1,4 +1,4 @@
-<div class="coupon-card mb-30">
+<div class="coupon-card mb-30 hover-up-2 transition-normal">
     <div class="top">
         <div class="left">
             <img src="{{ RvMedia::getImageUrl($discountCode->icon_url, null, false, RvMedia::getDefaultImage()) }}" class="seller_logo">
