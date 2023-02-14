@@ -76,8 +76,6 @@
     @endif
 @endif
 
-<script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js" async></script>
-<script src="https://sp.zalo.me/plugins/sdk.js" async></script>
 {!! Theme::footer() !!}
 </body>
 
