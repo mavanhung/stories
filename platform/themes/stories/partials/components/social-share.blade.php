@@ -2,7 +2,12 @@
     <li><a href="#"><i class="elegant-icon social_share"></i></a></li>
     {{-- zalo --}}
     <li>
-        <a class="zalo-share-button zalo" title="Share Zalo"
+        {{-- <a class="zalo-share-button zalo" title="Share Zalo"
+            rel="nofollow" data-href="{{ $post->url }}" data-oaid="2194457286054493180"
+            data-customize="true">
+            <img src="{{ Theme::asset()->url('images/icon/share_zalo_bg_white.webp') }}" alt="shareZalo">
+        </a> --}}
+        <a class="zalo" title="Share Zalo"
             rel="nofollow" data-href="{{ $post->url }}" data-oaid="2194457286054493180"
             data-customize="true">
             <img src="{{ Theme::asset()->url('images/icon/share_zalo_bg_white.webp') }}" alt="shareZalo">

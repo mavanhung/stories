@@ -213,4 +213,11 @@ $(document).ready(function () {
         $('.select2').val(null).trigger('change');
         window.showAlert("alert-success", "Làm mới bộ lọc thành công");
     });
+
+    $(document).on('mouseenter', '.zalo', function(e) {
+        if(!$(this).hasClass('zalo-share-button')){
+            $(this).addClass('zalo-share-button');
+            ZaloSocialSDK.reload();
+        }
+    });
 });
