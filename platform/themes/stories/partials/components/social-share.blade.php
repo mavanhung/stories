@@ -1,5 +1,5 @@
 <ul class="social-share">
-    <li><a href="#"><i class="elegant-icon social_share"></i></a></li>
+    <li><a href="#" title="social share"><i class="elegant-icon social_share"></i></a></li>
     {{-- zalo --}}
     <li>
         {{-- <a class="zalo-share-button zalo" title="Share Zalo"
