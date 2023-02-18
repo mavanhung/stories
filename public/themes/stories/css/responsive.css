@@ -218,6 +218,16 @@
 
     .post-card-1 .post-content {
         padding: 20px!important;
+        padding-top: 5px!important;
+    }
+
+    .post-card-1 .post-content .entry-meta {
+        margin-bottom: 5px!important;
+    }
+
+    .post-card-1 .post-content .entry-meta a {
+        display: inline-block;
+        padding: 16px 0;
     }
 
     .text-limit-2-row {
