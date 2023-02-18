@@ -60,7 +60,7 @@ class AdsManager
                 continue;
             }
 
-            $image = Html::image(RvMedia::getImageUrl($item->image), $item->name, ['style' => 'max-width: 100%'])->toHtml();
+            $image = Html::image(RvMedia::getImageUrl($item->image), $item->name, ['style' => 'max-width: 100%', 'width' => '100%', 'height' => '100%'])->toHtml();
 
             if ($item->url) {
                 $image = Html::link(route('public.ads-click', $item->key), $image, ['target' => '_blank'], null, false)->toHtml();
