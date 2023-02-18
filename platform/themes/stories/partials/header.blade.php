@@ -31,7 +31,7 @@
         @endif
         <!--Offcanvas sidebar-->
         <aside id="sidebar-wrapper" class="custom-scrollbar offcanvas-sidebar" data-load-url="{{ route('theme.ajax-get-panel-inner') }}">
-            <button class="off-canvas-close"><i class="elegant-icon icon_close"></i></button>
+            <button class="off-canvas-close" aria-label="button close"><i class="elegant-icon icon_close"></i></button>
             <div class="sidebar-inner">
                 <div class="sidebar-inner-loading">
                     <div class="half-circle-spinner">
@@ -163,7 +163,7 @@
                 <div class="pt-50 pb-50 ">
                     <div class="row mb-20">
                         <div class="col-12 align-self-center main-search-form-cover m-auto">
-                            <button class="search-icon">
+                            <button class="search-icon" aria-label="button close">
                                 <i class="elegant-icon icon_close"></i>
                             </button>
                             <p class="text-center"><span class="search-text-bg">{{ __('Search') }}</span></p>

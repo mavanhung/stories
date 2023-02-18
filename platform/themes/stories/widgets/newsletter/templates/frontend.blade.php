@@ -13,7 +13,7 @@
                     </div>
                 @endif
                 <input type="email" name="email" class="form-control bg-white font-small" placeholder="{{ __('Enter your email') }}">
-                <button class="btn bg-primary text-white" type="submit">{{ __('Subscribe') }}</button>
+                <button class="btn bg-primary text-white" type="submit" aria-label="{{ __('Subscribe') }}">{{ __('Subscribe') }}</button>
             </form>
         </div>
     </div>
