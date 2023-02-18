@@ -36,7 +36,7 @@ class DiscountCodeTable extends TableAbstract
 
         $this->repository = $discountCodeRepository;
 
-        if (!Auth::user()->hasAnyPermission(['tiki_discount_code.edit', 'tiki_discount_code.destroy'])) {
+        if (!Auth::user()->hasAnyPermission(['discountcodes.edit', 'discountcodes.destroy'])) {
             $this->hasOperations = false;
             $this->hasActions = false;
         }

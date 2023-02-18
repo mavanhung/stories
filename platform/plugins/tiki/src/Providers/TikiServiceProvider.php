@@ -72,7 +72,7 @@ class TikiServiceProvider extends ServiceProvider
                     'name'        => 'plugins/tiki::base.menu_name',
                     'icon'        => 'fa fa-tag',
                     'url'         => route('tiki_discount_code.index'),
-                    'permissions' => ['tiki_discount_code.index'],
+                    'permissions' => ['discountcodes.index'],
                 ])
                 ->registerItem([
                     'id'          => 'cms-plugins-tiki-discount-code',
@@ -81,7 +81,7 @@ class TikiServiceProvider extends ServiceProvider
                     'name'        => 'plugins/tiki::discountcode.menu_name',
                     'icon'        => null,
                     'url'         => route('tiki_discount_code.index'),
-                    'permissions' => ['tiki_discount_code.index'],
+                    'permissions' => ['discountcodes.index'],
                 ])
                 ->registerItem([
                     'id'          => 'cms-plugins-tiki-seller',
@@ -90,7 +90,7 @@ class TikiServiceProvider extends ServiceProvider
                     'name'        => 'plugins/tiki::seller.menu_name',
                     'icon'        => null,
                     'url'         => route('tiki_seller.index'),
-                    'permissions' => ['tiki_seller.index'],
+                    'permissions' => ['sellers.index'],
                 ]);
         });
     }

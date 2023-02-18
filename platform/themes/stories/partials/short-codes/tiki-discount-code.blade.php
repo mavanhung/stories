@@ -55,7 +55,7 @@
                 </button>
             </div>
             <div class="col-md-1 col-6 no-pad-left-10">
-                <button type="submit" class="primary-btn serach-btn d-flex align-items-center justify-content-center" id="submit_btn">
+                <button type="submit" class="primary-btn serach-btn d-flex align-items-center justify-content-center" id="submit_btn" aria-label="Search seller">
                     <i class="elegant-icon icon_search"></i>
                 </button>
             </div>

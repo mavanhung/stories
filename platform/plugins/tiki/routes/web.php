@@ -17,7 +17,7 @@ Route::group(['namespace' => 'Botble\Tiki\Http\Controllers', 'middleware' => ['w
             Route::delete('items/destroy', [
                 'as'         => 'deletes',
                 'uses'       => 'DiscountCodeController@deletes',
-                'permission' => 'tiki_discount_code.destroy',
+                'permission' => 'discountcodes.destroy',
             ]);
         });
         Route::group(['prefix' => 'tiki-sellers', 'as' => 'tiki_seller.'], function () {
@@ -25,7 +25,7 @@ Route::group(['namespace' => 'Botble\Tiki\Http\Controllers', 'middleware' => ['w
             Route::delete('items/destroy', [
                 'as'         => 'deletes',
                 'uses'       => 'SellerController@deletes',
-                'permission' => 'tiki_seller.destroy',
+                'permission' => 'sellers.destroy',
             ]);
         });
     });

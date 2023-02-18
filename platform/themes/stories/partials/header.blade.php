@@ -83,7 +83,7 @@
                                     <div class="col-md-8 col-8 p-0">
                                         <form class="search-style-2" action="{{ is_plugin_active('blog') ? route('public.search') : '#' }}">
                                             <input type="text" name="q" id="" value="{{ app('request')->input('q') }}" placeholder="{{ __('Enter search text') }}">
-                                            <button type="submit">
+                                            <button type="submit" aria-label="{{ __('Search') }}">
                                                 <i class="elegant-icon icon_search"></i>
                                             </button>
                                         </form>
@@ -106,7 +106,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <button class="search-icon d-none"><span class="mr-15 text-muted font-medium"><i class="elegant-icon icon_search mr-5"></i>{{ __('Search') }}</span></button>
+                            <button class="search-icon d-none" aria-label="{{ __('Search') }}"><span class="mr-15 text-muted font-medium"><i class="elegant-icon icon_search mr-5"></i>{{ __('Search') }}</span></button>
                             @if (theme_option('action_button_text') && theme_option('action_button_url'))
                                 <a href="{{ url(theme_option('action_button_url')) }}" class="btn btn-radius bg-primary text-white d-none d-md-inline ml-15 font-small box-shadow">{{ theme_option('action_button_text') }}</a>
                             @endif
@@ -138,7 +138,7 @@
                                 @endif
                             @endfor
                         </ul>
-                        <button class="search-icon"><span class="mr-15 text-muted font-medium"><i class="elegant-icon icon_search"></i></span></button>
+                        <button class="search-icon" aria-label="{{ __('Search') }}"><span class="mr-15 text-muted font-medium"><i class="elegant-icon icon_search"></i></span></button>
                         <div class="off-canvas-toggle-cover d-inline-block">
                             <div class="off-canvas-toggle hidden d-inline-block" id="off-canvas-toggle">
                                 <span></span>
@@ -146,7 +146,7 @@
                         </div>
                     </div>
                     {{-- <div class="float-right header-tools text-muted font-small search-icon-sticky d-none">
-                        <button class="search-icon"><span class="mr-15 text-muted font-medium"><i class="elegant-icon icon_search"></i></span></button>
+                        <button class="search-icon" aria-label="{{ __('Search') }}"><span class="mr-15 text-muted font-medium"><i class="elegant-icon icon_search"></i></span></button>
                         <div class="off-canvas-toggle-cover d-inline-block">
                             <div class="off-canvas-toggle hidden d-inline-block" id="off-canvas-toggle">
                                 <span></span>
@@ -171,7 +171,7 @@
                                 <div class="input-group w-100">
                                     <input type="text" name="q" value="{{ app('request')->input('q') }}" class="form-control" placeholder="{{ __('Enter search text') }}">
                                     <div class="input-group-append">
-                                        <button class="btn btn-search bg-white" type="submit">
+                                        <button class="btn btn-search bg-white" type="submit" aria-label="{{ __('Search') }}">
                                             <i class="elegant-icon icon_search"></i>
                                         </button>
                                     </div>
