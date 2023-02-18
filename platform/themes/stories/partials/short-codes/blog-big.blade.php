@@ -4,18 +4,18 @@
             <article class="col-md-6 mb-40 wow fadeInUp animated">
                 <div class="post-card-1 border-radius-10 hover-up">
                     <div class="post-thumb thumb-overlay img-hover-slide position-relative" style="background-image: url({{ RvMedia::getImageUrl($post->image, null, false, RvMedia::getDefaultImage()) }})">
-                        <a class="img-link" href="{{ $post->url }}"></a>
+                        <a class="img-link" href="{{ $post->url }}" title="{{ $post->name }}"></a>
                         @includeIf('theme.stories::partials.components.social-share', ['post' => $post])
                     </div>
                     <div class="post-content p-30">
                         <div class="entry-meta meta-0 font-small mb-10">
                             @foreach($post->categories as $category)
-                                <a href="{{ $category->url }}"><span class="post-cat text-{{ ['warning', 'primary', 'info', 'success'][array_rand(['warning', 'primary', 'info', 'success'])] }}">{{ $category->name }}</span></a>
+                                <a href="{{ $category->url }}" title="{{ $category->name }}"><span class="post-cat text-{{ ['warning', 'primary', 'info', 'success'][array_rand(['warning', 'primary', 'info', 'success'])] }}">{{ $category->name }}</span></a>
                             @endforeach
                         </div>
                         <div class="d-flex post-card-content">
                             <h5 class="post-title mb-20 font-weight-900">
-                                <a href="{{ $post->url }}">{{ $post->name }}</a>
+                                <a href="{{ $post->url }}" title="{{ $post->name }}">{{ $post->name }}</a>
                             </h5>
                             <div class="post-excerpt mb-25 font-small text-muted">
                                 <p>{{ $post->description }}</p>
