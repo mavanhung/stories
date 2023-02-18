@@ -108,7 +108,7 @@
                             <li class="list-inline-item text-muted"><span>{{ __('Share this') }}: </span></li>
                             {{-- zalo --}}
                             <li class="list-inline-item">
-                                <a class="zalo-share-button social-icon zalo text-xs-center" title="Share Zalo"
+                                <a class="zalo-share-button social-icon zalo text-xs-center" href="javascript:void(0);" title="Share Zalo"
                                     rel="nofollow" data-href="{{ $post->url }}" data-oaid="2194457286054493180"
                                     data-customize="true">
                                     <img src="{{ Theme::asset()->url('images/icon/share_zalo.svg') }}" alt="shareZalo">
@@ -116,7 +116,7 @@
                             </li>
                             {{-- facebook --}}
                             <li class="list-inline-item">
-                                <a class="fb-share-button social-icon fb text-xs-center" title="Share Facebook"
+                                <a class="fb-share-button social-icon fb text-xs-center" href="javascript:void(0);" title="Share Facebook"
                                     target="_blank" rel="nofollow"
                                     data-href="{{ $post->url }}"
                                     data-title="{{ $post->description }}">
@@ -126,7 +126,7 @@
                             </li>
                             {{-- messenger --}}
                             <li class="list-inline-item">
-                                <a class="fb-mess-share-button social-icon mess text-xs-center" title="Share Messenger" target="_blank"
+                                <a class="fb-mess-share-button social-icon mess text-xs-center" href="javascript:void(0);" title="Share Messenger" target="_blank"
                                     rel="nofollow"
                                     data-href="{{ $post->url }}"
                                     data-title="{{ $post->description }}">
@@ -136,7 +136,7 @@
                             </li>
                             {{-- twitter --}}
                             <li class="list-inline-item">
-                                <a class="twitter-share-button social-icon tw text-xs-center" title="Share Twitter" target="_blank"
+                                <a class="twitter-share-button social-icon tw text-xs-center" href="javascript:void(0);" title="Share Twitter" target="_blank"
                                     rel="nofollow"
                                     data-href="{{ $post->url }}"
                                     data-title="{{ $post->description }}">
@@ -146,7 +146,7 @@
                             </li>
                             {{-- copy --}}
                             <li class="list-inline-item">
-                                <a class="social-icon copy text-xs-center btn-copy" title="Share Copy Link" rel="nofollow"
+                                <a class="social-icon copy text-xs-center btn-copy" href="javascript:void(0);" title="Share Copy Link" rel="nofollow"
                                     href="javascript:void(0);" data-href="{{ $post->url }}">
                                     <img src="{{ Theme::asset()->url('images/icon/share_copy.svg') }}" alt="shareCopy">
                                 </a>
