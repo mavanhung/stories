@@ -58,9 +58,9 @@
                     fade: !0,
                     fadeSpeed: 1500,
                     prevArrow:
-                        '<button type="button" class="slick-prev"><i class="elegant-icon arrow_left"></i></button>',
+                        '<button type="button" class="slick-prev" aria-label="slick-prev"><i class="elegant-icon arrow_left"></i></button>',
                     nextArrow:
-                        '<button type="button" class="slick-next"><i class="elegant-icon arrow_right"></i></button>',
+                        '<button type="button" class="slick-next" aria-label="slick-next"><i class="elegant-icon arrow_right"></i></button>',
                     appendArrows: ".arrow-cover",
                 }),
                 e(".carausel-3-columns").slick({
@@ -74,9 +74,9 @@
                     loop: !0,
                     adaptiveHeight: !0,
                     prevArrow:
-                        '<button type="button" class="slick-prev"><i class="elegant-icon arrow_left"></i></button>',
+                        '<button type="button" class="slick-prev" aria-label="slick-prev"><i class="elegant-icon arrow_left"></i></button>',
                     nextArrow:
-                        '<button type="button" class="slick-next"><i class="elegant-icon arrow_right"></i></button>',
+                        '<button type="button" class="slick-next" aria-label="slick-next"><i class="elegant-icon arrow_right"></i></button>',
                     appendArrows: ".carausel-3-columns-wrapper",
                     responsive: [
                         {
@@ -114,9 +114,9 @@
                     dots: !1,
                     fade: !0,
                     prevArrow:
-                        '<button type="button" class="slick-prev"><i class="elegant-icon arrow_left"></i></button>',
+                        '<button type="button" class="slick-prev" aria-label="slick-prev"><i class="elegant-icon arrow_left"></i></button>',
                     nextArrow:
-                        '<button type="button" class="slick-next"><i class="elegant-icon arrow_right"></i></button>',
+                        '<button type="button" class="slick-next" aria-label="slick-next"><i class="elegant-icon arrow_right"></i></button>',
                     appendArrows: ".slider-3-arrow-cover",
                 }),
                 e(".sub-mega-menu .nav-pills > a").on(
