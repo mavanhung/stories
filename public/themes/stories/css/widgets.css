@@ -774,7 +774,8 @@ figure .social-share li:first-child,
 }
 
 figure .social-share li:first-child,
-.post-thumb .social-share li:first-child a {
+.post-thumb .social-share li:first-child a,
+.post-thumb .social-share li:first-child span {
     background: #007aff;
 }
 
@@ -784,7 +785,8 @@ figure .social-share li:first-child,
 }
 
 figure .social-share li a,
-.post-thumb .social-share li a {
+.post-thumb .social-share li a,
+.post-thumb .social-share li span {
     display: block;
     width: 20px;
     height: 20px;
@@ -796,9 +798,16 @@ figure .social-share li a,
     cursor: pointer;
 }
 
-.post-thumb .social-share li:first-child a {
+.post-thumb .social-share li:first-child a,
+.post-thumb .social-share li:first-child span {
     width: 24px;
     height: 24px;
+}
+
+.post-thumb .social-share li:first-child span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 figure .social-share:hover li:nth-child(1),

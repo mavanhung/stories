@@ -31,7 +31,8 @@ $(document).ready(function () {
         }
     );
 
-    $(document).on("click", ".btn-copy", function () {
+    $(document).on("click", ".btn-copy", function (event) {
+        event.preventDefault();
         const link = $(this).data("href");
         var $temp = $("<input>");
         $("body").append($temp);
@@ -79,7 +80,8 @@ $(document).ready(function () {
         if (window.focus) newWindow.focus();
     };
 
-    $(document).on("click", ".fb-share-button", function () {
+    $(document).on("click", ".fb-share-button", function (event) {
+        event.preventDefault();
         var url = $(this).attr("data-href");
         var title = $(this).attr("data-title");
         url =
@@ -90,7 +92,8 @@ $(document).ready(function () {
         popupCenter({ url: url, title: title, w: 626, h: 436 });
     });
 
-    $(document).on("click", ".fb-mess-share-button", function () {
+    $(document).on("click", ".fb-mess-share-button", function (event) {
+        event.preventDefault();
         var url = $(this).attr("data-href");
         var title = $(this).attr("data-title");
         url =
@@ -101,7 +104,12 @@ $(document).ready(function () {
         popupCenter({ url: url, title: title, w: 626, h: 436 });
     });
 
-    $(document).on("click", ".twitter-share-button", function () {
+    $(document).on("click", ".zalo-share-button", function (event) {
+        event.preventDefault();
+    });
+
+    $(document).on("click", ".twitter-share-button", function (event) {
+        event.preventDefault();
         var url = $(this).attr("data-href");
         var title = $(this).attr("data-title");
         url = "https://twitter.com/intent/tweet?url=" + url + "&text=" + title;
@@ -111,7 +119,8 @@ $(document).ready(function () {
     //Copy discount code Tiki
     var cpnBtn = $(".cpnBtn");
 
-    $(document).on("click", ".cpnBtn", function () {
+    $(document).on("click", ".cpnBtn", function (event) {
+        event.preventDefault();
         var cpnCode = $(this).prev();
         navigator.clipboard.writeText(cpnCode.text());
         $(this).text("Đã copy");
