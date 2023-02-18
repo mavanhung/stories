@@ -1214,7 +1214,8 @@ header .search-icon .ti-close,
     border-bottom-width: 1px;
     border-bottom-style: solid;
     border-bottom-color: var(--mutted-border-color);
-    background-color: #3ad16d;
+    /* background-color: #3ad16d; */
+    background-color: #1e8942;
 }
 
 .header-top-right {
