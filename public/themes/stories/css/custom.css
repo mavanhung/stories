@@ -951,3 +951,10 @@ ul.long-description li {
     font-weight: 600;
     margin-bottom: 0;
 }
+
+.bg-loaded {
+    background-image: url("../images/default-placeholder.png");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}

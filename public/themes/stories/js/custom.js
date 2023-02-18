@@ -229,4 +229,37 @@ $(document).ready(function () {
             ZaloSocialSDK.reload();
         }
     });
+
+    // Background image lazy load
+    var ll = $('.bg-loaded');
+    var lh = [];
+    var urlArr = [];
+    var wscroll = 0;
+    var wh = $(window).height();
+
+    function update_offsets(){
+        ll.each(function(){
+            var x = $(this).offset().top;
+            var url = $(this).data('bg_url');
+            lh.push(x);
+            urlArr.push(url);
+        });
+    };
+
+    function lazy() {
+        wscroll = $(window).scrollTop();
+        for(i = 0; i < lh.length; i++){
+            if(lh[i] <= wscroll + (wh - 100)){
+                ll.eq(i).css('background-image', 'url(' + urlArr[i] + ')');
+            };
+        };
+    };
+
+    // Page Load
+    update_offsets();
+    lazy();
+
+    $(window).on('scroll',function(){
+        lazy();
+    });
 });
