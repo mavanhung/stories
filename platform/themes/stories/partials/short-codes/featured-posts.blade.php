@@ -31,16 +31,16 @@
                                 @foreach($featuredPosts->take(2) as $post)
                                 <div class="position-relative post-thumb">
                                     <div class="thumb-overlay img-hover-slide position-relative" style="background-image: url({{ RvMedia::getImageUrl($post->image, null, false, RvMedia::getDefaultImage()) }})">
-                                        <a class="img-link" href="{{ $post->url }}"></a>
+                                        <a class="img-link" href="{{ $post->url }}" title="{{ $post->name }}"></a>
                                         <span class="top-left-icon bg-warning"><i class="elegant-icon icon_star_alt"></i></span>
                                         <div class="post-content-overlay text-white ml-30 mr-30 pb-30">
                                             <div class="entry-meta meta-0 font-small mb-20">
                                                 @foreach($post->categories as $category)
-                                                    <a href="{{ $category->url }}"><span class="post-cat text-{{ ['warning', 'primary', 'info', 'success'][array_rand(['warning', 'primary', 'info', 'success'])] }} text-uppercase">{{ $category->name }}</span></a>
+                                                    <a href="{{ $category->url }}" title="{{ $category->name }}"><span class="post-cat text-{{ ['warning', 'primary', 'info', 'success'][array_rand(['warning', 'primary', 'info', 'success'])] }} text-uppercase">{{ $category->name }}</span></a>
                                                 @endforeach
                                             </div>
                                             <h3 class="post-title font-weight-900 mb-20">
-                                                <a class="text-white" href="{{ $post->url }}">{{ $post->name }}</a>
+                                                <a class="text-white" href="{{ $post->url }}" title="{{ $post->name }}">{{ $post->name }}</a>
                                             </h3>
                                             <div class="entry-meta meta-1 font-small text-white mt-10 pr-5 pl-5">
                                                 <span class="post-on">{{ $post->created_at->diffForHumans() }}</span>
