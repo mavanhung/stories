@@ -30,7 +30,8 @@
                             <div class="slide-fade">
                                 @foreach($featuredPosts->take(2) as $post)
                                 <div class="position-relative post-thumb">
-                                    <div class="thumb-overlay img-hover-slide position-relative" style="background-image: url({{ RvMedia::getImageUrl($post->image, null, false, RvMedia::getDefaultImage()) }})">
+                                    {{-- <div class="thumb-overlay img-hover-slide position-relative" style="background-image: url({{ RvMedia::getImageUrl($post->image, null, false, RvMedia::getDefaultImage()) }})"> --}}
+                                    <div class="thumb-overlay img-hover-slide position-relative bg-loaded" data-bg_url="{{ RvMedia::getImageUrl($post->image, null, false, RvMedia::getDefaultImage()) }}">
                                         <a class="img-link" href="{{ $post->url }}" title="{{ $post->name }}"></a>
                                         <span class="top-left-icon bg-warning"><i class="elegant-icon icon_star_alt"></i></span>
                                         <div class="post-content-overlay text-white ml-30 mr-30 pb-30">
