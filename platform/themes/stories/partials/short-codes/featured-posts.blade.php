@@ -39,9 +39,9 @@
                                                     <a href="{{ $category->url }}" title="{{ $category->name }}"><span class="post-cat text-{{ ['warning', 'primary', 'info', 'success'][array_rand(['warning', 'primary', 'info', 'success'])] }} text-uppercase">{{ $category->name }}</span></a>
                                                 @endforeach
                                             </div>
-                                            <h3 class="post-title font-weight-900 mb-20">
+                                            <h4 class="post-title font-weight-900 mb-20">
                                                 <a class="text-white" href="{{ $post->url }}" title="{{ $post->name }}">{{ $post->name }}</a>
-                                            </h3>
+                                            </h4>
                                             <div class="entry-meta meta-1 font-small text-white mt-10 pr-5 pl-5">
                                                 <span class="post-on">{{ $post->created_at->diffForHumans() }}</span>
                                                 <span class="hit-count has-dot">{{ number_format($post->views) }} {{ __('views') }}</span>
