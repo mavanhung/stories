@@ -11,7 +11,7 @@
                     <div class="entry-meta align-items-center meta-2 font-small color-muted">
                         <p class="mb-5">
                             <span class="author-avatar"><img class="img-circle" src="{{ $post->author->avatar_url }}"
-                                    alt="{{ $post->author->getFullName() }}"></span>
+                                    alt="{{ $post->author->getFullName() }}" loading="lazy"></span>
                             <span class="author-name font-weight-bold">{{ $post->author->getFullName() }}</span>
                         </p>
                         {{-- <span class="mr-10"> {{ $post->created_at->format('M d, Y') }}</span> --}}
@@ -28,7 +28,7 @@
                             <a class="zalo-share-button social-icon zalo text-xs-center" title="Share Zalo"
                                 rel="nofollow" data-href="{{ $post->url }}" data-oaid="2194457286054493180"
                                 data-customize="true">
-                                <img src="{{ Theme::asset()->url('images/icon/share_zalo.svg') }}" alt="shareZalo">
+                                <img src="{{ Theme::asset()->url('images/icon/share_zalo.svg') }}" alt="shareZalo" loading="lazy">
                             </a>
                         </li>
                         {{-- facebook --}}
@@ -38,7 +38,7 @@
                                 data-href="{{ $post->url }}"
                                 data-title="{{ $post->description }}">
                                 <img src="{{ Theme::asset()->url('images/icon/share_facebook.svg') }}"
-                                    alt="shareFacebook">
+                                    alt="shareFacebook" loading="lazy">
                             </a>
                         </li>
                         {{-- messenger --}}
@@ -48,7 +48,7 @@
                                 data-href="{{ $post->url }}"
                                 data-title="{{ $post->description }}">
                                 <img src="{{ Theme::asset()->url('images/icon/share_messenger.svg') }}"
-                                    alt="shareMessenger">
+                                    alt="shareMessenger" loading="lazy">
                             </a>
                         </li>
                         {{-- twitter --}}
@@ -58,14 +58,14 @@
                                 data-href="{{ $post->url }}"
                                 data-title="{{ $post->description }}">
                                 <img src="{{ Theme::asset()->url('images/icon/share_twitter.svg') }}"
-                                    alt="shareTwitter">
+                                    alt="shareTwitter" loading="lazy">
                             </a>
                         </li>
                         {{-- copy --}}
                         <li class="list-inline-item">
                             <a class="social-icon copy text-xs-center btn-copy" title="Share Copy Link" rel="nofollow"
                                 href="javascript:void(0);" data-href="{{ $post->url }}">
-                                <img src="{{ Theme::asset()->url('images/icon/share_copy.svg') }}" alt="shareCopy">
+                                <img src="{{ Theme::asset()->url('images/icon/share_copy.svg') }}" alt="shareCopy" loading="lazy">
                             </a>
                         </li>
                     </ul>
@@ -159,7 +159,7 @@
                             style="visibility: visible; animation-name: fadeIn;">
                             <div class="author-image mb-30">
                                 <img class="avatar" src="{{ $post->author->avatar_url }}"
-                                    alt="{{ $post->author->getFullName() }}">
+                                    alt="{{ $post->author->getFullName() }}" loading="lazy">
                             </div>
                             <div class="author-info">
                                 <h4 class="font-weight-bold mb-20">
@@ -186,8 +186,9 @@
                                             <div class="row mb-40 list-style-2">
                                                 <div class="col-md-4">
                                                     <div class="post-thumb position-relative border-radius-5">
-                                                        <div class="img-hover-slide border-radius-5 position-relative"
-                                                            style="background-image: url({{ RvMedia::getImageUrl($relatedItem->image) }})">
+                                                        <div class="img-hover-slide border-radius-5 position-relative lazy-background"
+                                                            data-bg_url="{{ RvMedia::getImageUrl($relatedItem->image) }}">
+                                                            {{-- style="background-image: url({{ RvMedia::getImageUrl($relatedItem->image) }})"> --}}
                                                             <a class="img-link" href="{{ $relatedItem->url }}"></a>
                                                         </div>
                                                         @includeIf('theme.stories::partials.components.social-share', ['post' => $relatedItem])

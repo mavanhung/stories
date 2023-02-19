@@ -1,7 +1,7 @@
 <div class="coupon-card mb-30 hover-up-2 transition-normal">
     <div class="top">
         <div class="left">
-            <img src="{{ RvMedia::getImageUrl($discountCode->icon_url, null, false, RvMedia::getDefaultImage()) }}" class="seller_logo">
+            <img src="{{ RvMedia::getImageUrl($discountCode->icon_url, null, false, RvMedia::getDefaultImage()) }}" class="seller_logo" loading="lazy">
         </div>
         <div class="right">
             <a class="seller-name" href="{{ $discountCode->seller ? $discountCode->seller->seller_url : 'javascript:void(0);' }}" target="_blank">{{ $discountCode->seller ? $discountCode->seller->seller_name : 'Tiki' }}</a>

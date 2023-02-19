@@ -1,7 +1,8 @@
 <div class="row mb-40 list-style-2">
     <div class="col-md-4">
         <div class="post-thumb position-relative border-radius-5">
-            <div class="img-hover-slide border-radius-5 position-relative" style="background-image: url({{ RvMedia::getImageUrl($post->image, null, false, RvMedia::getDefaultImage())}})">
+            {{-- <div class="img-hover-slide border-radius-5 position-relative" style="background-image: url({{ RvMedia::getImageUrl($post->image, null, false, RvMedia::getDefaultImage())}})"> --}}
+            <div class="img-hover-slide border-radius-5 position-relative lazy-background" data-bg_url="{{ RvMedia::getImageUrl($post->image, null, false, RvMedia::getDefaultImage())}}">
                 <a class="img-link" href="{{ $post->url }}"></a>
             </div>
             @includeIf('theme.stories::partials.components.social-share', ['post' => $post])
