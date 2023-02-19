@@ -10,7 +10,7 @@
                         <div class="carausel-3-columns-item d-flex bg-grey has-border p-25 hover-up-2 transition-normal border-radius-5">
                             <div class="post-thumb post-thumb-64 d-flex mr-15 border-radius-5 img-hover-scale">
                                 @if (count($category->image->meta_value) > 0)
-                                <img src="{{ RvMedia::getImageUrl($category->image->meta_value[0], 'thumb', false, RvMedia::getDefaultImage()) }}" alt="{{ $category->name }}" loading="lazy">
+                                <img src="{{ RvMedia::getImageUrl($category->image->meta_value[0], 'thumb', false, RvMedia::getDefaultImage()) }}" alt="{{ $category->name }}" width="64" height="64" loading="lazy">
                                 @endif
                             </div>
                             <div class="post-content media-body">
