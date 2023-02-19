@@ -1,6 +1,6 @@
 <div class="post-card-1 border-radius-10 hover-up">
     {{-- <div class="post-thumb thumb-overlay img-hover-slide position-relative" style="background-image: url({{ RvMedia::getImageUrl($post->image, null, false, RvMedia::getDefaultImage())}})"> --}}
-    <div class="post-thumb thumb-overlay img-hover-slide position-relative bg-loaded" data-bg_url="{{ RvMedia::getImageUrl($post->image, null, false, RvMedia::getDefaultImage()) }}">
+    <div class="post-thumb thumb-overlay img-hover-slide position-relative lazy-background" data-bg_url="{{ RvMedia::getImageUrl($post->image, null, false, RvMedia::getDefaultImage()) }}">
         <a class="img-link" href="{{ $post->url }}" title="{{ $post->name }}"></a>
         @includeIf('theme.stories::partials.components.social-share', ['post' => $post])
     </div>

@@ -130,9 +130,8 @@ $(document).ready(function () {
         }, 3000);
     });
 
-
     //Select2
-    var sellerDefault = $('.select2').data('default');
+    var sellerDefault = $(".select2").data("default");
     $(".select2").select2({
         data: [sellerDefault],
         ajax: {
@@ -163,23 +162,23 @@ $(document).ready(function () {
             // cache: true,
         },
         language: {
-            inputTooShort: function() {
-                return 'Nhập tên cửa hàng cần tìm';
+            inputTooShort: function () {
+                return "Nhập tên cửa hàng cần tìm";
             },
-            searching: function() {
-                return 'Đang tìm kiếm...';
+            searching: function () {
+                return "Đang tìm kiếm...";
             },
-            loadingMore: function() {
-                return 'Đang tải thêm kết quả...';
+            loadingMore: function () {
+                return "Đang tải thêm kết quả...";
             },
             errorLoading: function () {
-                return 'Không thể tải kết quả';
+                return "Không thể tải kết quả";
             },
             noResults: function () {
-                return "Không tìm thấy kết quả"
+                return "Không tìm thấy kết quả";
             },
         },
-        placeholder: 'Tất cả',
+        placeholder: "Tất cả",
         // placeholder: {
         //     id: '',
         //     text: "Tất cả"
@@ -188,7 +187,6 @@ $(document).ready(function () {
         templateResult: formatRepo,
         templateSelection: formatRepoSelection,
     });
-
 
     function formatRepo(repo) {
         if (repo.loading) {
@@ -217,49 +215,45 @@ $(document).ready(function () {
         return repo.seller_name || repo.text;
     }
 
-    $(document).on('click', '#refresh_btn', function(e) {
-        $('input[name="qs"]').val('');
-        $('.select2').val(null).trigger('change');
+    $(document).on("click", "#refresh_btn", function (e) {
+        $('input[name="qs"]').val("");
+        $(".select2").val(null).trigger("change");
         window.showAlert("alert-success", "Làm mới bộ lọc thành công");
     });
 
-    $(document).on('mouseenter', '.zalo', function(e) {
-        if(!$(this).hasClass('zalo-share-button')){
-            $(this).addClass('zalo-share-button');
+    $(document).on("mouseenter", ".zalo", function (e) {
+        if (!$(this).hasClass("zalo-share-button")) {
+            $(this).addClass("zalo-share-button");
             ZaloSocialSDK.reload();
         }
     });
+});
 
-    // Background image lazy load
-    var ll = $('.bg-loaded');
-    var lh = [];
-    var urlArr = [];
-    var wscroll = 0;
-    var wh = $(window).height();
+// Background image lazy load
+document.addEventListener("DOMContentLoaded", function () {
+    var lazyBackgrounds = [].slice.call(
+        document.querySelectorAll(".lazy-background")
+    );
 
-    function update_offsets(){
-        ll.each(function(){
-            var x = $(this).offset().top;
-            var url = $(this).data('bg_url');
-            lh.push(x);
-            urlArr.push(url);
+    if (
+        "IntersectionObserver" in window &&
+        "IntersectionObserverEntry" in window &&
+        "intersectionRatio" in window.IntersectionObserverEntry.prototype
+    ) {
+        let lazyBackgroundObserver = new IntersectionObserver(function (
+            entries,
+            observer
+        ) {
+            entries.forEach(function (entry) {
+                if (entry.isIntersecting) {
+                    entry.target.style.backgroundImage = `url('${entry.target.dataset.bg_url}')`;
+                    lazyBackgroundObserver.unobserve(entry.target);
+                }
+            });
         });
-    };
 
-    function lazy() {
-        wscroll = $(window).scrollTop();
-        for(i = 0; i < lh.length; i++){
-            if(lh[i] <= wscroll + (wh + 1000)){
-                ll.eq(i).css('background-image', 'url(' + urlArr[i] + ')');
-            };
-        };
-    };
-
-    // Page Load
-    update_offsets();
-    lazy();
-
-    $(window).on('scroll',function(){
-        lazy();
-    });
+        lazyBackgrounds.forEach(function (lazyBackground) {
+            lazyBackgroundObserver.observe(lazyBackground);
+        });
+    }
 });
