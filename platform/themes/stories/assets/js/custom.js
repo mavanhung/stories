@@ -249,7 +249,7 @@ $(document).ready(function () {
     function lazy() {
         wscroll = $(window).scrollTop();
         for(i = 0; i < lh.length; i++){
-            if(lh[i] <= wscroll + (wh + 400)){
+            if(lh[i] <= wscroll + (wh + 1000)){
                 ll.eq(i).css('background-image', 'url(' + urlArr[i] + ')');
             };
         };
