@@ -10,7 +10,7 @@
         <a class="zalo" href="{{ $post->url }}" title="Share Zalo"
             data-href="{{ $post->url }}" data-oaid="2194457286054493180"
             data-customize="true">
-            <img src="{{ Theme::asset()->url('images/icon/share_zalo.webp') }}" width="20" height="20" alt="shareZalo">
+            <img src="{{ Theme::asset()->url('images/icon/share_zalo.webp') }}" width="20" height="20" alt="shareZalo" loading="lazy">
         </a>
     </li>
     {{-- facebook --}}
@@ -20,7 +20,7 @@
             data-href="{{ $post->url }}"
             data-title="{{ $post->description }}">
             <img src="{{ Theme::asset()->url('images/icon/share_facebook.svg') }}" width="20" height="20"
-                alt="shareFacebook">
+                alt="shareFacebook" loading="lazy">
         </a>
     </li>
     {{-- messenger --}}
@@ -29,7 +29,7 @@
             data-href="{{ $post->url }}"
             data-title="{{ $post->description }}">
             <img src="{{ Theme::asset()->url('images/icon/share_messenger.svg') }}" width="20" height="20"
-                alt="shareMessenger">
+                alt="shareMessenger" loading="lazy">
         </a>
     </li>
     {{-- twitter --}}
@@ -38,13 +38,13 @@
             data-href="{{ $post->url }}"
             data-title="{{ $post->description }}">
             <img src="{{ Theme::asset()->url('images/icon/share_twitter.svg') }}" width="20" height="20"
-                alt="shareTwitter">
+                alt="shareTwitter" loading="lazy">
         </a>
     </li>
     {{-- copy --}}
     <li>
         <a class="copy btn-copy" title="Share Copy Link" href="{{ $post->url }}" data-href="{{ $post->url }}">
-            <img src="{{ Theme::asset()->url('images/icon/share_copy.svg') }}" width="20" height="20" alt="shareCopy">
+            <img src="{{ Theme::asset()->url('images/icon/share_copy.svg') }}" width="20" height="20" alt="shareCopy" loading="lazy">
         </a>
     </li>
 </ul>
