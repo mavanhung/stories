@@ -54,10 +54,6 @@ return [
 
             // You may use this event to set up your assets.
             $theme->asset()->usePath()->add('style', 'css/style.css', [], [], $version);
-            $theme->asset()->usePath()->add('widgets', 'css/widgets.css', [], [], $version);
-            $theme->asset()->usePath()->add('custom', 'css/custom.css', [], [], $version);
-            $theme->asset()->usePath()->add('comments', 'css/comments.css', [], [], $version);
-            $theme->asset()->usePath()->add('responsive', 'css/responsive.css', [], [], $version);
             $theme->asset()->add('font-awesome', 'https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css');
             $theme->asset()->add('fancybox', 'https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css');
             $theme->asset()->add('select2', 'https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css');
@@ -86,10 +82,12 @@ return [
             $theme->asset()->container('footer')->add('fancybox-js', 'https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js');
             $theme->asset()->container('footer')->add('zalo-js', 'https://sp.zalo.me/plugins/sdk.js');
 
-            $theme->asset()->container('footer')->usePath()->add('comment', 'js/comment.js', ['jquery'], [], $version);
-            $theme->asset()->container('footer')->usePath()->add('main', 'js/main.js', ['jquery'], [], $version);
-            $theme->asset()->container('footer')->usePath()->add('backend', 'js/backend.js', ['jquery'], [], $version);
-            $theme->asset()->container('footer')->usePath()->add('custom', 'js/custom.js', ['jquery'], [], $version);
+            // $theme->asset()->container('footer')->usePath()->add('comment', 'js/comment.js', ['jquery'], [], $version);
+            // $theme->asset()->container('footer')->usePath()->add('main', 'js/main.js', ['jquery'], [], $version);
+            // $theme->asset()->container('footer')->usePath()->add('backend', 'js/backend.js', ['jquery'], [], $version);
+            // $theme->asset()->container('footer')->usePath()->add('custom', 'js/custom.js', ['jquery'], [], $version);
+
+            $theme->asset()->container('footer')->usePath()->add('script', 'js/script.js', ['jquery'], [], $version);
 
             if (function_exists('shortcode')) {
                 $theme->composer(['index', 'page', 'post'], function (\Botble\Shortcode\View\View $view) {
