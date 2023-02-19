@@ -60,7 +60,7 @@
                                 <a href="{{ url('') }}" title="logo"><img class="logo" src="{{ RvMedia::getImageUrl(theme_option('logo')) }}" alt="{{ setting('site_title') }}"></a>
                             @endif --}}
                             <a class="logo__custom" href="{{ url('') }}" title="logo">
-                                <img src="{{ Theme::asset()->url('images/logo.png') }}" alt="logo">
+                                <img src="{{ Theme::asset()->url('images/logo.png') }}" alt="logo" loading="lazy">
                                 <div class="logo__custom-text">
                                     <span>xoaichua</span>
                                     <small>review</small>
