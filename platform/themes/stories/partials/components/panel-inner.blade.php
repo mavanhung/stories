@@ -27,7 +27,7 @@
                                 {{-- <img src="{{ RvMedia::getImageUrl($post->image, 'thumb', false, RvMedia::getDefaultImage()) }}" alt="{{ $post->name }}"> --}}
                                 <img src="{{ RvMedia::getImageUrl($post->image, null, false, RvMedia::getDefaultImage()) }}"
                                     alt="{{ $post->name }}"
-                                    onerror="this.src='/images/default-placeholder.webp'"
+                                    onerror="this.src='{{ Theme::asset()->url('images/default-placeholder.webp') }}'"
                                     loading="lazy">
                             </a>
                         </div>

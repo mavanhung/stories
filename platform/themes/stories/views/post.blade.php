@@ -253,7 +253,7 @@
                                                     class="post-thumb post-thumb-80 d-flex mr-15 border-radius-5 img-hover-scale overflow-hidden">
                                                     <a class="color-white" href="{{ $relatedItem->url }}">
                                                         <img src="{{ RvMedia::getImageUrl($relatedItem->image) }}"
-                                                            onerror="this.src='/images/default-placeholder.webp'"
+                                                            onerror="this.src='{{ Theme::asset()->url('images/default-placeholder.webp') }}'"
                                                             alt="{{ $relatedItem->name }}" loading="lazy">
                                                     </a>
                                                 </div>

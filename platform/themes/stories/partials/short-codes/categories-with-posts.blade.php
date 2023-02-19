@@ -14,7 +14,7 @@
                                         <div class="d-flex hover-up-2 transition-normal">
                                             <div class="post-thumb post-thumb-80 d-flex mr-15 border-radius-5 img-hover-scale overflow-hidden">
                                                 <a class="color-white" href="{{ $post->url }}">
-                                                    <img src="{{ RvMedia::getImageUrl($post->image) }}" alt="{{ $post->name }}" onerror="this.src='/images/default-placeholder.webp'" loading="lazy">
+                                                    <img src="{{ RvMedia::getImageUrl($post->image) }}" alt="{{ $post->name }}" onerror="this.src='{{ Theme::asset()->url('images/default-placeholder.webp') }}'" loading="lazy">
                                                 </a>
                                             </div>
                                             <div class="post-content media-body">
