@@ -111,7 +111,7 @@
                                 <a class="zalo-share-button social-icon zalo text-xs-center" href="javascript:void(0);" title="Share Zalo"
                                     rel="nofollow" data-href="{{ $post->url }}" data-oaid="2194457286054493180"
                                     data-customize="true">
-                                    <img src="{{ Theme::asset()->url('images/icon/share_zalo.svg') }}" alt="shareZalo">
+                                    <img src="{{ Theme::asset()->url('images/icon/share_zalo.svg') }}" alt="shareZalo" loading="lazy">
                                 </a>
                             </li>
                             {{-- facebook --}}
@@ -121,7 +121,7 @@
                                     data-href="{{ $post->url }}"
                                     data-title="{{ $post->description }}">
                                     <img src="{{ Theme::asset()->url('images/icon/share_facebook.svg') }}"
-                                        alt="shareFacebook">
+                                        alt="shareFacebook" loading="lazy">
                                 </a>
                             </li>
                             {{-- messenger --}}
@@ -131,7 +131,7 @@
                                     data-href="{{ $post->url }}"
                                     data-title="{{ $post->description }}">
                                     <img src="{{ Theme::asset()->url('images/icon/share_messenger.svg') }}"
-                                        alt="shareMessenger">
+                                        alt="shareMessenger" loading="lazy">
                                 </a>
                             </li>
                             {{-- twitter --}}
@@ -141,14 +141,14 @@
                                     data-href="{{ $post->url }}"
                                     data-title="{{ $post->description }}">
                                     <img src="{{ Theme::asset()->url('images/icon/share_twitter.svg') }}"
-                                        alt="shareTwitter">
+                                        alt="shareTwitter" loading="lazy">
                                 </a>
                             </li>
                             {{-- copy --}}
                             <li class="list-inline-item">
                                 <a class="social-icon copy text-xs-center btn-copy" href="javascript:void(0);" title="Share Copy Link" rel="nofollow"
                                     href="javascript:void(0);" data-href="{{ $post->url }}">
-                                    <img src="{{ Theme::asset()->url('images/icon/share_copy.svg') }}" alt="shareCopy">
+                                    <img src="{{ Theme::asset()->url('images/icon/share_copy.svg') }}" alt="shareCopy" loading="lazy">
                                 </a>
                             </li>
                         </ul>
