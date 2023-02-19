@@ -5,12 +5,12 @@
         {{-- <a class="zalo-share-button zalo" title="Share Zalo"
             rel="nofollow" data-href="{{ $post->url }}" data-oaid="2194457286054493180"
             data-customize="true">
-            <img src="{{ Theme::asset()->url('images/icon/share_zalo_bg_white.webp') }}" alt="shareZalo">
+            <img src="{{ Theme::asset()->url('images/icon/share_zalo.webp') }}" alt="shareZalo">
         </a> --}}
         <a class="zalo" href="{{ $post->url }}" title="Share Zalo"
             data-href="{{ $post->url }}" data-oaid="2194457286054493180"
             data-customize="true">
-            <img src="{{ Theme::asset()->url('images/icon/share_zalo_bg_white.webp') }}" width="20" height="20" alt="shareZalo">
+            <img src="{{ Theme::asset()->url('images/icon/share_zalo.webp') }}" width="20" height="20" alt="shareZalo">
         </a>
     </li>
     {{-- facebook --}}
