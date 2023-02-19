@@ -6,7 +6,7 @@
         <meta content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=5, user-scalable=1" name="viewport"/>
 
         <!-- Fonts-->
-        <link href="https://fonts.googleapis.com/css2?family={{ urlencode(theme_option('primary_font', 'Noto Sans JP')) }}:wght@400;500;700;900&display=swap" rel="stylesheet" type="text/css">
+        <link media="all" href="https://fonts.googleapis.com/css2?family={{ urlencode(theme_option('primary_font', 'Noto Sans JP')) }}:wght@400;500;700;900&display=swap" rel="stylesheet" type="text/css">
         <!-- CSS Library-->
 
         <style>
