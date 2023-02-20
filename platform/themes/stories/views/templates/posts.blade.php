@@ -2,7 +2,7 @@
     <div class="loop-list loop-list-style-1">
         <div class="row">
             @foreach ($posts as $post)
-                <article class="col-md-4 mb-40 wow animated">
+                <article class="col-md-4 mb-40">
                     <div class="post-card-1 border-radius-10 hover-up">
                         {!! Theme::partial('components.post-card', compact('post')) !!}
                     </div>
@@ -10,7 +10,7 @@
             @endforeach
         </div>
     </div>
-    <div class="pagination-area mb-30 wow animated justify-content-start">
+    <div class="pagination-area mb-30 justify-content-start">
         {!! $posts->withQueryString()->links() !!}
     </div>
 @endif

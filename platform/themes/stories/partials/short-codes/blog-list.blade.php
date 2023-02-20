@@ -1,7 +1,7 @@
 <div class="post-module-3">
     <div class="loop-list loop-list-style-1">
         @foreach($posts as $post)
-            <article class="hover-up-2 transition-normal wow animated">
+            <article class="hover-up-2 transition-normal">
                 <div class="row mb-40 list-style-2">
                     <div class="col-md-4">
                         <div class="post-thumb position-relative border-radius-5">
@@ -34,7 +34,7 @@
         @endforeach
     </div>
 
-    <div class="pagination-area mb-30 wow animated justify-content-start">
+    <div class="pagination-area mb-30 justify-content-start">
         {!! $posts->withQueryString()->links() !!}
     </div>
 </div>

@@ -1,6 +1,6 @@
 <div class="site-bottom pb-50">
     <div class="container">
-        <div class="carausel-3-columns-wrapper sidebar-widget widget-latest-posts mb-30 mt-20 wow animated">
+        <div class="carausel-3-columns-wrapper sidebar-widget widget-latest-posts mb-30 mt-20">
             <div class="widget-header-2 position-relative mb-30">
                 <h5 class="mt-5 mb-30">{!! clean($title) !!}</h5>
             </div>

@@ -92,7 +92,7 @@
                         {!! clean($post->content, 'youtube') !!}
                     </div>
                     @if (!$post->tags->isEmpty())
-                        <div class="entry-bottom mt-50 mb-30 wow fadeIn  animated"
+                        <div class="entry-bottom mt-50 mb-30"
                             style="visibility: visible; animation-name: fadeIn;">
                             <div class="tags">
                                 <span>{{ __('Tags') }}: </span>
@@ -102,7 +102,7 @@
                             </div>
                         </div>
                     @endif
-                    <div class="single-social-share clearfix wow fadeIn  animated"
+                    <div class="single-social-share clearfix"
                         style="visibility: visible; animation-name: fadeIn;">
                         <ul class="header-social-network header-social-network-custom list-inline mr-15">
                             <li class="list-inline-item text-muted"><span>{{ __('Share this') }}: </span></li>
@@ -155,7 +155,7 @@
                     </div>
                     @if ($post->author->id)
                         <!--author box-->
-                        <div class="author-bio p-30 mt-50 border-radius-10 bg-white wow fadeIn  animated"
+                        <div class="author-bio p-30 mt-50 border-radius-10 bg-white"
                             style="visibility: visible; animation-name: fadeIn;">
                             <div class="author-image mb-30">
                                 <img class="avatar" src="{{ $post->author->avatar_url }}"
@@ -181,7 +181,7 @@
                                 </div>
                                 <div class="loop-list loop-list-style-1">
                                     @foreach ($relatedPosts->take(2) as $relatedItem)
-                                        <article class="hover-up-2 transition-normal wow animated"
+                                        <article class="hover-up-2 transition-normal"
                                             style="visibility: visible;">
                                             <div class="row mb-40 list-style-2">
                                                 <div class="col-md-4">

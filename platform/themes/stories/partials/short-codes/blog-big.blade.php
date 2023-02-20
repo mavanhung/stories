@@ -1,7 +1,7 @@
 <div class="loop-list loop-list-style-1">
     <div class="row">
         @foreach($posts as $post)
-            <article class="col-md-6 mb-40 wow animated">
+            <article class="col-md-6 mb-40">
                 <div class="post-card-1 border-radius-10 hover-up">
                     <div class="post-thumb thumb-overlay img-hover-slide position-relative" style="background-image: url({{ RvMedia::getImageUrl($post->image, null, false, RvMedia::getDefaultImage()) }})">
                         <a class="img-link" href="{{ $post->url }}" title="{{ $post->name }}"></a>
@@ -33,6 +33,6 @@
     </div>
 </div>
 
-<div class="pagination-area mb-30 wow animated justify-content-start">
+<div class="pagination-area mb-30 justify-content-start">
     {!! $posts->withQueryString()->links() !!}
 </div>

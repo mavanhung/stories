@@ -3,7 +3,7 @@
     e(window).on("load", function () {
         e(".preloader").delay(450).fadeOut("slow");
     }),
-        new WOW().init(),
+        // new WOW().init(),
         e(document).ready(function () {
             var s, i, t, o, l, n;
             e("button.search-icon").on("click", function () {

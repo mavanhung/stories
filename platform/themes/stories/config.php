@@ -68,7 +68,7 @@ return [
             $theme->asset()->container('footer')->usePath()->add('bootstrap', 'js/vendor/bootstrap.min.js');
             $theme->asset()->container('footer')->usePath()->add('jquery.slicknav', 'js/vendor/jquery.slicknav.js');
             $theme->asset()->container('footer')->usePath()->add('slick-js', 'js/vendor/slick.min.js');
-            $theme->asset()->container('footer')->usePath()->add('wow-js', 'js/vendor/wow.min.js');
+            // $theme->asset()->container('footer')->usePath()->add('wow-js', 'js/vendor/wow.min.js');
             $theme->asset()->container('footer')->usePath()->add('jquery.ticker', 'js/vendor/jquery.ticker.js');
             $theme->asset()->container('footer')->usePath()->add('jquery.vticker', 'js/vendor/jquery.vticker-min.js');
             $theme->asset()->container('footer')->usePath()->add('jquery.scrollUp', 'js/vendor/jquery.scrollUp.min.js');

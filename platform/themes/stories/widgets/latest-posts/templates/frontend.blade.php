@@ -1,11 +1,11 @@
-<div class="sidebar-widget widget-latest-posts mb-50 wow animated">
+<div class="sidebar-widget widget-latest-posts mb-50">
     <div class="widget-header-1 position-relative mb-30">
         <h5 class="mt-5 mb-30">{{ $config['name'] }}</h5>
     </div>
     <div class="post-block-list post-module-1">
         <ul class="list-post">
             @foreach(get_latest_posts($config['number_display']) as $post)
-                <li class="mb-30 wow animated">
+                <li class="mb-30">
                     <div class="d-flex bg-white has-border p-25 hover-up transition-normal border-radius-5">
                         <div class="post-content media-body">
                             <h6 class="post-title mb-15 text-limit-2-row font-medium"><a href="{{ $post->url }}">{{ $post->name }}</a></h6>

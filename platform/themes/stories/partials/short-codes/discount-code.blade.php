@@ -1,6 +1,6 @@
 <div class="bg-grey pt-30">
     <div class="container">
-        <div class="widget-header-1 position-relative mb-30  wow animated">
+        <div class="widget-header-1 position-relative mb-30">
             <h5 class="mt-5 mb-30">{!! clean($title) !!}</h5>
         </div>
         <div class="row">
