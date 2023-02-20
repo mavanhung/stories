@@ -76,7 +76,7 @@ return [
             $theme->asset()->container('footer')->add('jquery.select2', 'https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js');
             $theme->asset()->container('footer')->usePath()->add('jquery.magnific-popup', 'js/vendor/jquery.magnific-popup.js');
             $theme->asset()->container('footer')->usePath()->add('jquery.sticky', 'js/vendor/jquery.sticky.js');
-            $theme->asset()->container('footer')->usePath()->add('perfect-scrollbar', 'js/vendor/perfect-scrollbar.js');
+            // $theme->asset()->container('footer')->usePath()->add('perfect-scrollbar', 'js/vendor/perfect-scrollbar.js');
             $theme->asset()->container('footer')->usePath()->add('waypoints', 'js/vendor/jquery.waypoints.min.js');
             $theme->asset()->container('footer')->usePath()->add('jquery.theia.sticky', 'js/vendor/jquery.theia.sticky.js');
             $theme->asset()->container('footer')->add('fancybox-js', 'https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js');

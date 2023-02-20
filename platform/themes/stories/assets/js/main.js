@@ -23,7 +23,7 @@
                     e("body").removeClass("canvas-opened");
                 }),
                 document.querySelector.bind(document),
-                new PerfectScrollbar(".custom-scrollbar"),
+                // new PerfectScrollbar(".custom-scrollbar"),
                 e(".play-video").length &&
                     e(".play-video").magnificPopup({
                         disableOn: 700,
