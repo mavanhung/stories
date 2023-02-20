@@ -25,7 +25,7 @@
             <div class="row">
                 @if ($featuredPosts->count() > 1)
                     <div class="col-lg-8 mb-30">
-                        <div class="carausel-post-1 hover-up border-radius-10 overflow-hidden transition-normal position-relative wow fadeInUp animated">
+                        <div class="carausel-post-1 hover-up border-radius-10 overflow-hidden transition-normal position-relative wow animated">
                             <div class="arrow-cover"></div>
                             <div class="slide-fade">
                                 @foreach($featuredPosts->take(2) as $post)
@@ -56,12 +56,12 @@
                     </div>
                 @endif
                 @foreach($featuredPosts->skip(2)->take(1) as $post)
-                    <article class="col-lg-4 col-md-6 mb-30 wow fadeInUp animated" data-wow-delay="0.2s">
+                    <article class="col-lg-4 col-md-6 mb-30 wow animated" data-wow-delay="0.2s">
                         {!! Theme::partial('components.post-card', compact('post')) !!}
                     </article>
                 @endforeach
                 @foreach($featuredPosts->skip(3) as $post)
-                    <article class="col-lg-4 col-md-6 mb-30 wow fadeInUp animated" data-wow-delay="0.{{ $loop->index * 2 }}s">
+                    <article class="col-lg-4 col-md-6 mb-30 wow animated" data-wow-delay="0.{{ $loop->index * 2 }}s">
                         {!! Theme::partial('components.post-card', compact('post')) !!}
                     </article>
                 @endforeach

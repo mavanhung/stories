@@ -77,6 +77,6 @@
         </div>
     @endforeach
 </div>
-<div class="pagination-area pb-30 wow fadeInUp animated justify-content-start">
+<div class="pagination-area pb-30 wow animated justify-content-start">
     {!! $discountCodes->withQueryString()->links() !!}
 </div>

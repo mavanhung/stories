@@ -1,4 +1,4 @@
-<div class="sidebar-widget widget_instagram wow fadeInUp animated">
+<div class="sidebar-widget widget_instagram wow animated">
     <div class="widget-header-1 position-relative mb-30">
         <h5 class="mt-5 mb-30">{{ $config['name'] }}</h5>
     </div>

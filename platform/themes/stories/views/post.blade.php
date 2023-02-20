@@ -181,8 +181,8 @@
                                 </div>
                                 <div class="loop-list loop-list-style-1">
                                     @foreach ($relatedPosts->take(2) as $relatedItem)
-                                        <article class="hover-up-2 transition-normal wow fadeInUp   animated"
-                                            style="visibility: visible; animation-name: fadeInUp;">
+                                        <article class="hover-up-2 transition-normal wow animated"
+                                            style="visibility: visible;">
                                             <div class="row mb-40 list-style-2">
                                                 <div class="col-md-4">
                                                     <div class="post-thumb position-relative border-radius-5">
