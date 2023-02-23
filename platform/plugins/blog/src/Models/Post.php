@@ -71,6 +71,7 @@ class Post extends BaseModel
         'status',
         'author_id',
         'author_type',
+        'website'
     ];
 
     /**

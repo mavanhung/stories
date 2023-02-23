@@ -89,7 +89,8 @@
                                 $post->categories()->first() ? $post->categories()->first()->name : __('Uncategorized'),
                             ) !!}
                         @endif
-                        {!! clean($post->content, 'youtube') !!}
+                        {{-- {!! clean($post->content, 'youtube') !!} --}}
+                        {!! $post->content !!}
                     </div>
                     @if (!$post->tags->isEmpty())
                         <div class="entry-bottom mt-50 mb-30"

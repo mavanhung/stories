@@ -258,6 +258,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 });
 
+//Không sử dụng trình nghe bị động để cải thiện hiệu suất cuộn
 function add_script_fix_devgg(){
     (function() {
         var supportsPassive = eventListenerOptionsSupported();
@@ -302,4 +303,3 @@ function add_script_fix_devgg(){
 }
 
 add_script_fix_devgg();
-    // add_action('wp_footer', 'add_script_fix_devgg');

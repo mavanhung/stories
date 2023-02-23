@@ -2,7 +2,9 @@
 
 namespace App\Helpers;
 
+use File;
 use Goutte\Client;
+use Botble\Media\RvMedia;
 use Botble\ACL\Models\User;
 use Botble\Blog\Models\Post;
 use Botble\Page\Models\Page;
@@ -13,6 +15,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Botble\Blog\Models\PostCategory;
 use Botble\Language\Models\Language;
+use Botble\Media\Models\MediaFolder;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Storage;
 use Botble\Language\Models\LanguageMeta;
@@ -34,11 +37,10 @@ trait Functions
         return str_replace($entities, $replacements, urlencode($string));
     }
 
-    public function saveImage($url, $storagePath, $name)
+    public function saveImage($url, $storagePath)
     {
         //$url: đường dẫn hình ảnh cần tải về (vd: https://phongreviews.com/wp-content/uploads/2021/07/binh-sua-pigeon-1.jpg)
         //$storagePath : đường dẫn thư mục sẽ lưu hình ảnh tải về (vd: crawlers/binh-sua-pigeon-1.jpg)
-        //$name: tên hình ảnh (vd: image.jpg)
         try {
             ini_set("memory_limit", "-1");
             set_time_limit(0);
@@ -498,7 +500,7 @@ trait Functions
         $this->saveDB($data);
     }
 
-    public function crawlersChanhtuoi()
+    public function crawlersTrustReview()
     {
         // Ghi chú
         // category_id là id danh Mục
@@ -507,21 +509,396 @@ trait Functions
         $UrlList = [
             [
                 'category_id' => 22,
-                'page' => 10,
+                'page' => 5,
                 'url' => [
-                    'https://chanhtuoi.com/kinh-nghiem/tai-chinh'
+                    'https://trustreview.vn/category/thiet-bi-dien-tu'
+                ]
+            ],
+            [
+                'category_id' => 20,
+                'page' => 15,
+                'url' => [
+                    'https://trustreview.vn/category/do-gia-dung'
+                ]
+            ],
+            [
+                'category_id' => 19,
+                'page' => 5,
+                'url' => [
+                    'https://trustreview.vn/category/suc-khoe-lam-dep'
+                ]
+            ],
+            [
+                'category_id' => 19,
+                'page' => 3,
+                'url' => [
+                    'https://trustreview.vn/category/suc-khoe'
+                ]
+            ],
+            [
+                'category_id' => 21,
+                'page' => 3,
+                'url' => [
+                    'https://trustreview.vn/category/me-va-be'
+                ]
+            ],
+            [
+                'category_id' => 23,
+                'page' => 5,
+                'url' => [
+                    'https://trustreview.vn/category/nha-cua-doi-song'
+                ]
+            ],
+            [
+                'category_id' => 25,
+                'page' => 7,
+                'url' => [
+                    'https://trustreview.vn/category/kinh-nghiem'
+                ]
+            ],
+            [
+                'category_id' => 25,
+                'page' => 5,
+                'url' => [
+                    'https://trustreview.vn/category/kinh-nghiem/kinh-nghiem-do-gia-dung'
+                ]
+            ],
+            [
+                'category_id' => 25,
+                'page' => 1,
+                'url' => [
+                    'https://trustreview.vn/category/kinh-nghiem/kien-thuc-suc-khoe-lam-dep'
                 ]
             ],
         ];
         $client = new Client();
 
-        //Lấy đường dẫn
+        //Lấy đường dẫn theo page cài sẵn vì đường dẫn trên phongreviews không đủ chỉ có 5 page
         foreach ($UrlList as $key => $value) {
             $pageUrl = [];
             for ($i=2; $i <= $value['page']; $i++) {
-                $pageUrl[] = $value['url'][0].'page/'.$i.'/';
+                $pageUrl[] = $value['url'][0].'/page/'.$i.'/';
             }
             $UrlList[$key]['url'] = array_merge($UrlList[$key]['url'],  $pageUrl);
         }
+
+        //Lấy đường dẫn chi tiết tin
+        foreach ($UrlList as $key => $value) {
+            $data = [];
+            foreach ($value['url'] as $item) {
+                $crawler = $client->request('GET', $item);
+                $articles = $crawler->filter('article')->filter('span.left');
+                if(count($articles) <= 0) {
+                    // Lấy đường dẫn và thumbnail
+                    $result = $crawler->filter('article')->each(
+                        function (Crawler $node) {
+                            $url = $node->filter('h3.entry-title a')->attr('href');
+                            $thumbnail = $node->filter('img')->attr('data-src');
+                            return [
+                                'href' => $url,
+                                'thumbnail' => $thumbnail
+                            ];
+                        }
+                    );
+                    $data = array_merge($data, $result);
+                }
+            }
+            $UrlList[$key]['url_item'] = $data;
+        }
+
+        foreach ($UrlList as $valueUrlList) {
+            foreach ($valueUrlList['url_item'] as $valueUrlItem) {
+                $this->crawlersTrustReviewDetail($valueUrlList['category_id'], $valueUrlItem['href'], $valueUrlItem['thumbnail']);
+            }
+        }
+    }
+
+    public function crawlersTrustReviewDetail($categoryId, $url, $urlThumbnail)
+    {
+        try {
+            DB::beginTransaction();
+            dump($url);
+            $client = new Client();
+            $crawler = $client->request('GET', $url);
+
+            //Lấy tiêu đề bài viết
+            $title = $crawler->filter('article h1.entry-title')->text();
+
+            //Lấy nội dung html cần lưu (đã loại trừ những thẻ không cần thiết)
+            $content = $crawler->filter('article #ftwp-postcontent')
+                                ->children()
+                                ->reduce(function (Crawler $node) {
+                                    $check = strpos($node->attr('id'), 'ftwp-container-outer');
+                                    return $check === false ? true : false;
+                                })
+                                ->reduce(function (Crawler $node) {
+                                    $check = strpos($node->attr('class'), 'kk-star-ratings');
+                                    return $check === false ? true : false;
+                                })
+                                ->each(function (Crawler $node) {
+                                    return $node->outerHtml();
+                                });
+                                $content = preg_replace('/data-id=".*?"/', '', $content);
+                                $content = preg_replace('/id=".*?"/', '', $content);
+                                // $content = preg_replace('/class=".*?"/', '', $content);
+                                $content = preg_replace('/dir=".*?"/', '', $content);
+                                // $content = preg_replace('/style=".*?"/', '', $content);
+                                $content = preg_replace('/data-width=".*?"/', '', $content);
+                                $content = preg_replace('/data-height=".*?"/', '', $content);
+                                $content = preg_replace('/data-init-width=".*?"/', '', $content);
+                                $content = preg_replace('/data-init-height=".*?"/', '', $content);
+                                $content = preg_replace('/data-lazyloaded=".*?"/', '', $content);
+                                $content = preg_replace('/data-placeholder-resp=".*?"/', '', $content);
+                                $content = preg_replace('/data-ll-status=".*?"/', '', $content);
+                                $content = preg_replace('/data-sizes=".*?"/', '', $content);
+                                $content = preg_replace('/sizes=".*?"/', '', $content);
+                                $content = preg_replace('/data-srcset=".*?"/', '', $content);
+                                $content = preg_replace('/srcset=".*?"/', '', $content);
+
+            $data = [];
+            $slug_components = parse_url($url);
+            $slug_components = str_replace('.html', '', explode('/', $slug_components['path'])[1]);
+            $slug = Slug::where('Key', $slug_components)
+                                        ->where('reference_type', Post::class)
+                                        ->first();
+            if(blank($slug)) {
+                $post = Post::create([
+                    'name' => $title,
+                    // 'description' => $data['description'],
+                    // 'status' => 'pending',
+                    'status' => 'published',
+                    'author_id' => 1,
+                    'author_type' => User::class,
+                    'format_type' => 'default',
+                    'website' => 'trustreview.vn'
+                ]);
+                $folder = MediaFolder::where('slug', 'news')->first();
+                $folderChild = MediaFolder::where('parent_id', $folder->id)
+                                            ->where('slug', $post->id)
+                                            ->first();
+                if(blank($folderChild)) {
+                    $folder = \Botble\Media\Models\MediaFolder::create([
+                        'user_id' => 1,
+                        'name' => $post->id,
+                        'slug' => $post->id,
+                        'parent_id' => $folder->id
+                    ]);
+                }
+                //Tải và lưu hình ảnh thumbnail
+                if(isset($urlThumbnail)){
+                    // Lưu hình ảnh ở local storage
+                    $thumbnailName = array_reverse(explode ('/', $urlThumbnail))[0];
+                    $extension = 'image/' . array_reverse(explode('.', $thumbnailName))[0];
+                    $storagePath = 'news/'.$post->id.'/'.$thumbnailName;
+                    // $storagePathThumbnail = 'storage/news/'.$post->id.'/'.$thumbnailName;
+                    $this->saveImage($urlThumbnail, $storagePath);
+                    // Kết thúc lưu hình ảnh ở local storage
+
+                    $fileUpload = new \Illuminate\Http\UploadedFile(Storage::path($storagePath), $thumbnailName, $extension, null, true);
+                    $image = \RvMedia::handleUpload($fileUpload, $folder->id);
+
+                    // Update lại thumbnail bài viết
+                    $post->update([
+                        'image' => $storagePath
+                    ]);
+                }
+            }
+            if(isset($post)) {
+                foreach($content as $k => $c) {
+                    $checkBtn = strpos($c, 'class="div-btn"');
+                    $checkImg = strpos($c, '<img');
+                    $checkTaga = strpos($c, 'https://go.isclix.com');
+                    $checkCenter = strpos($c, 'style="text-align: center;"');
+                    if(!($checkBtn === false)){
+                        //Xử lý thẻ a
+                        preg_match_all('/<a[^>]+href=([\'"])(?<href>.+?)\1[^>]*>/i', $c, $result);
+                        if (!empty($result)) {
+                            $href = $result['href'][0];
+                            $crawler = $client->request('GET', $href);
+                            $baseHref = $crawler->getBaseHref();
+                            if(!(strpos($baseHref, 'https://ti.ki') === false)){
+                                $url_components = parse_url($baseHref);
+                                parse_str($url_components['query'], $params);
+                                $urlAffiliate = $params['TIKI_URI'];
+                                $campaignId = '4348614231480407268';
+                            }
+                            if(!(strpos($baseHref, 'https://shopee.vn/search') === false)){
+                                $url_components = parse_url($baseHref);
+                                parse_str($url_components['query'], $params);
+                                $keyword = urlencode($params['keyword']);
+                                $urlAffiliate = $url_components['scheme'] .'://'. $url_components['host'] . $url_components['path'] . '?keyword=' . $keyword;
+                                $campaignId = '4751584435713464237';
+                            }else if(!(strpos($baseHref, 'https://shopee.vn') === false)){
+                                $url_components = parse_url($baseHref);
+                                $urlAffiliate = $url_components['scheme'] .'://'. $url_components['host'] . $url_components['path'];
+                                $campaignId = '4751584435713464237';
+                            }
+                            if(!(strpos($baseHref, 'lazada.vn') === false)){
+                                $url_components = parse_url($baseHref);
+                                parse_str($url_components['query'], $params);
+                                $url_components1 = parse_url($params['url']);
+                                parse_str($url_components1['query'], $params);
+                                $urlAffiliate = $params['url'];
+                                $campaignId = '5127144557053758578';
+                            }
+                            if(isset($urlAffiliate)){
+                                $response = $this->getUrlAffiliate($urlAffiliate, $campaignId);
+                                if(isset($response) && $response['success']) {
+                                    $resultUrlAffiliate = $response['data']['product_success_link'][0]['short_url'];
+                                    $c = preg_replace("/(?<=href=(\"|'))[^\"']+(?=(\"|'))/", $resultUrlAffiliate, $c);
+                                    $c = preg_replace('/style=".*?"/', '', $c);
+                                    $data[] = $c;
+                                }
+                            }
+                        }
+                    }else if(!($checkImg === false)){
+                        //Xử lý thẻ img
+                        $doc = new \DOMDocument();
+                        $doc->loadHTML('<?xml encoding="UTF-8">' . $c, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+                        $imageTags = $doc->getElementsByTagName('img');
+
+                        foreach($imageTags as $tag) {
+                            $dataSrc = $tag->getAttribute('data-src');
+                            if(isset($dataSrc)) {
+                                // Lưu hình ảnh ở local storage
+                                $imgName = array_reverse(explode ('/', $dataSrc))[0];
+                                $imgExtension = 'image/' . array_reverse(explode('.', $imgName))[0];
+                                $imgStoragePath = 'news/'.$post->id.'/'.$imgName;
+                                // $storagePathThumbnail = 'storage/news/'.$post->id.'/'.$imgName;
+                                $this->saveImage($dataSrc, $imgStoragePath);
+                                // Kết thúc lưu hình ảnh ở local storage
+
+                                $fileUpload = new \Illuminate\Http\UploadedFile(Storage::path($imgStoragePath), $imgName, $imgExtension, null, true);
+                                \RvMedia::handleUpload($fileUpload, $folder->id);
+                            }
+                            $tag->setAttribute('loading', 'lazy');
+                            $tag->setAttribute('src', get_image_url($imgStoragePath));
+                            $tag->setAttribute('data-src', get_image_url($imgStoragePath));
+                        }
+                        $dom = $doc->saveHTML();
+                        $dom = preg_replace('/style=".*?"/', '', $dom);
+                        $data[] = preg_replace('/class=".*?"/', '', $dom);
+                    }else if(!($checkTaga === false)) {
+                        //Xử lý thẻ a
+                        preg_match_all('/<a[^>]+href=([\'"])(?<href>.+?)\1[^>]*>/i', $c, $resultTaga);
+                        if (!empty($resultTaga)) {
+                            $href = $resultTaga['href'][0];
+                            $crawler = $client->request('GET', $href);
+                            $baseHref = $crawler->getBaseHref();
+                            if(!(strpos($baseHref, 'https://ti.ki') === false)){
+                                $url_components = parse_url($baseHref);
+                                parse_str($url_components['query'], $params);
+                                $urlAffiliate = $params['TIKI_URI'];
+                                $campaignId = '4348614231480407268';
+                            }
+                            if(!(strpos($baseHref, 'https://shopee.vn/search') === false)){
+                                $url_components = parse_url($baseHref);
+                                parse_str($url_components['query'], $params);
+                                $keyword = urlencode($params['keyword']);
+                                $urlAffiliate = $url_components['scheme'] .'://'. $url_components['host'] . $url_components['path'] . '?keyword=' . $keyword;
+                                $campaignId = '4751584435713464237';
+                            }else if(!(strpos($baseHref, 'https://shopee.vn') === false)){
+                                $url_components = parse_url($baseHref);
+                                $urlAffiliate = $url_components['scheme'] .'://'. $url_components['host'] . $url_components['path'];
+                                $campaignId = '4751584435713464237';
+                            }
+                            if(!(strpos($baseHref, 'lazada.vn') === false)){
+                                $url_components = parse_url($baseHref);
+                                parse_str($url_components['query'], $params);
+                                $url_components1 = parse_url($params['url']);
+                                parse_str($url_components1['query'], $params);
+                                $urlAffiliate = $params['url'];
+                                $campaignId = '5127144557053758578';
+                            }
+                            if(isset($urlAffiliate)){
+                                $response = $this->getUrlAffiliate($urlAffiliate, $campaignId);
+                                if(isset($response) && $response['success']) {
+                                    $resultUrlAffiliate = $response['data']['product_success_link'][0]['short_url'];
+                                    $c = preg_replace("/(?<=href=(\"|'))[^\"']+(?=(\"|'))/", $resultUrlAffiliate, $c);
+                                    // $c = preg_replace('/style=".*?"/', '', $c);
+                                    $data[] = $c;
+                                }
+                            }
+                        }
+                    }else if(!($checkCenter === false)){
+                        $data[] = preg_replace('/class=".*?"/', '', str_replace(['trustreview.vn', 'trustreview', 'TrustReview', '.html'], ['xoaichua.com', 'xoaichua', 'XoaiChua', ''], $c));
+                    }else {
+                        $c = preg_replace('/style=".*?"/', '', $c);
+                        $data[] = preg_replace('/class=".*?"/', '', str_replace(['trustreview.vn', 'trustreview', 'TrustReview', '.html'], ['xoaichua.com', 'xoaichua', 'XoaiChua', ''], $c));
+                    }
+                }
+                //Lưu vào DB
+                $post->update([
+                    'description' => strip_tags($data[0]),
+                    'content' => implode('', $data)
+                ]);
+                PostCategory::create([
+                    'category_id' => $categoryId,
+                    'post_id' => $post->id
+                ]);
+                Slug::create([
+                    'key' => $slug_components,
+                    'reference_id' => $post->id,
+                    'reference_type' => Post::class
+                ]);
+                LanguageMeta::create([
+                    'lang_meta_code' => 'vi',
+                    'lang_meta_origin' =>  md5($post->id . Post::class . time()),
+                    'reference_id' => $post->id,
+                    'reference_type' => Post::class
+                ]);
+            }
+
+            DB::commit();
+            // dump('done');
+            return true;
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            $this->error('Có lỗi xảy ra: '.$th->getMessage().', file: '.$th->getFile().', dòng: '.$th->getLine());
+            Log::channel('Crawlers')->error([
+                $th->getMessage(),
+                $th->getFile(),
+                $th->getLine()
+            ]);
+        }
+    }
+
+    public function getUrlAffiliate($urlAffiliate, $campaignId)
+    {
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => 'https://pub2-api.accesstrade.vn/v1/product_link/',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'POST',
+            CURLOPT_POSTFIELDS =>'{
+                "original_url": [
+                    "'. $urlAffiliate .'"
+                ],
+                "tracking_domain": "https://go.isclix.com",
+                "utm_source": "",
+                "utm_medium": "",
+                "utm_campaign": "",
+                "utm_content": "",
+                "short_link": "https://shorten.asia",
+                "create_shorten": true,
+                "sub3": "",
+                "campaign_id": "'. $campaignId .'"
+            }',
+            CURLOPT_HTTPHEADER => array(
+                'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2Nzc1MzI3MDcsImlhdCI6MTY3NzAzMjcwNywibmJmIjoxNjc3MDMyNzA3LCJqdGkiOiIyMDIzLTAyLTIyIDAyOjI1OjA3LjM4NDY3Nl82MTI2NDUxMzAzNzIxMDU5NTY2IiwiaWRlbnRpdHkiOnsiaWQiOiI2MDc5MDY2MzMyMDM3ODc5NjcxIiwic3NvX2lkIjo1NTE5NzMzLCJsb2dpbl9uYW1lIjoiaHVuZ19tdl85NSIsImZvbGxvd2VyIjpudWxsLCJsb2dpbl9uYW1lX3NzbyI6Imh1bmdfbXZfOTUiLCJ0b2tlbl9wcm9maWxlIjoiZGQwNGNhZGEtYjNkZi00ODA4LTk1MjgtNzk0OTIyYjQ0NjRmIiwiZW1haWwiOiJtYXZhbmh1bmcyNzA5OTVAZ21haWwuY29tIiwiZmlyc3RfbmFtZSI6IlZcdTAxMDNuIEhcdTAxYjBuZyIsImxhc3RfbmFtZSI6Ik1cdTAwZTMiLCJkYXRlX2JpcnRoIjoiMTk5NS0wOS0yNyIsImFnZW5jeSI6ZmFsc2UsIl9hdF9pZCI6IjEzODIyMzkiLCJpc0ZyYW1lIjpmYWxzZSwidXNlcm5hbWUiOiJodW5nX212Xzk1IiwicGhvbmUiOiIrODQzNDQyNDI2NzkiLCJhZGRyZXNzIjoiXHUxZWE0cCBQaFx1MDFiMFx1MWVkYmMgVFx1MDBlMm4sIFRcdTAwZTJuIFBoXHUwMWIwXHUxZWRiYywgXHUwMTEwXHUxZWQzbmcgUGhcdTAwZmEsIEJcdTAwZWNuaCBQaFx1MDFiMFx1MWVkYmMiLCJnZW5kZXIiOjEsImN0aW1lIjoiIiwiZGVzY3JpcHRpb24iOiIiLCJhdmF0YXIiOiIiLCJtb2RlbCI6IiJ9fQ.B3fX2ihivT8aUIKDjq0UuXVvy0AMfTadvG20rL55uTc',
+                'Content-Type: application/json'
+            ),
+        ));
+
+        $response = curl_exec($curl);
+
+        curl_close($curl);
+        return json_decode($response, true);
     }
 }
