@@ -586,6 +586,7 @@ trait Functions
         foreach ($UrlList as $key => $value) {
             $data = [];
             foreach ($value['url'] as $item) {
+                dump($item);
                 $crawler = $client->request('GET', $item);
                 $articles = $crawler->filter('article')->filter('span.left');
                 if(count($articles) <= 0) {
