@@ -1000,11 +1000,22 @@ ul.long-description li {
             li {
                 list-style: disc;
                 list-style-position: inside;
+                p {
+                    display: inline;
+                }
             }
         }
         em {
             display: block;
             text-align: center;
+        }
+
+        table {
+            th, td {
+                border: 1px solid #aeaeae;
+                padding: 15px;
+                vertical-align: middle;
+            }
         }
     }
 }
