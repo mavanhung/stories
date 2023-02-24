@@ -1010,6 +1010,13 @@ ul.long-description li {
             text-align: center;
         }
 
+        h5 {
+            em {
+                display: inline;
+                text-align: unset;
+            }
+        }
+
         table {
             th, td {
                 border: 1px solid #aeaeae;
