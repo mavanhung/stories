@@ -540,13 +540,13 @@ trait Functions
                     'https://trustreview.vn/category/thiet-bi-dien-tu'
                 ]
             ],
-            // [
-            //     'category_id' => 20,
-            //     'page' => 15,
-            //     'url' => [
-            //         'https://trustreview.vn/category/do-gia-dung'
-            //     ]
-            // ],
+            [
+                'category_id' => 20,
+                'page' => 15,
+                'url' => [
+                    'https://trustreview.vn/category/do-gia-dung'
+                ]
+            ],
             [
                 'category_id' => 19,
                 'page' => 5,
