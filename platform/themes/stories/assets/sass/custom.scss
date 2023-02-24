@@ -1027,4 +1027,31 @@ ul.long-description li {
     }
 }
 
+#scrollTop {
+    background-color: var(--color-primary);
+    color: #fff;
+    border: 0;
+    font-size: 15px;
+    outline: 0;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    padding: 0;
+    box-shadow: 0 2px 4px var(--button-shadow-color-normal),0 0 0 transparent;
+    transition: all 0.25s cubic-bezier(0.02, 0.01, 0.47, 1);
+    right: 10px;
+    bottom: 10px;
+    margin-right: 0 !important;
+    cursor: pointer;
+    i {
+        line-height: 2;
+        font-size: 20px;
+    }
+}
 
+#scrollTop.show {
+    position: fixed;
+    z-index: 2147483647;
+}

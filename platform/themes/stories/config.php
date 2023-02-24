@@ -71,7 +71,7 @@ return [
             // $theme->asset()->container('footer')->usePath()->add('wow-js', 'js/vendor/wow.min.js');
             $theme->asset()->container('footer')->usePath()->add('jquery.ticker', 'js/vendor/jquery.ticker.js');
             $theme->asset()->container('footer')->usePath()->add('jquery.vticker', 'js/vendor/jquery.vticker-min.js');
-            $theme->asset()->container('footer')->usePath()->add('jquery.scrollUp', 'js/vendor/jquery.scrollUp.min.js');
+            // $theme->asset()->container('footer')->usePath()->add('jquery.scrollUp', 'js/vendor/jquery.scrollUp.min.js');
             $theme->asset()->container('footer')->usePath()->add('jquery.nice-select', 'js/vendor/jquery.nice-select.min.js');
             $theme->asset()->container('footer')->add('jquery.select2', 'https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js');
             $theme->asset()->container('footer')->usePath()->add('jquery.magnific-popup', 'js/vendor/jquery.magnific-popup.js');

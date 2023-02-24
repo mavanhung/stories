@@ -33,16 +33,16 @@
                         preloader: !1,
                         fixedContentPos: !1,
                     }),
-                e.scrollUp({
-                    scrollName: "scrollUp",
-                    topDistance: "300",
-                    topSpeed: 300,
-                    animation: "fade",
-                    animationInSpeed: 200,
-                    animationOutSpeed: 200,
-                    scrollText: '<i class="elegant-icon arrow_up"></i>',
-                    activeOverlay: !1,
-                }),
+                // e.scrollUp({
+                //     scrollName: "scrollUp",
+                //     topDistance: "300",
+                //     topSpeed: 300,
+                //     animation: "fade",
+                //     animationInSpeed: 200,
+                //     animationOutSpeed: 200,
+                //     scrollText: '<i class="elegant-icon arrow_up"></i>',
+                //     activeOverlay: !1,
+                // }),
                 e(window).on("scroll", function () {
                     e(window).scrollTop() < 245
                         ? e(".header-sticky").removeClass("sticky-bar")
