@@ -259,7 +259,7 @@
                                                     </a>
                                                 </div>
                                                 <div class="post-content media-body">
-                                                    <h6 class="post-title mb-15 text-limit-2-row font-medium"><a
+                                                    <h6 class="post-title mb-15 text-limit-3-row font-medium font-weight-600"><a
                                                             href="{{ $relatedItem->url }}">{{ $relatedItem->name }}</a>
                                                     </h6>
                                                     <div class="entry-meta meta-1 float-left font-x-small">
