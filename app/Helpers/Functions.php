@@ -774,6 +774,7 @@ trait Functions
                                     parse_str($url_components['query'], $params);
                                     if(isset($params['url'])){
                                         $url_components1 = parse_url($params['url']);
+                                        dump($baseHref, $params['url'], $url_components1);
                                         parse_str($url_components1['query'], $params);
                                         $urlAffiliate = $params['url'];
                                         $campaignId = '5127144557053758578';
