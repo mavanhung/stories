@@ -74,7 +74,7 @@ class StoriesController extends PublicController
             $exists = $this->postRepository->count([
                 'id'  => $request->input('posts_id'),
             ]);
-            if ($exists[1] <= 0) {
+            if ($exists <= 0) {
                 return $response
                     ->setError()
                     ->setMessage('Bài viết không tồn tại.');
