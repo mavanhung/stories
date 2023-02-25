@@ -63,6 +63,36 @@ if (is_plugin_active('blog')) {
         return Theme::partial('short-codes.blog-categories-posts-admin-config', compact('categories'));
     });
 
+    add_shortcode('blog-categories-posts-big', __('Blog categories posts big'), __('Blog categories posts big'),
+        function ($shortCode) {
+            $attributes = $shortCode->toArray();
+
+            $categories = collect([]);
+
+            for ($i = 1; $i <= count($attributes); $i++) {
+                if (!Arr::has($attributes, 'category_id_' . $i)) {
+                    continue;
+                }
+
+                $category = app(CategoryInterface::class)
+                            ->findById(Arr::get($attributes, 'category_id_' . $i), ['slugable', 'posts' => function ($query) {
+                                $query->where('status', BaseStatusEnum::PUBLISHED)->latest()->with(['slugable', 'categories', 'categories.slugable'])->limit(6);
+                            }]);
+
+                if ($category) {
+                    $categories[] = $category;
+                }
+            }
+
+            return Theme::partial('short-codes.blog-categories-posts-big', compact('categories'));
+        });
+
+    shortcode()->setAdminConfig('blog-categories-posts-big', function () {
+        $categories = app(CategoryInterface::class)->allBy(['status' => BaseStatusEnum::PUBLISHED]);
+
+        return Theme::partial('short-codes.blog-categories-posts-big-admin-config', compact('categories'));
+    });
+
     add_shortcode('categories-with-posts', __('Categories with Posts'), __('Categories with Posts'), function ($shortCode) {
 
         $attributes = $shortCode->toArray();
