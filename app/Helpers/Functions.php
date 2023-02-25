@@ -892,7 +892,9 @@ trait Functions
                             $data[] = preg_replace('/class=".*?"/', '', $domouter);
                         }else {
                             $c = preg_replace('/style=".*?"/', '', $c);
-                            $data[] = preg_replace('/class=".*?"/', '', str_replace(['trustreview.vn', 'trustreview', 'TrustReview', 'Trustreview', '.html'], ['xoaichua.com', 'xoaichua', 'XoaiChua', 'XoaiChua', ''], $c));
+                            $search = ['trustreview.vn', 'trustreview', 'TrustReview', 'Trustreview', 'Trust Review', 'Trust review', 'trust review', '.html'];
+                            $replace = ['xoaichua.com', 'xoaichua', 'XoaiChua', 'XoaiChua', 'XoaiChua', 'XoaiChua', 'XoaiChua', ''];
+                            $data[] = preg_replace('/class=".*?"/', '', str_replace($search, $replace, $c));
                         }
                     }
                     //Lưu vào DB
@@ -1181,7 +1183,9 @@ trait Functions
                         } else {
                             $c = preg_replace('/style=".*?"/', '', $c);
                             $c = preg_replace('/id=".*?"/', '', $c);
-                            $data[] = preg_replace('/class=".*?"/', '', str_replace(['trustreview.vn', 'trustreview', 'TrustReview', 'Trustreview', '.html'], ['xoaichua.com', 'xoaichua', 'XoaiChua', 'XoaiChua', ''], $c));
+                            $search = ['trustreview.vn', 'trustreview', 'TrustReview', 'Trustreview', 'Trust Review', 'Trust review', 'trust review', '.html'];
+                            $replace = ['xoaichua.com', 'xoaichua', 'XoaiChua', 'XoaiChua', 'XoaiChua', 'XoaiChua', 'XoaiChua', ''];
+                            $data[] = preg_replace('/class=".*?"/', '', str_replace($search, $replace, $c));
                         }
                     }
                     // Lưu vào DB
