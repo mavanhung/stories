@@ -12,7 +12,7 @@
                             <div class="loop-list loop-list-style-1">
                                 <div class="row">
                                     @foreach($category->posts->sortByDesc('id')->take(6) as $post)
-                                        <article class="col-md-4 mb-40">
+                                        <article class="col-lg-4 col-md-6 mb-40">
                                             <div class="post-card-1 border-radius-10 hover-up">
                                                 {!! Theme::partial('components.post-card', compact('post')) !!}
                                             </div>

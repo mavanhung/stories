@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row">
             @foreach($categories as $category)
-                <div class="col-lg-{{ 12 / count($categories) }} col-md-{{ 12 / (count($categories) + 1) }}">
+                <div class="col-lg-{{ 12 / count($categories) }} col-md-{{ 12 / (count($categories) - 1) }}">
                     <div class="sidebar-widget widget-latest-posts mb-30" style="visibility: visible;">
                         <div class="widget-header-2 position-relative mb-30">
                             <h5 class="mt-5 mb-30">{{ $category->name }}</h5>

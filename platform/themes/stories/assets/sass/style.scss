@@ -1425,6 +1425,7 @@ h1.page-404 {
 }
 
 .img-hover-scale img {
+    height: auto;
     -webkit-transition: -webkit-transform .5s;
     transition: -webkit-transform .5s;
     -o-transition: transform .5s;
