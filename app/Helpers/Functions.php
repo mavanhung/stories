@@ -803,30 +803,37 @@ trait Functions
                                 $imgExists = $this->remoteFileExists($dataSrc);
                                 if (!$imgExists) {
                                     $dataSrc = $tag->getAttribute('src');
+                                    $imgExists1 = $this->remoteFileExists($dataSrc);
                                 }
 
-                                if(isset(parse_url($dataSrc)['query'])) {
-                                    $dataSrc = parse_url($dataSrc)['scheme'].'://'.parse_url($dataSrc)['host'].parse_url($dataSrc)['path'];
-                                }
-                                if(isset($dataSrc)) {
-                                    // Lưu hình ảnh ở local storage
-                                    $imgName = array_reverse(explode ('/', $dataSrc))[0];
-                                    $imgExtension = 'image/' . array_reverse(explode('.', $imgName))[0];
-                                    $imgStoragePath = 'news/'.$post->id.'/'.$imgName;
-                                    // $storagePathThumbnail = 'storage/news/'.$post->id.'/'.$imgName;
-                                    $this->saveImage($dataSrc, $imgStoragePath);
-                                    // Kết thúc lưu hình ảnh ở local storage
+                                if($imgExists || (isset($imgExists1) && $imgExists1)){
+                                    if(isset(parse_url($dataSrc)['query'])) {
+                                        $dataSrc = parse_url($dataSrc)['scheme'].'://'.parse_url($dataSrc)['host'].parse_url($dataSrc)['path'];
+                                    }
+                                    if(isset($dataSrc)) {
+                                        // Lưu hình ảnh ở local storage
+                                        $imgName = array_reverse(explode ('/', $dataSrc))[0];
+                                        $imgExtension = 'image/' . array_reverse(explode('.', $imgName))[0];
+                                        $imgStoragePath = 'news/'.$post->id.'/'.$imgName;
+                                        // $storagePathThumbnail = 'storage/news/'.$post->id.'/'.$imgName;
+                                        $this->saveImage($dataSrc, $imgStoragePath);
+                                        // Kết thúc lưu hình ảnh ở local storage
 
-                                    $fileUpload = new \Illuminate\Http\UploadedFile(Storage::path($imgStoragePath), $imgName, $imgExtension, null, true);
-                                    \RvMedia::handleUpload($fileUpload, $folder->id);
+                                        $fileUpload = new \Illuminate\Http\UploadedFile(Storage::path($imgStoragePath), $imgName, $imgExtension, null, true);
+                                        \RvMedia::handleUpload($fileUpload, $folder->id);
+                                    }
+                                    $tag->setAttribute('loading', 'lazy');
+                                    $tag->setAttribute('src', get_image_url($imgStoragePath));
+                                    $tag->setAttribute('data-src', get_image_url($imgStoragePath));
                                 }
-                                $tag->setAttribute('loading', 'lazy');
-                                $tag->setAttribute('src', get_image_url($imgStoragePath));
-                                $tag->setAttribute('data-src', get_image_url($imgStoragePath));
+
                             }
                             $dom = $doc->saveHTML();
                             $dom = preg_replace('/style=".*?"/', '', $dom);
-                            $data[] = preg_replace('/class=".*?"/', '', $dom);
+                            $dom = preg_replace('/class=".*?"/', '', $dom);
+                            if($imgExists || (isset($imgExists1) && $imgExists1)){
+                                $data[] = $dom;
+                            }
                         }else if(!($checkTaga === false)) {
                             //Xử lý thẻ a
                             preg_match_all('/<a[^>]+href=([\'"])(?<href>.+?)\1[^>]*>/i', $c, $resultTaga);
@@ -1009,33 +1016,39 @@ trait Functions
                             $doc->loadHTML('<?xml encoding="UTF-8">' . $c, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
                             $imageTags = $doc->getElementsByTagName('img');
 
-                            foreach($imageTags as $tag) {
+                            foreach($imageTags as $kit => $tag) {
                                 $dataSrc = $tag->getAttribute('data-src');
-
                                 $imgExists = $this->remoteFileExists($dataSrc);
                                 if (!$imgExists) {
                                     $dataSrc = $tag->getAttribute('src');
+                                    $imgExists1 = $this->remoteFileExists($dataSrc);
                                 }
 
-                                if(isset(parse_url($dataSrc)['query'])) {
-                                    $dataSrc = parse_url($dataSrc)['scheme'].'://'.parse_url($dataSrc)['host'].parse_url($dataSrc)['path'];
-                                }
-                                if(isset($dataSrc)) {
-                                    // Lưu hình ảnh ở local storage
-                                    $imgName = array_reverse(explode ('/', $dataSrc))[0];
-                                    $imgExtension = 'image/' . array_reverse(explode('.', $imgName))[0];
-                                    $imgStoragePath = 'news/'.$post->id.'/'.$imgName;
-                                    // $storagePathThumbnail = 'storage/news/'.$post->id.'/'.$imgName;
-                                    $this->saveImage($dataSrc, $imgStoragePath);
-                                    // Kết thúc lưu hình ảnh ở local storage
+                                if($imgExists || (isset($imgExists1) && $imgExists1)){
+                                    if(isset(parse_url($dataSrc)['query'])) {
+                                        $dataSrc = parse_url($dataSrc)['scheme'].'://'.parse_url($dataSrc)['host'].parse_url($dataSrc)['path'];
+                                    }
+                                    if(isset($dataSrc)) {
+                                        // Lưu hình ảnh ở local storage
+                                        $imgName = array_reverse(explode ('/', $dataSrc))[0];
+                                        $imgExtension = 'image/' . array_reverse(explode('.', $imgName))[0];
+                                        $imgStoragePath = 'news/'.$post->id.'/'.$imgName;
+                                        // $storagePathThumbnail = 'storage/news/'.$post->id.'/'.$imgName;
+                                        $this->saveImage($dataSrc, $imgStoragePath);
+                                        // Kết thúc lưu hình ảnh ở local storage
 
-                                    $fileUpload = new \Illuminate\Http\UploadedFile(Storage::path($imgStoragePath), $imgName, $imgExtension, null, true);
-                                    \RvMedia::handleUpload($fileUpload, $folder->id);
+                                        $fileUpload = new \Illuminate\Http\UploadedFile(Storage::path($imgStoragePath), $imgName, $imgExtension, null, true);
+                                        \RvMedia::handleUpload($fileUpload, $folder->id);
+                                    }
+                                    $tag->setAttribute('loading', 'lazy');
+                                    $tag->setAttribute('src', get_image_url($imgStoragePath));
+                                    $tag->setAttribute('data-src', get_image_url($imgStoragePath));
+                                    $tag->parentNode->removeAttribute('class');
+                                }else {
+                                    $imgKit = $imageTags->item($kit);
+                                    $imgKit->parentNode->removeChild($imgKit);
                                 }
-                                $tag->setAttribute('loading', 'lazy');
-                                $tag->setAttribute('src', get_image_url($imgStoragePath));
-                                $tag->setAttribute('data-src', get_image_url($imgStoragePath));
-                                $tag->parentNode->removeAttribute('class');
+
                             }
                             $dom = $doc->saveHTML();
                             $dom = preg_replace('/style=".*?"/', '', $dom);
