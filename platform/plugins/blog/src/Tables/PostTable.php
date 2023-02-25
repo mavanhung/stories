@@ -178,6 +178,7 @@ class PostTable extends TableAbstract
                 'name'  => 'posts.name',
                 'title' => trans('core/base::tables.name'),
                 'class' => 'text-left',
+                'width' => '250px',
             ],
             'updated_at' => [
                 'name'      => 'posts.updated_at',
