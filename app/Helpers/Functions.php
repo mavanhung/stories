@@ -645,7 +645,7 @@ trait Functions
                         $doc->loadHTML('<?xml encoding="UTF-8">' . $c, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
                         $imageTags = $doc->getElementsByTagName('img');
                         $noscripts = $doc->getElementsByTagName('noscript');
-                        $src = '';
+                        // $src = '';
 
                         foreach($imageTags as $tag) {
                             $src = $tag->getAttribute('src');
