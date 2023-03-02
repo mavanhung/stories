@@ -647,9 +647,10 @@ trait Functions
                         $noscripts = $doc->getElementsByTagName('noscript');
                         // $src = '';
 
-                        foreach($imageTags as $tag) {
-                            $src = $tag->getAttribute('src');
-                        }
+                        // foreach($imageTags as $tag) {
+                        //     $src = $tag->getAttribute('src');
+                        // }
+                        $src = $imageTags[1]->getAttribute('src');
                         dump($src);
                         $imgExists = $this->remoteFileExists($src);
                         if($imgExists){
