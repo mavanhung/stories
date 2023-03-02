@@ -546,8 +546,8 @@ trait Functions
                                 ->each(function (Crawler $node) {
                                     return $node->outerHtml();
                                 });
-                                $content = preg_replace('/id=".*?"/', '', $content);
-            $description = mb_substr(strip_tags($content[0]), 0, 300, 'utf-8');
+                                // $content = preg_replace('/id=".*?"/', '', $content);
+            // $description = mb_substr(strip_tags($content[0]), 0, 300, 'utf-8');
             $data = [];
             $slug_components = parse_url($url);
             $slug_components = explode('/', $slug_components['path'])[1];
