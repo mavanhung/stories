@@ -650,8 +650,8 @@ trait Functions
                         // foreach($imageTags as $tag) {
                         //     $src = $tag->getAttribute('src');
                         // }
-                        $src = $imageTags[1]->getAttribute('src');
-                        dump($imageTags, $src);
+                        // $src = $imageTags[1]->getAttribute('src');
+                        dump($c);
                         $imgExists = $this->remoteFileExists($src);
                         // if($imgExists){
                         //     if(isset(parse_url($src)['query'])) {
