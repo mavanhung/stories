@@ -46,7 +46,10 @@ class BlogService
                     ->getFirstBy($condition, ['*'],
                         ['categories', 'tags', 'slugable', 'categories.slugable', 'tags.slugable']);
 
-                $commentsCount = Comment::where('posts_id', $slug->reference_id)->get()->count();
+                $commentsCount = Comment::where('posts_id', $slug->reference_id)
+                                        ->whereStatus(BaseStatusEnum::PUBLISHED)
+                                        ->get()
+                                        ->count();
 
                 if (empty($post)) {
                     abort(404);

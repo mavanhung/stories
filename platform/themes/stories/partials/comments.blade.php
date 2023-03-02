@@ -37,7 +37,7 @@
                 <div class="form-group">
                     <script type="text/x-custom-template" id="review-image-template">
                         <span class="image-viewer__item" data-id="__id__">
-                            <img src="https://nest.botble.com/vendor/core/core/base/images/placeholder.png" alt="Preview" class="img-responsive d-block">
+                            <img src="{{ Theme::asset()->url('images/placeholder.png') }}" alt="Preview" class="img-responsive d-block">
                             <span class="image-viewer__icon-remove">
                                 <i class="fa fa-times"></i>
                             </span>
@@ -260,7 +260,7 @@
             </div>
         </div>
     </form>
-    <h2 class="comments-title">Bình luận ({{ $commentsCount }})</h2>
+    <h2 class="comments-title">Bình luận (<span class="comments-count">{{ $commentsCount }}</span>)</h2>
     <div class="be-comment-wrapper">
         {{-- <div class="be-comment">
             <div class="be-img-comment">

@@ -209,6 +209,7 @@ $(document).ready(function () {
                         setImagesFormReview(input);
                     }
                     $('.be-comment-wrapper').prepend(res.data);
+                    $('.comments-count').text(Number($('.comments-count').text()) + 1);
                     showSuccess('Thêm bình luận thành công!');
                 } else {
                     showError(res.message);
