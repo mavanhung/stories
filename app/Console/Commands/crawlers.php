@@ -40,9 +40,32 @@ class crawlers extends Command
      */
     public function handle()
     {
-        // $this->crawlersPhongReviews();
-        $this->crawlersTrustReview();
-        // $this->crawlersPhongReviewsDetail(22, 'https://phongreviews.com/may-scan-hp/', 'https://phongreviews.com/wp-content/uploads/2021/08/may-scan-hp-8-1536x960.jpg');
+        // https://phongreviews.com/sua-rua-mat-sk-ii/    click
+        // https://phongreviews.com/son-espoir/   rutgon
+        // https://phongreviews.com/laptop-acer/   tiki.vn
+        // https://phongreviews.com/tai-nghe-nhet-tai/   NO
+        // https://phongreviews.com/tai-nghe-chup-tai/
+        // https://phongreviews.com/ban-phim-co-gia-re/
+        // https://phongreviews.com/may-duoi-chuot/
+        // https://phongreviews.com/loa-hat-karaoke-di-dong/
+        // https://phongreviews.com/may-ghi-am-tot/
+        // https://phongreviews.com/bo-kich-song-wifi-nao-tot/
+        // https://phongreviews.com/may-in-mau-nao-tot/
+        // https://phongreviews.com/workstation-laptop-tot-nhat/
+        // https://phongreviews.com/nen-mua-may-doc-sach-nao/
+        // https://phongreviews.com/bo-phat-wifi-3g-4g-nao-tot/
+        // https://phongreviews.com/nen-mua-android-tv-box-nao-tot-nhat/
+
+        // https://phongreviews.com/may-rua-mat-emmie/ shorten.asia
+
+        //ERROR
+        // https://phongreviews.com/tu-dong-mini/
+        // https://phongreviews.com/may-chieu-mini/
+
+
+        $this->crawlersPhongReviews();
+        // $this->crawlersTrustReview();
+        // $this->crawlersPhongReviewsDetail(32, 'https://phongreviews.com/may-chieu-mini/', 'https://phongreviews.com/wp-content/uploads/2021/08/may-scan-hp-8-1536x960.jpg');
         return 0;
     }
 }

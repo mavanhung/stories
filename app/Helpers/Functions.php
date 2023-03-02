@@ -210,6 +210,103 @@ trait Functions
         }
     }
 
+    public function removeSizeImgSrc($src)
+    {
+        $arr = explode('-', $src);
+        $ext = '.'.array_reverse(explode('.', $src))[0];
+        if(count($arr) > 1){
+            $arrAfter = array_slice($arr, 0, count($arr) -1);
+            $srcAfter = implode('-', $arrAfter) . $ext;
+            $exists = $this->remoteFileExists($srcAfter);
+            if(!$exists){
+                return $src;
+            }
+            return $srcAfter;
+        }
+        return $src;
+    }
+
+    public function getBeforeUrlAffiliatePhongReview($href, $baseHref, $baseHrefCheck)
+    {
+        if(!(strpos($baseHrefCheck, 'https://ti.ki') === false)){
+            $urlAffiliate = '';
+            $url_components = parse_url($baseHref);
+            parse_str($url_components['query'], $params);
+            $urlAffiliate = $params['TIKI_URI'];
+            $campaignId = '4348614231480407268';
+        }else if(!(strpos($baseHrefCheck, 'https://shopee.vn/search') === false)){
+            $urlAffiliate = '';
+            $url_components = parse_url($baseHref);
+            parse_str($url_components['query'], $params);
+            $keyword = urlencode($params['keyword']);
+            $urlAffiliate = $url_components['scheme'] .'://'. $url_components['host'] . $url_components['path'] . '?keyword=' . $keyword;
+            $campaignId = '4751584435713464237';
+        }else if(!(strpos($baseHrefCheck, 'https://shopee.vn') === false)){
+            $urlAffiliate = '';
+            $url_components = parse_url($baseHref);
+            $urlAffiliate = $url_components['scheme'] .'://'. $url_components['host'] . $url_components['path'];
+            $campaignId = '4751584435713464237';
+        }else if(!(strpos($baseHrefCheck, 'https://click.accesstrade.vn') === false)) {
+            $urlAffiliate = '';
+            $url_components = parse_url($baseHref);
+            parse_str($url_components['query'], $params);
+            if(isset($params['url'])){
+                $url_components1 = parse_url($params['url']);
+                if(!empty($url_components1['query'])) {
+                    parse_str($url_components1['query'], $params);
+                    $urlAffiliate = $params['url'];
+                }else {
+                    $urlAffiliate = $params['url'];
+                }
+                $campaignId = '5127144557053758578';
+            }
+        }else if(!(strpos($baseHrefCheck, 'https://rutgon.me') === false)){
+            $urlAffiliate = '';
+            $url_components = parse_url($baseHref);
+            parse_str($url_components['query'], $params);
+            if(isset($params['url'])){
+                // $urlAffiliate = $params['url'];
+                $baseHrefBase = $params['url'];
+                $baseHrefBaseCheck = substr($baseHrefBase, 0, 36);
+                $result = $this->getBeforeUrlAffiliatePhongReview($baseHrefBase, $baseHrefBase, $baseHrefBaseCheck);
+                $urlAffiliate = $result['urlAffiliate'];
+                $campaignId = $result['campaignId'];
+            }
+        }else if(!(strpos($baseHrefCheck, 'https://tiki.vn/search') === false)){
+            $urlAffiliate = '';
+            $urlAffiliate = $baseHref;
+            $campaignId = '4348614231480407268';
+        }else if(!(strpos($baseHrefCheck, 'https://tiki.vn') === false)){
+            $urlAffiliate = '';
+            $url_components = parse_url($href);
+            $urlAffiliate = $url_components['scheme'] .'://'. $url_components['host'] . $url_components['path'];
+            $campaignId = '4348614231480407268';
+        }else if(!(strpos($baseHrefCheck, 'https://shorten.asia') === false)){
+            $urlAffiliate = '';
+            $base = 'https://'.array_reverse(explode('https://',$baseHref))[0];
+            $client = new Client();
+            $crawlerBase = $client->request('GET', $base);
+            $baseHrefBase = $crawlerBase->getBaseHref();
+            $baseHrefBaseCheck = substr($baseHrefBase, 0, 36);
+            $result = $this->getBeforeUrlAffiliatePhongReview($href, $baseHrefBase, $baseHrefBaseCheck);
+            $urlAffiliate = $result['urlAffiliate'];
+            $campaignId = $result['campaignId'];
+        }else if(!(strpos($baseHrefCheck, 'https://www.lazada.vn') === false)){
+            $urlAffiliate = '';
+            $urlAffiliate = $baseHref;
+            $campaignId = '5127144557053758578';
+        }else if(!(strpos($baseHrefCheck, 'https://go.isclix.com') === false)){
+            //Sẽ ko có urlAffiliate vì hết hàng hoặc lỗi link
+        }else {
+            dump('NO: '.$baseHrefCheck);
+        }
+
+        return [
+            'urlAffiliate' => !empty($urlAffiliate) ? $urlAffiliate : '',
+            'campaignId' => !empty($campaignId) ? $campaignId : ''
+        ];
+    }
+
     public function crawlersPhongReviews()
     {
         // Ghi chú
@@ -231,20 +328,20 @@ trait Functions
             //         'https://phongreviews.com/chuyen-muc/suc-khoe/'
             //     ]
             // ],
-            [
-                'category_id' => 20,
-                'page' => 52,
-                'url' => [
-                    'https://phongreviews.com/chuyen-muc/do-gia-dung/'
-                ]
-            ],
-            [
-                'category_id' => 23,
-                'page' => 29,
-                'url' => [
-                    'https://phongreviews.com/chuyen-muc/nha-cua-doi-song/'
-                ]
-            ],
+            // [
+            //     'category_id' => 20,
+            //     'page' => 52,
+            //     'url' => [
+            //         'https://phongreviews.com/chuyen-muc/do-gia-dung/'
+            //     ]
+            // ],
+            // [
+            //     'category_id' => 23,
+            //     'page' => 29,
+            //     'url' => [
+            //         'https://phongreviews.com/chuyen-muc/nha-cua-doi-song/'
+            //     ]
+            // ],
             [
                 'category_id' => 37,
                 'page' => 4,
@@ -252,13 +349,13 @@ trait Functions
                     'https://phongreviews.com/chuyen-muc/the-thao-da-ngoai/'
                 ]
             ],
-            [
-                'category_id' => 21,
-                'page' => 24,
-                'url' => [
-                    'https://phongreviews.com/chuyen-muc/me-be/'
-                ]
-            ],
+            // [
+            //     'category_id' => 21,
+            //     'page' => 24,
+            //     'url' => [
+            //         'https://phongreviews.com/chuyen-muc/me-be/'
+            //     ]
+            // ],
             // [
             //     'category_id' => 1,
             //     'page' => 27,
@@ -296,14 +393,14 @@ trait Functions
             // ],
             // [
             //     'category_id' => 1,
-            //     'page' => 200,
+            //     'page' => 12,
             //     'url' => [
             //         'https://phongreviews.com/chuyen-muc/giai-tri/sach-va-truyen/'
             //     ]
             // ],
             // [
             //     'category_id' => 1,
-            //     'page' => 200,
+            //     'page' => 9,
             //     'url' => [
             //         'https://phongreviews.com/chuyen-muc/giai-tri/review-phim/'
             //     ]
@@ -317,7 +414,7 @@ trait Functions
             // ],
             // [
             //     'category_id' => 18,
-            //     'page' => 200,
+            //     'page' => 1,
             //     'url' => [
             //         'https://phongreviews.com/chuyen-muc/than-so-hoc/'
             //     ]
@@ -364,6 +461,7 @@ trait Functions
                                 $text = explode(')', $text[1]);
                                 if(count($text) > 1) {
                                     $thumbnail = $text[0];
+                                    $thumbnail = $this->removeSizeImgSrc($thumbnail);
                                 }
                             }
                             return [
@@ -379,6 +477,7 @@ trait Functions
                         function (Crawler $node) {
                             $url = $node->filter('a.elementor-post__thumbnail__link')->attr('href');
                             $thumbnail = $node->filter('.elementor-post__thumbnail img')->attr('data-src');
+                            $thumbnail = $this->removeSizeImgSrc($thumbnail);
                             return [
                                 'href' => $url,
                                 'thumbnail' => $thumbnail
@@ -386,144 +485,264 @@ trait Functions
                         }
                     );
                     $data = array_merge($data, $result2);
+                    for ($m=0; $m < count($data); $m++) {
+                        $this->crawlersPhongReviewsDetail($value['category_id'], $data[$m]['href'], $data[$m]['thumbnail']);
+                    }
                 }
             }
-            $UrlList[$key]['url_item'] = $data;
+            // $UrlList[$key]['url_item'] = $data;
         }
 
-        foreach ($UrlList as $valueUrlList) {
-            foreach ($valueUrlList['url_item'] as $valueUrlItem) {
-                $this->crawlersPhongReviewsDetail($valueUrlList['category_id'], $valueUrlItem['href'], $valueUrlItem['thumbnail']);
-            }
-        }
+        // foreach ($UrlList as $valueUrlList) {
+        //     foreach ($valueUrlList['url_item'] as $k => $valueUrlItem) {
+        //         $this->crawlersPhongReviewsDetail($valueUrlList['category_id'], $valueUrlItem['href'], $valueUrlItem['thumbnail']);
+        //     }
+        // }
     }
 
     public function crawlersPhongReviewsDetail($categoryId, $url, $urlThumbnail)
     {
-        dump($url);
-        $client = new Client();
-        $crawler = $client->request('GET', $url);
+        try {
+            DB::beginTransaction();
+            dump($url);
+            $client = new Client();
+            $crawler = $client->request('GET', $url);
 
-        //Lấy tiêu đề bài viết
-        $title = $crawler->filter('article.post-inner .rh_post_layout_compact .single_top_main')
-                        ->each(function (Crawler $node) {
-                            return $node->filter('h1')->text();
-                        });
-
-        //Lấy nội dung html cần lưu (đã loại trừ những thẻ không cần thiết)
-        $content = $crawler->filter('article.post-inner')
-                            ->children()
-                            ->reduce(function (Crawler $node) {
-                                $check = strpos($node->attr('class'), 'rh_post_layout_compact');
-                                return $check === false ? true : false;
-                            })
-                            ->reduce(function (Crawler $node) {
-                                $check = strpos($node->attr('class'), 'wpsm-titlebox');
-                                return $check === false ? true : false;
-                            })
-                            ->reduce(function (Crawler $node) {
-                                $check = strpos($node->attr('class'), 'google-auto-placed');
-                                return $check === false ? true : false;
-                            })
-                            ->reduce(function (Crawler $node) {
-                                $check = strpos($node->attr('class'), 'kk-star-ratings');
-                                return $check === false ? true : false;
-                            })
-                            ->reduce(function (Crawler $node) {
-                                $check = strpos($node->attr('class'), 'priced_block');
-                                return $check === false ? true : false;
-                            })
-                            ->reduce(function (Crawler $node) {
-                                $check = strpos($node->attr('style'), 'clear:both; margin-top:0em; margin-bottom:1em;');
-                                return $check === false ? true : false;
-                            })
+            //Lấy tiêu đề bài viết
+            $title = $crawler->filter('article.post-inner .rh_post_layout_compact .single_top_main')
                             ->each(function (Crawler $node) {
-                                return $node->outerHtml();
+                                return $node->filter('h1')->text();
                             });
 
-        foreach ($content as $keyContent =>  $contentValue) {
-            $arrContentValues = explode ( '<noscript>' , $contentValue);
-            if(count($arrContentValues) > 1) {
-                $contentValue1 = explode ( '<img' , $arrContentValues[0])[0];
-                $contentValue2 = implode('', explode ( '</noscript>' , $arrContentValues[1]));
-                $content[$keyContent] = $contentValue1.$contentValue2;
-            }
-        }
+            //Lấy nội dung html cần lưu (đã loại trừ những thẻ không cần thiết)
+            $content = $crawler->filter('article.post-inner')
+                                ->children()
+                                ->reduce(function (Crawler $node) {
+                                    $check = strpos($node->attr('class'), 'rh_post_layout_compact');
+                                    return $check === false ? true : false;
+                                })
+                                ->reduce(function (Crawler $node) {
+                                    $check = strpos($node->attr('class'), 'wpsm-titlebox');
+                                    return $check === false ? true : false;
+                                })
+                                ->reduce(function (Crawler $node) {
+                                    $check = strpos($node->attr('class'), 'google-auto-placed');
+                                    return $check === false ? true : false;
+                                })
+                                ->reduce(function (Crawler $node) {
+                                    $check = strpos($node->attr('class'), 'kk-star-ratings');
+                                    return $check === false ? true : false;
+                                })
+                                // ->reduce(function (Crawler $node) {
+                                //     $check = strpos($node->attr('class'), 'priced_block');
+                                //     return $check === false ? true : false;
+                                // })
+                                // ->reduce(function (Crawler $node) {
+                                //     $check = strpos($node->attr('style'), 'clear:both; margin-top:0em; margin-bottom:1em;');
+                                //     return $check === false ? true : false;
+                                // })
+                                ->each(function (Crawler $node) {
+                                    return $node->outerHtml();
+                                });
+                                $content = preg_replace('/id=".*?"/', '', $content);
+            $description = mb_substr(strip_tags($content[0]), 0, 300, 'utf-8');
+            $data = [];
+            $slug_components = parse_url($url);
+            $slug_components = explode('/', $slug_components['path'])[1];
+            $slug = Slug::where('Key', $slug_components)
+                                        ->where('reference_type', Post::class)
+                                        ->first();
 
-        $description = strip_tags($content[0]);
+            if(blank($slug)) {
+                $post = Post::create([
+                    'name' => $title[0],
+                    'description' => $description,
+                    'status' => 'pending',
+                    // 'status' => 'published',
+                    'author_id' => 1,
+                    'author_type' => User::class,
+                    'format_type' => 'default',
+                    'website' => 'phongreviews.com'
+                ]);
+                $folder = MediaFolder::where('slug', 'news')->first();
+                $folderChild = MediaFolder::where('parent_id', $folder->id)
+                                            ->where('slug', $post->id)
+                                            ->first();
+                if(blank($folderChild)) {
+                    $folder = \Botble\Media\Models\MediaFolder::create([
+                        'user_id' => 1,
+                        'name' => $post->id,
+                        'slug' => $post->id,
+                        'parent_id' => $folder->id
+                    ]);
+                }
+                //Tải và lưu hình ảnh thumbnail
+                if(isset($urlThumbnail) && $urlThumbnail != ''){
+                    // Lưu hình ảnh ở local storage
+                    $thumbnailName = array_reverse(explode ('/', $urlThumbnail))[0];
+                    $extension = 'image/' . array_reverse(explode('.', $thumbnailName))[0];
+                    $storagePath = 'news/'.$post->id.'/'.$thumbnailName;
+                    $this->saveImage($urlThumbnail, $storagePath);
+                    // Kết thúc lưu hình ảnh ở local storage
 
-        //Lấy đường dẫn hình ảnh cần lưu
-        $images = $crawler->filter('article.post-inner')
-                            ->children()
-                            ->reduce(function (Crawler $node) {
-                                $check = strpos($node->attr('class'), 'rh_post_layout_compact');
-                                return $check === false ? true : false;
-                            })
-                            ->reduce(function (Crawler $node) {
-                                $check = strpos($node->attr('class'), 'wpsm-titlebox');
-                                return $check === false ? true : false;
-                            })
-                            ->reduce(function (Crawler $node) {
-                                $check = strpos($node->attr('class'), 'google-auto-placed');
-                                return $check === false ? true : false;
-                            })
-                            ->reduce(function (Crawler $node) {
-                                $check = strpos($node->attr('class'), 'kk-star-ratings');
-                                return $check === false ? true : false;
-                            })
-                            ->reduce(function (Crawler $node) {
-                                $check = strpos($node->attr('class'), 'priced_block');
-                                return $check === false ? true : false;
-                            })
-                            ->reduce(function (Crawler $node) {
-                                $check = strpos($node->attr('style'), 'clear:both; margin-top:0em; margin-bottom:1em;');
-                                return $check === false ? true : false;
-                            })
-                            ->each(function (Crawler $node) {
-                                return $node->filter('img')
-                                            ->each(function (Crawler $node) {
-                                                return [
-                                                    'src' => $node->attr('src'),
-                                                    'srcset' => $node->attr('srcset'),
-                                                    'data-lazy-srcset' => $node->attr('data-lazy-srcset'),
-                                                    'data-lazy-src' => $node->attr('data-lazy-src')
-                                                ];
-                                            });
-                            });
-        $images = array_filter($images);
-        $listImage = [];
-        foreach ($images as $image) {
-            foreach ($image as $item) {
-                foreach ($item as $k => $it) {
-                    if(!blank($it)) {
-                        // if($k == 'srcset') {
-                            $srcsetArr = explode (', ', $it);
-                            if(count($srcsetArr) > 0){
-                                foreach ($srcsetArr as $srcsetArrItem) {
-                                    $srcsetArrItemUrl = explode (' ', $srcsetArrItem);
-                                    if(count($srcsetArrItemUrl) > 0){
-                                        if(!in_array($srcsetArrItemUrl[0], $listImage)) {
-                                            $listImage[] = $srcsetArrItemUrl[0];
-                                        }
-                                    }
-                                }
-                            }
-                        // }
-                    }
+                    $fileUpload = new \Illuminate\Http\UploadedFile(Storage::path($storagePath), $thumbnailName, $extension, null, true);
+                    \RvMedia::handleUpload($fileUpload, $folder->id);
+
+                    // Update lại thumbnail bài viết
+                    $post->update([
+                        'image' => $storagePath
+                    ]);
                 }
             }
+
+            if(isset($post)) {
+                foreach($content as $k => $c) {
+                    $checkBtn = strpos($c, 'class="priced_block clearfix"');
+                    $checkImg = strpos($c, '<img');
+                    $checkStyle = strpos($c, '<style>');
+                    if(!($checkBtn === false)){
+                        //Xử lý thẻ a
+                        $doc = new \DOMDocument();
+                        libxml_use_internal_errors(true);
+                        $doc->loadHTML('<?xml encoding="UTF-8">' . $c, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+                        $aTags = $doc->getElementsByTagName('a');
+                        $aTagsCustom = '';
+                        foreach($aTags as $aTag) {
+                            $href = $aTag->getAttribute('href');
+                            $client = new Client();
+                            $crawlerA = $client->request('GET', $href);
+                            $baseHref = $crawlerA->getBaseHref();
+                            $baseHrefCheck = substr($baseHref, 0, 36);
+                            $textContent = $aTag->textContent;
+
+                            // dump($href, $baseHref, $baseHrefCheck);
+
+                            $urlAffiliate = '';
+                            $campaignId = '';
+                            $dataBeforeUrlAffiliate = $this->getBeforeUrlAffiliatePhongReview($href, $baseHref, $baseHrefCheck);
+                            if(!empty($dataBeforeUrlAffiliate['urlAffiliate']) && !empty($dataBeforeUrlAffiliate['campaignId'])) {
+                                $urlAffiliate = $dataBeforeUrlAffiliate['urlAffiliate'];
+                                $campaignId = $dataBeforeUrlAffiliate['campaignId'];
+                            }
+
+                            if(isset($urlAffiliate)){
+                                $response = $this->getUrlAffiliate($urlAffiliate, $campaignId);
+                                if(isset($response) && isset($response['success'])) {
+                                    $resultUrlAffiliate = $response['data']['product_success_link'][0]['short_url'];
+                                    $aTagsCustom .= '<div class="div-btn"><a class="btn" href="'.$resultUrlAffiliate.'" target="_blank" rel="nofollow noopener">'.$textContent.'</a></div>';
+                                }
+                            }
+                        }
+                        if(!empty($aTagsCustom)){
+                            $data[] = $aTagsCustom;
+                        }
+                    }else if(!($checkImg === false)){
+                        // Xử lý thẻ img
+                        $doc = new \DOMDocument();
+                        libxml_use_internal_errors(true);
+                        $doc->loadHTML('<?xml encoding="UTF-8">' . $c, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+                        $imageTags = $doc->getElementsByTagName('img');
+                        $noscripts = $doc->getElementsByTagName('noscript');
+                        $src = '';
+
+                        foreach($imageTags as $tag) {
+                            $src = $tag->getAttribute('src');
+                        }
+                        $imgExists = $this->remoteFileExists($src);
+                        if($imgExists){
+                            if(isset(parse_url($src)['query'])) {
+                                $src = parse_url($src)['scheme'].'://'.parse_url($src)['host'].parse_url($src)['path'];
+                            }
+                            if(isset($src)) {
+                                // Lưu hình ảnh ở local storage
+                                $imgName = array_reverse(explode ('/', $src))[0];
+                                $imgExtension = 'image/' . array_reverse(explode('.', $imgName))[0];
+                                $imgStoragePath = 'news/'.$post->id.'/'.$imgName;
+                                // $storagePathThumbnail = 'storage/news/'.$post->id.'/'.$imgName;
+                                $this->saveImage($src, $imgStoragePath);
+                                // Kết thúc lưu hình ảnh ở local storage
+
+                                $fileUpload = new \Illuminate\Http\UploadedFile(Storage::path($imgStoragePath), $imgName, $imgExtension, null, true);
+                                \RvMedia::handleUpload($fileUpload, $folder->id);
+                            }
+                            $imageTags[0]->setAttribute('loading', 'lazy');
+                            $imageTags[0]->setAttribute('src', get_image_url($imgStoragePath));
+                            $imageTags[0]->setAttribute('data-src', get_image_url($imgStoragePath));
+                        }
+                        foreach($noscripts as $nos => $noscr) {
+                            $noscript = $noscripts->item($nos);
+                            $noscript->parentNode->removeChild($noscript);
+                        }
+                        $dom = $doc->saveHTML();
+                        $dom = preg_replace('/style=".*?"/', '', $dom);
+                        $dom = preg_replace('/class=".*?"/', '', $dom);
+                        $dom = preg_replace('/data-lazy-srcset=".*?"/', '', $dom);
+                        $dom = preg_replace('/data-lazy-sizes=".*?"/', '', $dom);
+                        $dom = preg_replace('/data-lazy-src=".*?"/', '', $dom);
+                        $dom = preg_replace('/data-was-processed=".*?"/', '', $dom);
+                        $dom = preg_replace('/sizes=".*?"/', '', $dom);
+                        $dom = preg_replace('/srcset=".*?"/', '', $dom);
+                        if($imgExists){
+                            $data[] = $dom;
+                        }
+                    }else if(!($checkStyle === false)){
+                        //Xóa thẻ style
+                        $doc = new \DOMDocument();
+                        libxml_use_internal_errors(true);
+                        $doc->loadHTML('<?xml encoding="UTF-8">' . $c, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+                        $aTags = $doc->getElementsByTagName('a');
+                        $spans = $doc->getElementsByTagName('span');
+                        $href = '';
+                        $text = '';
+                        foreach($spans as $span) {
+                            $text .= ' '.$span->textContent;
+                        }
+                        foreach($aTags as $aTag) {
+                            $href = $aTag->getAttribute('href');
+                        }
+                        $href = str_replace('phongreviews', 'xoaichua', $href);
+                        $res = '<div class="btn-a-custom"><a href="'.$href.'" target="_blank" rel="dofollow">'.$text.'</a></div>';
+                        $data[] = $res;
+                    }else {
+                        $c = preg_replace('/style=".*?"/', '', $c);
+                        $c = preg_replace('/class=".*?"/', '', $c);
+                        $search = ['phongreviews.com', 'phongreviews', 'PhongReviews', 'Phongreviews', 'Phong Reviews', 'Phong reviews', 'phong reviews', '.html'];
+                        $replace = ['xoaichua.com', 'xoaichua', 'XoaiChua', 'XoaiChua', 'XoaiChua', 'XoaiChua', 'XoaiChua', ''];
+                        $data[] = str_replace($search, $replace, $c);
+                    }
+                }
+                //Lưu vào DB
+                $post->update([
+                    'description' => $description,
+                    'content' => implode('', $data)
+                ]);
+                PostCategory::create([
+                    'category_id' => $categoryId,
+                    'post_id' => $post->id
+                ]);
+                Slug::create([
+                    'key' => $slug_components,
+                    'reference_id' => $post->id,
+                    'reference_type' => Post::class
+                ]);
+                LanguageMeta::create([
+                    'lang_meta_code' => 'vi',
+                    'lang_meta_origin' =>  md5($post->id . Post::class . time()),
+                    'reference_id' => $post->id,
+                    'reference_type' => Post::class
+                ]);
+            }
+            DB::commit();
+            return true;
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            $this->error('Có lỗi xảy ra: '.$th->getMessage().', file: '.$th->getFile().', dòng: '.$th->getLine());
+            Log::channel('Crawlers')->error([
+                $th->getMessage(),
+                $th->getFile(),
+                $th->getLine()
+            ]);
         }
-        $slug = array_reverse(explode ('/', $url))[1];
-        $data = [
-            'category_id' => $categoryId,
-            'name' => count($title) > 0 ? $title[0] : '',
-            'description' => $description,
-            'content' => $content,
-            'thumbnail' => $urlThumbnail,
-            'slug' => $slug,
-            'images' => $listImage
-        ];
-        $this->saveDB($data);
     }
 
     public function crawlersTrustReview()
@@ -910,7 +1129,7 @@ trait Functions
                     }
                     //Lưu vào DB
                     $post->update([
-                        'description' => strip_tags($data[0]),
+                        'description' => mb_substr(strip_tags($data[0]), 0, 300, 'utf-8'),
                         'content' => implode('', $data)
                     ]);
                     PostCategory::create([
@@ -1270,7 +1489,7 @@ trait Functions
                 "campaign_id": "'. $campaignId .'"
             }',
             CURLOPT_HTTPHEADER => array(
-                'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2Nzc1MzI3MDcsImlhdCI6MTY3NzAzMjcwNywibmJmIjoxNjc3MDMyNzA3LCJqdGkiOiIyMDIzLTAyLTIyIDAyOjI1OjA3LjM4NDY3Nl82MTI2NDUxMzAzNzIxMDU5NTY2IiwiaWRlbnRpdHkiOnsiaWQiOiI2MDc5MDY2MzMyMDM3ODc5NjcxIiwic3NvX2lkIjo1NTE5NzMzLCJsb2dpbl9uYW1lIjoiaHVuZ19tdl85NSIsImZvbGxvd2VyIjpudWxsLCJsb2dpbl9uYW1lX3NzbyI6Imh1bmdfbXZfOTUiLCJ0b2tlbl9wcm9maWxlIjoiZGQwNGNhZGEtYjNkZi00ODA4LTk1MjgtNzk0OTIyYjQ0NjRmIiwiZW1haWwiOiJtYXZhbmh1bmcyNzA5OTVAZ21haWwuY29tIiwiZmlyc3RfbmFtZSI6IlZcdTAxMDNuIEhcdTAxYjBuZyIsImxhc3RfbmFtZSI6Ik1cdTAwZTMiLCJkYXRlX2JpcnRoIjoiMTk5NS0wOS0yNyIsImFnZW5jeSI6ZmFsc2UsIl9hdF9pZCI6IjEzODIyMzkiLCJpc0ZyYW1lIjpmYWxzZSwidXNlcm5hbWUiOiJodW5nX212Xzk1IiwicGhvbmUiOiIrODQzNDQyNDI2NzkiLCJhZGRyZXNzIjoiXHUxZWE0cCBQaFx1MDFiMFx1MWVkYmMgVFx1MDBlMm4sIFRcdTAwZTJuIFBoXHUwMWIwXHUxZWRiYywgXHUwMTEwXHUxZWQzbmcgUGhcdTAwZmEsIEJcdTAwZWNuaCBQaFx1MDFiMFx1MWVkYmMiLCJnZW5kZXIiOjEsImN0aW1lIjoiIiwiZGVzY3JpcHRpb24iOiIiLCJhdmF0YXIiOiIiLCJtb2RlbCI6IiJ9fQ.B3fX2ihivT8aUIKDjq0UuXVvy0AMfTadvG20rL55uTc',
+                'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2Nzc4MDExODQsImlhdCI6MTY3NzMwMTE4NCwibmJmIjoxNjc3MzAxMTg0LCJqdGkiOiIyMDIzLTAyLTI1IDA0OjU5OjQ0LjkxNDkxOF82MTI4NzAzNDU2NDgzMDQzNDkwIiwiaWRlbnRpdHkiOnsiaWQiOiI2MDc5MDY2MzMyMDM3ODc5NjcxIiwic3NvX2lkIjo1NTE5NzMzLCJsb2dpbl9uYW1lIjoiaHVuZ19tdl85NSIsImZvbGxvd2VyIjpudWxsLCJsb2dpbl9uYW1lX3NzbyI6Imh1bmdfbXZfOTUiLCJ0b2tlbl9wcm9maWxlIjoiMjc5OWE0NTQtNWU4Yy00MjIxLTljMTUtYjQ4MmI0OTA4NGExIiwiZW1haWwiOiJtYXZhbmh1bmcyNzA5OTVAZ21haWwuY29tIiwiZmlyc3RfbmFtZSI6IlZcdTAxMDNuIEhcdTAxYjBuZyIsImxhc3RfbmFtZSI6Ik1cdTAwZTMiLCJkYXRlX2JpcnRoIjoiMTk5NS0wOS0yNyIsImFnZW5jeSI6ZmFsc2UsIl9hdF9pZCI6IjEzODIyMzkiLCJpc0ZyYW1lIjpmYWxzZSwidXNlcm5hbWUiOiJodW5nX212Xzk1IiwicGhvbmUiOiIrODQzNDQyNDI2NzkiLCJhZGRyZXNzIjoiXHUxZWE0cCBQaFx1MDFiMFx1MWVkYmMgVFx1MDBlMm4sIFRcdTAwZTJuIFBoXHUwMWIwXHUxZWRiYywgXHUwMTEwXHUxZWQzbmcgUGhcdTAwZmEsIEJcdTAwZWNuaCBQaFx1MDFiMFx1MWVkYmMiLCJnZW5kZXIiOjEsImN0aW1lIjoiIiwiZGVzY3JpcHRpb24iOiIiLCJhdmF0YXIiOiIiLCJtb2RlbCI6IiJ9fQ.Temla4K-r__nJ59fQ5tEh5sOJ6tUTFeuu0ZJ1L_As5Q',
                 'Content-Type: application/json'
             ),
         ));
