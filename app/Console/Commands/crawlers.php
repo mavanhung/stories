@@ -63,9 +63,9 @@ class crawlers extends Command
         // https://phongreviews.com/may-chieu-mini/
 
 
-        $this->crawlersPhongReviews();
+        // $this->crawlersPhongReviews();
         // $this->crawlersTrustReview();
-        // $this->crawlersPhongReviewsDetail(32, 'https://phongreviews.com/may-chieu-mini/', 'https://phongreviews.com/wp-content/uploads/2021/08/may-scan-hp-8-1536x960.jpg');
+        $this->crawlersPhongReviewsDetail(37, 'https://phongreviews.com/dung-cu-tap-yoga/', 'https://phongreviews.com/wp-content/uploads/2022/06/dung-cu-tap-yoga-336x220.jpg');
         return 0;
     }
 }

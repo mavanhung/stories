@@ -343,7 +343,7 @@ trait Functions
             //     ]
             // ],
             [
-                'category_id' => 37,
+                'category_id' => 32,
                 'page' => 4,
                 'url' => [
                     'https://phongreviews.com/chuyen-muc/the-thao-da-ngoai/'
@@ -648,6 +648,7 @@ trait Functions
                         foreach($imageTags as $tag) {
                             $src = $tag->getAttribute('src');
                         }
+                        dump($src);
                         $imgExists = $this->remoteFileExists($src);
                         if($imgExists){
                             if(isset(parse_url($src)['query'])) {
@@ -711,6 +712,7 @@ trait Functions
                         $data[] = str_replace($search, $replace, $c);
                     }
                 }
+                // dd($data);
                 //Lưu vào DB
                 $post->update([
                     'description' => $description,
