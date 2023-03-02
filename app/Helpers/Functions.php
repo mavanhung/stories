@@ -509,6 +509,7 @@ trait Functions
             dump($url);
             $client = new Client();
             $crawler = $client->request('GET', $url);
+            dd($crawler);
 
             //Lấy tiêu đề bài viết
             $title = $crawler->filter('article.post-inner .rh_post_layout_compact .single_top_main')
