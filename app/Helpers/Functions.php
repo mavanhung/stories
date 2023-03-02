@@ -446,7 +446,7 @@ trait Functions
         //Lấy đường dẫn chi tiết tin
         foreach ($UrlList as $key => $value) {
             $data = [];
-            foreach ($value['url'] as $item) {
+            foreach (array_reverse($value['url']) as $item) {
                 $crawler = $client->request('GET', $item);
                 $baseHref = $crawler->getBaseHref(); //Lấy getBaseHref của client trả về để so sánh với page url vì nếu quá page nó sẽ redirect về trang chủ phongreviews
                 if($item == $baseHref) {
@@ -485,6 +485,7 @@ trait Functions
                         }
                     );
                     $data = array_merge($data, $result2);
+                    $data = array_reverse($data);
                     for ($m=0; $m < count($data); $m++) {
                         $this->crawlersPhongReviewsDetail($value['category_id'], $data[$m]['href'], $data[$m]['thumbnail']);
                     }
