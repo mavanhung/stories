@@ -60,8 +60,6 @@ trait Functions
 
         curl_close($curl);
 
-        dump('abc: '.$url, $ret);
-
         return $ret;
     }
 
@@ -345,7 +343,7 @@ trait Functions
             //     ]
             // ],
             [
-                'category_id' => 32,
+                'category_id' => 37,
                 'page' => 4,
                 'url' => [
                     'https://phongreviews.com/chuyen-muc/the-thao-da-ngoai/'
@@ -546,98 +544,98 @@ trait Functions
                                 ->each(function (Crawler $node) {
                                     return $node->outerHtml();
                                 });
-                                // $content = preg_replace('/id=".*?"/', '', $content);
-            // $description = mb_substr(strip_tags($content[0]), 0, 300, 'utf-8');
+                                $content = preg_replace('/id=".*?"/', '', $content);
+            $description = mb_substr(strip_tags($content[0]), 0, 300, 'utf-8');
             $data = [];
             $slug_components = parse_url($url);
             $slug_components = explode('/', $slug_components['path'])[1];
-            // $slug = Slug::where('Key', $slug_components)
-            //                             ->where('reference_type', Post::class)
-            //                             ->first();
+            $slug = Slug::where('Key', $slug_components)
+                                        ->where('reference_type', Post::class)
+                                        ->first();
 
-            // if(blank($slug)) {
-            //     $post = Post::create([
-            //         'name' => $title[0],
-            //         'description' => $description,
-            //         'status' => 'pending',
-            //         // 'status' => 'published',
-            //         'author_id' => 1,
-            //         'author_type' => User::class,
-            //         'format_type' => 'default',
-            //         'website' => 'phongreviews.com'
-            //     ]);
-            //     $folder = MediaFolder::where('slug', 'news')->first();
-            //     $folderChild = MediaFolder::where('parent_id', $folder->id)
-            //                                 ->where('slug', $post->id)
-            //                                 ->first();
-            //     if(blank($folderChild)) {
-            //         $folder = \Botble\Media\Models\MediaFolder::create([
-            //             'user_id' => 1,
-            //             'name' => $post->id,
-            //             'slug' => $post->id,
-            //             'parent_id' => $folder->id
-            //         ]);
-            //     }
-            //     //Tải và lưu hình ảnh thumbnail
-            //     if(isset($urlThumbnail) && $urlThumbnail != ''){
-            //         // Lưu hình ảnh ở local storage
-            //         $thumbnailName = array_reverse(explode ('/', $urlThumbnail))[0];
-            //         $extension = 'image/' . array_reverse(explode('.', $thumbnailName))[0];
-            //         $storagePath = 'news/'.$post->id.'/'.$thumbnailName;
-            //         $this->saveImage($urlThumbnail, $storagePath);
-            //         // Kết thúc lưu hình ảnh ở local storage
+            if(blank($slug)) {
+                $post = Post::create([
+                    'name' => $title[0],
+                    'description' => $description,
+                    'status' => 'pending',
+                    // 'status' => 'published',
+                    'author_id' => 1,
+                    'author_type' => User::class,
+                    'format_type' => 'default',
+                    'website' => 'phongreviews.com'
+                ]);
+                $folder = MediaFolder::where('slug', 'news')->first();
+                $folderChild = MediaFolder::where('parent_id', $folder->id)
+                                            ->where('slug', $post->id)
+                                            ->first();
+                if(blank($folderChild)) {
+                    $folder = \Botble\Media\Models\MediaFolder::create([
+                        'user_id' => 1,
+                        'name' => $post->id,
+                        'slug' => $post->id,
+                        'parent_id' => $folder->id
+                    ]);
+                }
+                //Tải và lưu hình ảnh thumbnail
+                if(isset($urlThumbnail) && $urlThumbnail != ''){
+                    // Lưu hình ảnh ở local storage
+                    $thumbnailName = array_reverse(explode ('/', $urlThumbnail))[0];
+                    $extension = 'image/' . array_reverse(explode('.', $thumbnailName))[0];
+                    $storagePath = 'news/'.$post->id.'/'.$thumbnailName;
+                    $this->saveImage($urlThumbnail, $storagePath);
+                    // Kết thúc lưu hình ảnh ở local storage
 
-            //         $fileUpload = new \Illuminate\Http\UploadedFile(Storage::path($storagePath), $thumbnailName, $extension, null, true);
-            //         \RvMedia::handleUpload($fileUpload, $folder->id);
+                    $fileUpload = new \Illuminate\Http\UploadedFile(Storage::path($storagePath), $thumbnailName, $extension, null, true);
+                    \RvMedia::handleUpload($fileUpload, $folder->id);
 
-            //         // Update lại thumbnail bài viết
-            //         $post->update([
-            //             'image' => $storagePath
-            //         ]);
-            //     }
-            // }
-            dd($content);
-            // if(isset($post)) {
+                    // Update lại thumbnail bài viết
+                    $post->update([
+                        'image' => $storagePath
+                    ]);
+                }
+            }
+
+            if(isset($post)) {
                 foreach($content as $k => $c) {
                     $checkBtn = strpos($c, 'class="priced_block clearfix"');
                     $checkImg = strpos($c, '<img');
                     $checkStyle = strpos($c, '<style>');
                     if(!($checkBtn === false)){
-                        // //Xử lý thẻ a
-                        // $doc = new \DOMDocument();
-                        // libxml_use_internal_errors(true);
-                        // $doc->loadHTML('<?xml encoding="UTF-8">' . $c, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
-                        // $aTags = $doc->getElementsByTagName('a');
-                        // $aTagsCustom = '';
-                        // foreach($aTags as $aTag) {
-                        //     $href = $aTag->getAttribute('href');
-                        //     $client = new Client();
-                        //     $crawlerA = $client->request('GET', $href);
-                        //     $baseHref = $crawlerA->getBaseHref();
-                        //     $baseHrefCheck = substr($baseHref, 0, 36);
-                        //     $textContent = $aTag->textContent;
+                        //Xử lý thẻ a
+                        $doc = new \DOMDocument();
+                        libxml_use_internal_errors(true);
+                        $doc->loadHTML('<?xml encoding="UTF-8">' . $c, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+                        $aTags = $doc->getElementsByTagName('a');
+                        $aTagsCustom = '';
+                        foreach($aTags as $aTag) {
+                            $href = $aTag->getAttribute('href');
+                            $client = new Client();
+                            $crawlerA = $client->request('GET', $href);
+                            $baseHref = $crawlerA->getBaseHref();
+                            $baseHrefCheck = substr($baseHref, 0, 36);
+                            $textContent = $aTag->textContent;
 
-                        //     // dump($href, $baseHref, $baseHrefCheck);
+                            // dump($href, $baseHref, $baseHrefCheck);
 
-                        //     $urlAffiliate = '';
-                        //     $campaignId = '';
-                        //     $dataBeforeUrlAffiliate = $this->getBeforeUrlAffiliatePhongReview($href, $baseHref, $baseHrefCheck);
-                        //     if(!empty($dataBeforeUrlAffiliate['urlAffiliate']) && !empty($dataBeforeUrlAffiliate['campaignId'])) {
-                        //         $urlAffiliate = $dataBeforeUrlAffiliate['urlAffiliate'];
-                        //         $campaignId = $dataBeforeUrlAffiliate['campaignId'];
-                        //     }
+                            $urlAffiliate = '';
+                            $campaignId = '';
+                            $dataBeforeUrlAffiliate = $this->getBeforeUrlAffiliatePhongReview($href, $baseHref, $baseHrefCheck);
+                            if(!empty($dataBeforeUrlAffiliate['urlAffiliate']) && !empty($dataBeforeUrlAffiliate['campaignId'])) {
+                                $urlAffiliate = $dataBeforeUrlAffiliate['urlAffiliate'];
+                                $campaignId = $dataBeforeUrlAffiliate['campaignId'];
+                            }
 
-                        //     if(isset($urlAffiliate)){
-                        //         $response = $this->getUrlAffiliate($urlAffiliate, $campaignId);
-                        //         if(isset($response) && isset($response['success'])) {
-                        //             $resultUrlAffiliate = $response['data']['product_success_link'][0]['short_url'];
-                        //             $aTagsCustom .= '<div class="div-btn"><a class="btn" href="'.$resultUrlAffiliate.'" target="_blank" rel="nofollow noopener">'.$textContent.'</a></div>';
-                        //         }
-                        //     }
-                        // }
-                        // if(!empty($aTagsCustom)){
-                        //     $data[] = $aTagsCustom;
-                        // }
+                            if(isset($urlAffiliate)){
+                                $response = $this->getUrlAffiliate($urlAffiliate, $campaignId);
+                                if(isset($response) && isset($response['success'])) {
+                                    $resultUrlAffiliate = $response['data']['product_success_link'][0]['short_url'];
+                                    $aTagsCustom .= '<div class="div-btn"><a class="btn" href="'.$resultUrlAffiliate.'" target="_blank" rel="nofollow noopener">'.$textContent.'</a></div>';
+                                }
+                            }
+                        }
+                        if(!empty($aTagsCustom)){
+                            $data[] = $aTagsCustom;
+                        }
                     }else if(!($checkImg === false)){
                         // Xử lý thẻ img
                         $doc = new \DOMDocument();
@@ -645,50 +643,48 @@ trait Functions
                         $doc->loadHTML('<?xml encoding="UTF-8">' . $c, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
                         $imageTags = $doc->getElementsByTagName('img');
                         $noscripts = $doc->getElementsByTagName('noscript');
-                        // $src = '';
+                        $src = '';
 
-                        // foreach($imageTags as $tag) {
-                        //     $src = $tag->getAttribute('src');
-                        // }
-                        // $src = $imageTags[1]->getAttribute('src');
-                        // dump($c);
-                        // $imgExists = $this->remoteFileExists($src);
-                        // if($imgExists){
-                        //     if(isset(parse_url($src)['query'])) {
-                        //         $src = parse_url($src)['scheme'].'://'.parse_url($src)['host'].parse_url($src)['path'];
-                        //     }
-                        //     if(isset($src)) {
-                        //         // Lưu hình ảnh ở local storage
-                        //         $imgName = array_reverse(explode ('/', $src))[0];
-                        //         $imgExtension = 'image/' . array_reverse(explode('.', $imgName))[0];
-                        //         $imgStoragePath = 'news/'.$post->id.'/'.$imgName;
-                        //         // $storagePathThumbnail = 'storage/news/'.$post->id.'/'.$imgName;
-                        //         $this->saveImage($src, $imgStoragePath);
-                        //         // Kết thúc lưu hình ảnh ở local storage
+                        foreach($imageTags as $tag) {
+                            $src = $tag->getAttribute('src');
+                        }
+                        $imgExists = $this->remoteFileExists($src);
+                        if($imgExists){
+                            if(isset(parse_url($src)['query'])) {
+                                $src = parse_url($src)['scheme'].'://'.parse_url($src)['host'].parse_url($src)['path'];
+                            }
+                            if(isset($src)) {
+                                // Lưu hình ảnh ở local storage
+                                $imgName = array_reverse(explode ('/', $src))[0];
+                                $imgExtension = 'image/' . array_reverse(explode('.', $imgName))[0];
+                                $imgStoragePath = 'news/'.$post->id.'/'.$imgName;
+                                // $storagePathThumbnail = 'storage/news/'.$post->id.'/'.$imgName;
+                                $this->saveImage($src, $imgStoragePath);
+                                // Kết thúc lưu hình ảnh ở local storage
 
-                        //         $fileUpload = new \Illuminate\Http\UploadedFile(Storage::path($imgStoragePath), $imgName, $imgExtension, null, true);
-                        //         \RvMedia::handleUpload($fileUpload, $folder->id);
-                        //     }
-                        //     $imageTags[0]->setAttribute('loading', 'lazy');
-                        //     $imageTags[0]->setAttribute('src', get_image_url($imgStoragePath));
-                        //     $imageTags[0]->setAttribute('data-src', get_image_url($imgStoragePath));
-                        // }
-                        // foreach($noscripts as $nos => $noscr) {
-                        //     $noscript = $noscripts->item($nos);
-                        //     $noscript->parentNode->removeChild($noscript);
-                        // }
-                        // $dom = $doc->saveHTML();
-                        // $dom = preg_replace('/style=".*?"/', '', $dom);
-                        // $dom = preg_replace('/class=".*?"/', '', $dom);
-                        // $dom = preg_replace('/data-lazy-srcset=".*?"/', '', $dom);
-                        // $dom = preg_replace('/data-lazy-sizes=".*?"/', '', $dom);
-                        // $dom = preg_replace('/data-lazy-src=".*?"/', '', $dom);
-                        // $dom = preg_replace('/data-was-processed=".*?"/', '', $dom);
-                        // $dom = preg_replace('/sizes=".*?"/', '', $dom);
-                        // $dom = preg_replace('/srcset=".*?"/', '', $dom);
-                        // if($imgExists){
-                        //     $data[] = $dom;
-                        // }
+                                $fileUpload = new \Illuminate\Http\UploadedFile(Storage::path($imgStoragePath), $imgName, $imgExtension, null, true);
+                                \RvMedia::handleUpload($fileUpload, $folder->id);
+                            }
+                            $imageTags[0]->setAttribute('loading', 'lazy');
+                            $imageTags[0]->setAttribute('src', get_image_url($imgStoragePath));
+                            $imageTags[0]->setAttribute('data-src', get_image_url($imgStoragePath));
+                        }
+                        foreach($noscripts as $nos => $noscr) {
+                            $noscript = $noscripts->item($nos);
+                            $noscript->parentNode->removeChild($noscript);
+                        }
+                        $dom = $doc->saveHTML();
+                        $dom = preg_replace('/style=".*?"/', '', $dom);
+                        $dom = preg_replace('/class=".*?"/', '', $dom);
+                        $dom = preg_replace('/data-lazy-srcset=".*?"/', '', $dom);
+                        $dom = preg_replace('/data-lazy-sizes=".*?"/', '', $dom);
+                        $dom = preg_replace('/data-lazy-src=".*?"/', '', $dom);
+                        $dom = preg_replace('/data-was-processed=".*?"/', '', $dom);
+                        $dom = preg_replace('/sizes=".*?"/', '', $dom);
+                        $dom = preg_replace('/srcset=".*?"/', '', $dom);
+                        if($imgExists){
+                            $data[] = $dom;
+                        }
                     }else if(!($checkStyle === false)){
                         //Xóa thẻ style
                         $doc = new \DOMDocument();
@@ -715,29 +711,28 @@ trait Functions
                         $data[] = str_replace($search, $replace, $c);
                     }
                 }
-                // dd($data);
                 //Lưu vào DB
-                // $post->update([
-                //     'description' => $description,
-                //     'content' => implode('', $data)
-                // ]);
-                // PostCategory::create([
-                //     'category_id' => $categoryId,
-                //     'post_id' => $post->id
-                // ]);
-                // Slug::create([
-                //     'key' => $slug_components,
-                //     'reference_id' => $post->id,
-                //     'reference_type' => Post::class
-                // ]);
-                // LanguageMeta::create([
-                //     'lang_meta_code' => 'vi',
-                //     'lang_meta_origin' =>  md5($post->id . Post::class . time()),
-                //     'reference_id' => $post->id,
-                //     'reference_type' => Post::class
-                // ]);
-            // }
-            // DB::commit();
+                $post->update([
+                    'description' => $description,
+                    'content' => implode('', $data)
+                ]);
+                PostCategory::create([
+                    'category_id' => $categoryId,
+                    'post_id' => $post->id
+                ]);
+                Slug::create([
+                    'key' => $slug_components,
+                    'reference_id' => $post->id,
+                    'reference_type' => Post::class
+                ]);
+                LanguageMeta::create([
+                    'lang_meta_code' => 'vi',
+                    'lang_meta_origin' =>  md5($post->id . Post::class . time()),
+                    'reference_id' => $post->id,
+                    'reference_type' => Post::class
+                ]);
+            }
+            DB::commit();
             return true;
         } catch (\Throwable $th) {
             DB::rollBack();
