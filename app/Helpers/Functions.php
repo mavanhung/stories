@@ -652,7 +652,7 @@ trait Functions
                         // }
                         // $src = $imageTags[1]->getAttribute('src');
                         dump($c);
-                        $imgExists = $this->remoteFileExists($src);
+                        // $imgExists = $this->remoteFileExists($src);
                         // if($imgExists){
                         //     if(isset(parse_url($src)['query'])) {
                         //         $src = parse_url($src)['scheme'].'://'.parse_url($src)['host'].parse_url($src)['path'];
