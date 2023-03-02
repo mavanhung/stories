@@ -596,7 +596,7 @@ trait Functions
             //         ]);
             //     }
             // }
-
+            dd($content);
             // if(isset($post)) {
                 foreach($content as $k => $c) {
                     $checkBtn = strpos($c, 'class="priced_block clearfix"');
@@ -651,7 +651,7 @@ trait Functions
                         //     $src = $tag->getAttribute('src');
                         // }
                         // $src = $imageTags[1]->getAttribute('src');
-                        dump($c);
+                        // dump($c);
                         // $imgExists = $this->remoteFileExists($src);
                         // if($imgExists){
                         //     if(isset(parse_url($src)['query'])) {
