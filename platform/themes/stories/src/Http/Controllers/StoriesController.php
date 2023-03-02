@@ -79,35 +79,38 @@ class StoriesController extends PublicController
                     ->setError()
                     ->setMessage('Bài viết không tồn tại.');
             }
-            // $results = [];
-            // if ($request->hasFile('images')) {
-            //     $images = (array)$request->file('images', []);
-            //     foreach ($images as $image) {
-            //         $result = RvMedia::handleUpload($image, 0, 'comments');
-            //         if ($result['error'] != false) {
-            //             return $response->setError()->setMessage($result['message']);
-            //         }
-            //         $results[] = $result;
-            //     }
-            // }
 
-            // $request->merge([
-            //     'images' => $results ? json_encode(array_filter(collect($results)->pluck('data.url')->values()->toArray())) : null,
-            // ]);
-
+            //Lưu hình ảnh ở storage
             $results = [];
             if ($request->hasFile('images')) {
                 $images = (array)$request->file('images', []);
                 foreach ($images as $image) {
-                    $path = Storage::disk('s3')->put('comments', $image);
-                    $path = Storage::disk('s3')->url($path);
-                    $results[] = $path;
+                    $result = RvMedia::handleUpload($image, 0, 'comments');
+                    if ($result['error'] != false) {
+                        return $response->setError()->setMessage($result['message']);
+                    }
+                    $results[] = $result;
                 }
             }
 
             $request->merge([
-                'images' => $results ? json_encode($results) : null,
+                'images' => $results ? json_encode(array_filter(collect($results)->pluck('data.url')->values()->toArray())) : null,
             ]);
+
+            //Lưu hình ảnh ở s3
+            // $results = [];
+            // if ($request->hasFile('images')) {
+            //     $images = (array)$request->file('images', []);
+            //     foreach ($images as $image) {
+            //         $path = Storage::disk('s3')->put('comments', $image);
+            //         $path = Storage::disk('s3')->url($path);
+            //         $results[] = $path;
+            //     }
+            // }
+
+            // $request->merge([
+            //     'images' => $results ? json_encode($results) : null,
+            // ]);
 
             $comment = $this->commentRepository->createOrUpdate($request->input());
 

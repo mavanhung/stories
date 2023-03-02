@@ -62,6 +62,9 @@ class crawlers extends Command
         // https://phongreviews.com/tu-dong-mini/
         // https://phongreviews.com/may-chieu-mini/
 
+        //Cần xem xét lại hình ảnh và btn
+        // https://phongreviews.com/may-chay-bo-impulse
+
 
         $this->crawlersPhongReviews();
         // $this->crawlersTrustReview();
