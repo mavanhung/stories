@@ -60,6 +60,8 @@ trait Functions
 
         curl_close($curl);
 
+        dump('abc: '.$url, $ret);
+
         return $ret;
     }
 
