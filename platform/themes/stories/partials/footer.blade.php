@@ -75,7 +75,7 @@
         </div>
     @endif
 @endif
-<a id="scrollTop" href="javascript:void(0);"><i class="elegant-icon arrow_up"></i></a>
+<div id="scrollTop"><i class="elegant-icon arrow_up"></i></div>
 {!! Theme::footer() !!}
 </body>
 
