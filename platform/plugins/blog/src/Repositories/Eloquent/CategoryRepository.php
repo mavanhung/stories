@@ -159,6 +159,9 @@ class CategoryRepository extends RepositoriesAbstract implements CategoryInterfa
             ->withCount('posts')
             ->orderBy('posts_count', 'desc')
             ->where('categories.status', BaseStatusEnum::PUBLISHED)
+            ->whereHas('posts', function($q){
+                $q->where('status', BaseStatusEnum::PUBLISHED);
+            })
             ->limit($limit);
 
         return $this->applyBeforeExecuteQuery($data)->get();
