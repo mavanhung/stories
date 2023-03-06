@@ -14,7 +14,7 @@ class crawlers extends Command
      *
      * @var string
      */
-    protected $signature = 'command:crawlers';
+    protected $signature = 'command:crawlers {website}';
 
     /**
      * The console command description.
@@ -66,9 +66,14 @@ class crawlers extends Command
         // https://phongreviews.com/may-chay-bo-impulse
 
 
-        $this->crawlersPhongReviews();
-        // $this->crawlersTrustReview();
-        // $this->crawlersPhongReviewsDetail(32, 'https://phongreviews.com/dung-cu-tap-yoga/', 'https://phongreviews.com/wp-content/uploads/2022/06/dung-cu-tap-yoga-336x220.jpg');
+        $website = $this->argument('website');
+        if($website == 'phongreviews'){
+            $this->crawlersPhongReviews();
+        }
+        if($website == 'trustreview'){
+            $this->crawlersTrustReview();
+        }
+        // $this->crawlersPhongReviewsDetail(32, 'https://phongreviews.com/may-chay-bo-impulse', 'https://phongreviews.com/wp-content/uploads/2022/06/dung-cu-tap-yoga-336x220.jpg');
         return 0;
     }
 }

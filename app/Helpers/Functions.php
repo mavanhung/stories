@@ -601,7 +601,71 @@ trait Functions
                     $checkBtn = strpos($c, 'class="priced_block clearfix"');
                     $checkImg = strpos($c, '<img');
                     $checkStyle = strpos($c, '<style>');
-                    if(!($checkBtn === false)){
+                    if(!($checkBtn === false) && !($checkImg === false)){
+                        $doc = new \DOMDocument();
+                        libxml_use_internal_errors(true);
+                        $doc->loadHTML('<?xml encoding="UTF-8">' . $c, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+                        //Xử lý thẻ img
+                        $imageTags = $doc->getElementsByTagName('img');
+                        $imgTagsCustom = '';
+                        foreach($imageTags as $tag) {
+                            $src = $tag->getAttribute('src');
+                            $title = $tag->getAttribute('title');
+                            $title = $tag->getAttribute('title');
+                            $widthAt = $tag->getAttribute('width');
+                            $heightAt = $tag->getAttribute('height');
+
+                            $imgExists = $this->remoteFileExists($src);
+                            if($imgExists){
+                                if(isset(parse_url($src)['query'])) {
+                                    $src = parse_url($src)['scheme'].'://'.parse_url($src)['host'].parse_url($src)['path'];
+                                }
+                                if(isset($src)) {
+                                    // Lưu hình ảnh ở local storage
+                                    $imgName = array_reverse(explode ('/', $src))[0];
+                                    $imgExtension = 'image/' . array_reverse(explode('.', $imgName))[0];
+                                    $imgStoragePath = 'news/'.$post->id.'/'.$imgName;
+                                    $this->saveImage($src, $imgStoragePath);
+                                    // Kết thúc lưu hình ảnh ở local storage
+
+                                    $fileUpload = new \Illuminate\Http\UploadedFile(Storage::path($imgStoragePath), $imgName, $imgExtension, null, true);
+                                    \RvMedia::handleUpload($fileUpload, $folder->id);
+                                }
+                                $imgTagsCustom .= '<img decoding="async" loading="lazy" src="'.get_image_url($imgStoragePath).'" data-src="'.get_image_url($imgStoragePath).'" width="'.$widthAt.'" height="'.$heightAt.'" >';
+                            }
+                        }
+
+                        //Xử lý thẻ a
+                        $aTags = $doc->getElementsByTagName('a');
+                        $aTagsCustom = '';
+                        foreach($aTags as $aTag) {
+                            $href = $aTag->getAttribute('href');
+                            $client = new Client();
+                            $crawlerA = $client->request('GET', $href);
+                            $baseHref = $crawlerA->getBaseHref();
+                            $baseHrefCheck = substr($baseHref, 0, 36);
+                            $textContent = $aTag->textContent;
+
+                            $urlAffiliate = '';
+                            $campaignId = '';
+                            $dataBeforeUrlAffiliate = $this->getBeforeUrlAffiliatePhongReview($href, $baseHref, $baseHrefCheck);
+                            if(!empty($dataBeforeUrlAffiliate['urlAffiliate']) && !empty($dataBeforeUrlAffiliate['campaignId'])) {
+                                $urlAffiliate = $dataBeforeUrlAffiliate['urlAffiliate'];
+                                $campaignId = $dataBeforeUrlAffiliate['campaignId'];
+                            }
+
+                            if(isset($urlAffiliate)){
+                                $response = $this->getUrlAffiliate($urlAffiliate, $campaignId);
+                                if(isset($response) && isset($response['success'])) {
+                                    $resultUrlAffiliate = $response['data']['product_success_link'][0]['short_url'];
+                                    $aTagsCustom .= '<div class="div-btn"><a class="btn" href="'.$resultUrlAffiliate.'" target="_blank" rel="nofollow noopener">'.$textContent.'</a></div>';
+                                }
+                            }
+                        }
+                        if(!empty($aTagsCustom) || !empty($imgTagsCustom)){
+                            $data[] = $imgTagsCustom . $aTagsCustom;
+                        }
+                    }else if(!($checkBtn === false)){
                         //Xử lý thẻ a
                         $doc = new \DOMDocument();
                         libxml_use_internal_errors(true);
@@ -1479,7 +1543,7 @@ trait Functions
                 "original_url": [
                     "'. $urlAffiliate .'"
                 ],
-                "tracking_domain": "https://go.isclix.com",
+                "tracking_domain": "go.isclix.com",
                 "utm_source": "",
                 "utm_medium": "",
                 "utm_campaign": "",
@@ -1490,7 +1554,7 @@ trait Functions
                 "campaign_id": "'. $campaignId .'"
             }',
             CURLOPT_HTTPHEADER => array(
-                'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2Nzc4MDExODQsImlhdCI6MTY3NzMwMTE4NCwibmJmIjoxNjc3MzAxMTg0LCJqdGkiOiIyMDIzLTAyLTI1IDA0OjU5OjQ0LjkxNDkxOF82MTI4NzAzNDU2NDgzMDQzNDkwIiwiaWRlbnRpdHkiOnsiaWQiOiI2MDc5MDY2MzMyMDM3ODc5NjcxIiwic3NvX2lkIjo1NTE5NzMzLCJsb2dpbl9uYW1lIjoiaHVuZ19tdl85NSIsImZvbGxvd2VyIjpudWxsLCJsb2dpbl9uYW1lX3NzbyI6Imh1bmdfbXZfOTUiLCJ0b2tlbl9wcm9maWxlIjoiMjc5OWE0NTQtNWU4Yy00MjIxLTljMTUtYjQ4MmI0OTA4NGExIiwiZW1haWwiOiJtYXZhbmh1bmcyNzA5OTVAZ21haWwuY29tIiwiZmlyc3RfbmFtZSI6IlZcdTAxMDNuIEhcdTAxYjBuZyIsImxhc3RfbmFtZSI6Ik1cdTAwZTMiLCJkYXRlX2JpcnRoIjoiMTk5NS0wOS0yNyIsImFnZW5jeSI6ZmFsc2UsIl9hdF9pZCI6IjEzODIyMzkiLCJpc0ZyYW1lIjpmYWxzZSwidXNlcm5hbWUiOiJodW5nX212Xzk1IiwicGhvbmUiOiIrODQzNDQyNDI2NzkiLCJhZGRyZXNzIjoiXHUxZWE0cCBQaFx1MDFiMFx1MWVkYmMgVFx1MDBlMm4sIFRcdTAwZTJuIFBoXHUwMWIwXHUxZWRiYywgXHUwMTEwXHUxZWQzbmcgUGhcdTAwZmEsIEJcdTAwZWNuaCBQaFx1MDFiMFx1MWVkYmMiLCJnZW5kZXIiOjEsImN0aW1lIjoiIiwiZGVzY3JpcHRpb24iOiIiLCJhdmF0YXIiOiIiLCJtb2RlbCI6IiJ9fQ.Temla4K-r__nJ59fQ5tEh5sOJ6tUTFeuu0ZJ1L_As5Q',
+                'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2NzgzMTA2MzcsImlhdCI6MTY3NzgxMDYzNywibmJmIjoxNjc3ODEwNjM3LCJqdGkiOiIyMDIzLTAzLTAzIDAyOjMwOjM3LjY3NDY0N182MTMyOTc3MDU1OTc2NDE3NTQyIiwiaWRlbnRpdHkiOnsiaWQiOiI2MDc5MDY2MzMyMDM3ODc5NjcxIiwic3NvX2lkIjo1NTE5NzMzLCJsb2dpbl9uYW1lIjoiaHVuZ19tdl85NSIsImZvbGxvd2VyIjpudWxsLCJsb2dpbl9uYW1lX3NzbyI6Imh1bmdfbXZfOTUiLCJ0b2tlbl9wcm9maWxlIjoiMjc5OWE0NTQtNWU4Yy00MjIxLTljMTUtYjQ4MmI0OTA4NGExIiwiZW1haWwiOiJtYXZhbmh1bmcyNzA5OTVAZ21haWwuY29tIiwiZmlyc3RfbmFtZSI6IlZcdTAxMDNuIEhcdTAxYjBuZyIsImxhc3RfbmFtZSI6Ik1cdTAwZTMiLCJkYXRlX2JpcnRoIjoiMTk5NS0wOS0yNyIsImFnZW5jeSI6ZmFsc2UsIl9hdF9pZCI6IjEzODIyMzkiLCJpc0ZyYW1lIjpmYWxzZSwidXNlcm5hbWUiOiJodW5nX212Xzk1IiwicGhvbmUiOiIrODQzNDQyNDI2NzkiLCJhZGRyZXNzIjoiXHUxZWE0cCBQaFx1MDFiMFx1MWVkYmMgVFx1MDBlMm4sIFRcdTAwZTJuIFBoXHUwMWIwXHUxZWRiYywgXHUwMTEwXHUxZWQzbmcgUGhcdTAwZmEsIEJcdTAwZWNuaCBQaFx1MDFiMFx1MWVkYmMiLCJnZW5kZXIiOjEsImN0aW1lIjoiIiwiZGVzY3JpcHRpb24iOiIiLCJhdmF0YXIiOiIiLCJtb2RlbCI6IiJ9fQ.MikDSsKZTmqX0R3CKjiw0cUdufTZU7epanj8WOY4edc',
                 'Content-Type: application/json'
             ),
         ));
@@ -1498,6 +1562,9 @@ trait Functions
         $response = curl_exec($curl);
 
         curl_close($curl);
+        if(!empty(json_decode($response, true)['status_code']) && json_decode($response, true)['status_code'] == 401){
+            dd('Chưa đăng nhập accesstrade');
+        }
         return json_decode($response, true);
     }
 }
