@@ -98,118 +98,6 @@ trait Functions
         }
     }
 
-    public function saveDB($data)
-    {
-        //name, description, content, thumbnail, category_id, slug
-        try {
-            DB::beginTransaction();
-            $slug = Slug::where('Key',$data['slug'])
-                        ->where('reference_type', Post::class)
-                        ->first();
-            if(blank($slug)) {
-                $data['description'] = str_replace('Phong Reviews', 'Xoài Chua', $data['description']);
-                $post = Post::create([
-                    'name' => $data['name'],
-                    'description' => $data['description'],
-                    'status' => 'pending',
-                    // 'status' => 'published',
-                    'author_id' => 1,
-                    'author_type' => User::class,
-                    'format_type' => 'default'
-                ]);
-                PostCategory::create([
-                    'category_id' => $data['category_id'],
-                    'post_id' => $post->id
-                ]);
-                Slug::create([
-                    'key' => $data['slug'],
-                    'reference_id' => $post->id,
-                    'reference_type' => Post::class
-                ]);
-                LanguageMeta::create([
-                    'lang_meta_code' => 'vi',
-                    'lang_meta_origin' =>  md5($post->id . Post::class . time()),
-                    'reference_id' => $post->id,
-                    'reference_type' => Post::class
-                ]);
-                //Format content dạng array thành string
-                $data['content'] = implode('', $data['content']);
-                $dataContentArr = explode('<noscript>', $data['content']);
-                foreach ($dataContentArr as $key => $value) {
-                    if($key % 2 != 0) {
-                        $dataContentArr[$key] = explode('</noscript>', $value)[1];
-                    }
-                }
-                $data['content'] = implode('', $dataContentArr);
-                //Tải và lưu hình ảnh thumbnail
-                if(!blank($data['thumbnail'])){
-                    if(strpos($data['thumbnail'], 'https://') === 0) {
-                        // Lưu hình ảnh ở local storage
-                        $thumbnailName = array_reverse(explode ('/', $data['thumbnail']))[0];
-                        $storagePath = 'news/'.$post->id.'/'.$thumbnailName;
-                        $storagePathThumbnail = 'storage/news/'.$post->id.'/'.$thumbnailName;
-                        $this->saveImage($data['thumbnail'], $storagePath, $thumbnailName);
-                        // Kết thúc lưu hình ảnh ở local storage
-
-                        // Lưu hình ảnh ở AWS S3
-                        // $thumbnailName = array_reverse(explode ('/', $data['thumbnail']))[0];
-                        // $storagePath = 'news/'.$post->id.'/'.$thumbnailName;
-                        // $response = $this->saveImage($data['thumbnail'], $storagePath, $thumbnailName);
-                        // $path = Storage::disk('s3')->put($storagePath, $response);
-                        // $path = Storage::disk('s3')->url($storagePath);
-                        // $storagePathThumbnail = $path;
-                        // Kết thúc lưu hình ảnh ở AWS S3
-
-                        //Update lại thumbnail bài viết
-                        $post->update([
-                            'image' => $storagePath
-                        ]);
-                    }
-                }
-                //Tải hình ảnh trong bài viết và cập nhật lại đường dẫn trong nội dung
-                foreach ($data['images'] as $keyImage => $image) {
-                    if(strpos($image, 'https://') === 0) {
-                        // Lưu hình ảnh ở local storage
-                        $imageName = array_reverse(explode ('/', $image))[0];
-                        $storagePath = 'news/'.$post->id.'/'.$imageName;
-                        $storagePathReplace = 'storage/news/'.$post->id.'/'.$imageName;
-                        $this->saveImage($image, $storagePath, $imageName);
-                        $data['content'] = str_replace($image, $storagePathReplace, $data['content'] );
-                        // Kết thúc lưu hình ảnh ở local storage
-
-                        // Lưu hình ảnh ở AWS S3
-                        // $imageName = array_reverse(explode ('/', $image))[0];
-                        // $storagePath = 'news/'.$post->id.'/'.$imageName;
-                        // $response = $this->saveImage($image, $storagePath, $imageName);
-                        // $path = Storage::disk('s3')->put($storagePath, $response);
-                        // $path = Storage::disk('s3')->url($storagePath);
-                        // $data['content'] = str_replace($image, $path, $data['content'] );
-                        // Kết thúc lưu hình ảnh ở AWS S3
-                    }else {
-                        $data['content'] = str_replace($image, !blank($storagePathThumbnail) ? $storagePathThumbnail : '', $data['content'] );
-                    }
-                }
-                $data['content'] = str_replace('src=""', '', $data['content'] );
-                $data['content'] = str_replace('https://phongreviews.com', '', $data['content'] );
-                $data['content'] = str_replace('Phong Reviews', 'Xoài Chua', $data['content'] );
-                $post->update([
-                    'content' => $data['content']
-                ]);
-                dump('save done');
-            }
-            DB::commit();
-            return true;
-        } catch (\Throwable $th) {
-            DB::rollBack();
-            $this->error('Có lỗi xảy ra: '.$th->getMessage().', file: '.$th->getFile().', dòng: '.$th->getLine());
-            Log::channel('Crawlers')->error([
-                $th->getMessage(),
-                $th->getFile(),
-                $th->getLine()
-            ]);
-        }
-    }
-
     public function removeSizeImgSrc($src)
     {
         $arr = explode('-', $src);
@@ -342,13 +230,13 @@ trait Functions
             //         'https://phongreviews.com/chuyen-muc/nha-cua-doi-song/'
             //     ]
             // ],
-            [
-                'category_id' => 37,
-                'page' => 4,
-                'url' => [
-                    'https://phongreviews.com/chuyen-muc/the-thao-da-ngoai/'
-                ]
-            ],
+            // [
+            //     'category_id' => 37,
+            //     'page' => 4,
+            //     'url' => [
+            //         'https://phongreviews.com/chuyen-muc/the-thao-da-ngoai/'
+            //     ]
+            // ],
             // [
             //     'category_id' => 21,
             //     'page' => 24,
@@ -391,20 +279,20 @@ trait Functions
             //         'https://phongreviews.com/chuyen-muc/giai-tri/'
             //     ]
             // ],
-            // [
-            //     'category_id' => 1,
-            //     'page' => 12,
-            //     'url' => [
-            //         'https://phongreviews.com/chuyen-muc/giai-tri/sach-va-truyen/'
-            //     ]
-            // ],
-            // [
-            //     'category_id' => 1,
-            //     'page' => 9,
-            //     'url' => [
-            //         'https://phongreviews.com/chuyen-muc/giai-tri/review-phim/'
-            //     ]
-            // ],
+            [
+                'category_id' => [33, 34],
+                'page' => 12,
+                'url' => [
+                    'https://phongreviews.com/chuyen-muc/giai-tri/sach-va-truyen/'
+                ]
+            ],
+            [
+                'category_id' => [33, 35],
+                'page' => 9,
+                'url' => [
+                    'https://phongreviews.com/chuyen-muc/giai-tri/review-phim/'
+                ]
+            ],
             // [
             //     'category_id' => 31,
             //     'page' => 2,
@@ -781,10 +669,19 @@ trait Functions
                     'description' => $description,
                     'content' => implode('', $data)
                 ]);
-                PostCategory::create([
-                    'category_id' => $categoryId,
-                    'post_id' => $post->id
-                ]);
+                if(is_array($categoryId)){
+                    foreach ($categoryId as $key => $cateId) {
+                        PostCategory::create([
+                            'category_id' => $cateId,
+                            'post_id' => $post->id
+                        ]);
+                    }
+                }else {
+                    PostCategory::create([
+                        'category_id' => $categoryId,
+                        'post_id' => $post->id
+                    ]);
+                }
                 Slug::create([
                     'key' => $slug_components,
                     'reference_id' => $post->id,
