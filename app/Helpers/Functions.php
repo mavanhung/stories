@@ -230,13 +230,13 @@ trait Functions
             //         'https://phongreviews.com/chuyen-muc/nha-cua-doi-song/'
             //     ]
             // ],
-            // [
-            //     'category_id' => 37,
-            //     'page' => 4,
-            //     'url' => [
-            //         'https://phongreviews.com/chuyen-muc/the-thao-da-ngoai/'
-            //     ]
-            // ],
+            [
+                'category_id' => 37,
+                'page' => 4,
+                'url' => [
+                    'https://phongreviews.com/chuyen-muc/the-thao-da-ngoai/'
+                ]
+            ],
             // [
             //     'category_id' => 21,
             //     'page' => 24,
@@ -251,20 +251,20 @@ trait Functions
             //         'https://phongreviews.com/chuyen-muc/kinh-nghiem/'
             //     ]
             // ],
-            // [
-            //     'category_id' => 1,
-            //     'page' => 3,
-            //     'url' => [
-            //         'https://phongreviews.com/chuyen-muc/hoc-tap/'
-            //     ]
-            // ],
-            // [
-            //     'category_id' => 14,
-            //     'page' => 73,
-            //     'url' => [
-            //         'https://phongreviews.com/chuyen-muc/am-thuc/'
-            //     ]
-            // ],
+            [
+                'category_id' => [25, 30],
+                'page' => 3,
+                'url' => [
+                    'https://phongreviews.com/chuyen-muc/hoc-tap/'
+                ]
+            ],
+            [
+                'category_id' => [25, 31],
+                'page' => 73,
+                'url' => [
+                    'https://phongreviews.com/chuyen-muc/am-thuc/'
+                ]
+            ],
             [
                 'category_id' => [25, 32],
                 'page' => 17,
@@ -446,8 +446,8 @@ trait Functions
                 $post = Post::create([
                     'name' => $title[0],
                     'description' => $description,
-                    'status' => 'pending',
-                    // 'status' => 'published',
+                    // 'status' => 'pending',
+                    'status' => 'published',
                     'author_id' => 1,
                     'author_type' => User::class,
                     'format_type' => 'default',

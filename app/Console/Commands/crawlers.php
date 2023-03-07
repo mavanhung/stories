@@ -73,7 +73,7 @@ class crawlers extends Command
         if($website == 'trustreview'){
             $this->crawlersTrustReview();
         }
-        // $this->crawlersPhongReviewsDetail(32, 'https://phongreviews.com/may-chay-bo-impulse', 'https://phongreviews.com/wp-content/uploads/2022/06/dung-cu-tap-yoga-336x220.jpg');
+        // $this->crawlersPhongReviewsDetail(32, 'https://phongreviews.com/sach-ngay-xua-co-mot-chuyen-tinh', 'https://phongreviews.com/wp-content/uploads/2022/06/dung-cu-tap-yoga-336x220.jpg');
         return 0;
     }
 }
