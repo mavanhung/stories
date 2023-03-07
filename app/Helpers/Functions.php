@@ -265,13 +265,13 @@ trait Functions
                     'https://phongreviews.com/chuyen-muc/am-thuc/'
                 ]
             ],
-            [
-                'category_id' => [25, 32],
-                'page' => 17,
-                'url' => [
-                    'https://phongreviews.com/chuyen-muc/du-lich/'
-                ]
-            ],
+            // [
+            //     'category_id' => [25, 32],
+            //     'page' => 17,
+            //     'url' => [
+            //         'https://phongreviews.com/chuyen-muc/du-lich/'
+            //     ]
+            // ],
             // [
             //     'category_id' => 1,
             //     'page' => 24,
@@ -446,8 +446,8 @@ trait Functions
                 $post = Post::create([
                     'name' => $title[0],
                     'description' => $description,
-                    // 'status' => 'pending',
-                    'status' => 'published',
+                    'status' => 'pending',
+                    // 'status' => 'published',
                     'author_id' => 1,
                     'author_type' => User::class,
                     'format_type' => 'default',
