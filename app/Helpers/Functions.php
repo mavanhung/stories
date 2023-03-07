@@ -265,13 +265,13 @@ trait Functions
             //         'https://phongreviews.com/chuyen-muc/am-thuc/'
             //     ]
             // ],
-            // [
-            //     'category_id' => 11,
-            //     'page' => 17,
-            //     'url' => [
-            //         'https://phongreviews.com/chuyen-muc/du-lich/'
-            //     ]
-            // ],
+            [
+                'category_id' => [25, 32],
+                'page' => 17,
+                'url' => [
+                    'https://phongreviews.com/chuyen-muc/du-lich/'
+                ]
+            ],
             // [
             //     'category_id' => 1,
             //     'page' => 24,
@@ -279,20 +279,20 @@ trait Functions
             //         'https://phongreviews.com/chuyen-muc/giai-tri/'
             //     ]
             // ],
-            [
-                'category_id' => [33, 34],
-                'page' => 12,
-                'url' => [
-                    'https://phongreviews.com/chuyen-muc/giai-tri/sach-va-truyen/'
-                ]
-            ],
-            [
-                'category_id' => [33, 35],
-                'page' => 9,
-                'url' => [
-                    'https://phongreviews.com/chuyen-muc/giai-tri/review-phim/'
-                ]
-            ],
+            // [
+            //     'category_id' => [33, 34],
+            //     'page' => 12,
+            //     'url' => [
+            //         'https://phongreviews.com/chuyen-muc/giai-tri/sach-va-truyen/'
+            //     ]
+            // ],
+            // [
+            //     'category_id' => [33, 35],
+            //     'page' => 9,
+            //     'url' => [
+            //         'https://phongreviews.com/chuyen-muc/giai-tri/review-phim/'
+            //     ]
+            // ],
             // [
             //     'category_id' => 31,
             //     'page' => 2,
@@ -635,6 +635,9 @@ trait Functions
                         $dom = preg_replace('/data-was-processed=".*?"/', '', $dom);
                         $dom = preg_replace('/sizes=".*?"/', '', $dom);
                         $dom = preg_replace('/srcset=".*?"/', '', $dom);
+                        $search = ['phongreviews.com', 'phongreviews', 'PhongReviews', 'Phongreviews', 'Phong Reviews', 'Phong reviews', 'phong reviews', '.html'];
+                        $replace = ['xoaichua.com', 'xoaichua', 'XoaiChua', 'XoaiChua', 'XoaiChua', 'XoaiChua', 'XoaiChua', ''];
+                        $dom = str_replace($search, $replace, $dom);
                         if($imgExists){
                             $data[] = $dom;
                         }
