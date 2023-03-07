@@ -230,13 +230,13 @@ trait Functions
             //         'https://phongreviews.com/chuyen-muc/nha-cua-doi-song/'
             //     ]
             // ],
-            [
-                'category_id' => 37,
-                'page' => 4,
-                'url' => [
-                    'https://phongreviews.com/chuyen-muc/the-thao-da-ngoai/'
-                ]
-            ],
+            // [
+            //     'category_id' => 37,
+            //     'page' => 4,
+            //     'url' => [
+            //         'https://phongreviews.com/chuyen-muc/the-thao-da-ngoai/'
+            //     ]
+            // ],
             // [
             //     'category_id' => 21,
             //     'page' => 24,
@@ -251,13 +251,13 @@ trait Functions
             //         'https://phongreviews.com/chuyen-muc/kinh-nghiem/'
             //     ]
             // ],
-            [
-                'category_id' => [25, 30],
-                'page' => 3,
-                'url' => [
-                    'https://phongreviews.com/chuyen-muc/hoc-tap/'
-                ]
-            ],
+            // [
+            //     'category_id' => [25, 30],
+            //     'page' => 3,
+            //     'url' => [
+            //         'https://phongreviews.com/chuyen-muc/hoc-tap/'
+            //     ]
+            // ],
             [
                 'category_id' => [25, 31],
                 'page' => 73,
