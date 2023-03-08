@@ -66,10 +66,10 @@
                 e(".carausel-3-columns").slick({
                     dots: !1,
                     infinite: !0,
-                    speed: 1e3,
+                    speed: 2e3,
                     arrows: !0,
-                    // autoplay: !0,
-                    slidesToShow: 3,
+                    autoplay: !0,
+                    slidesToShow: 4,
                     slidesToScroll: 1,
                     loop: !0,
                     adaptiveHeight: !0,
@@ -81,14 +81,18 @@
                     responsive: [
                         {
                             breakpoint: 1024,
-                            settings: { slidesToShow: 3, slidesToScroll: 3 },
+                            settings: { slidesToShow: 4, slidesToScroll: 3 },
                         },
                         {
                             breakpoint: 992,
-                            settings: { slidesToShow: 2, slidesToScroll: 2 },
+                            settings: { slidesToShow: 3, slidesToScroll: 2 },
                         },
                         {
                             breakpoint: 769,
+                            settings: { slidesToShow: 2, slidesToScroll: 1 },
+                        },
+                        {
+                            breakpoint: 481,
                             settings: { slidesToShow: 1, slidesToScroll: 1 },
                         },
                     ],
