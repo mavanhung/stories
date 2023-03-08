@@ -11,7 +11,7 @@
                             <img src="{{ Theme::asset()->url('images/icon/ma-giam-gia-shopee.webp') }}" width="70" height="70" alt="Mã giảm giá Shopee">
                         </div>
                         <div class="discount__code-body">
-                            <h5>Mã giảm giá Shopee</h6>
+                            <h5>Mã giảm giá Shopee</h5>
                         </div>
                     </div>
                 </a>
