@@ -258,20 +258,20 @@ trait Functions
             //         'https://phongreviews.com/chuyen-muc/hoc-tap/'
             //     ]
             // ],
-            [
-                'category_id' => [25, 31],
-                'page' => 73,
-                'url' => [
-                    'https://phongreviews.com/chuyen-muc/am-thuc/'
-                ]
-            ],
             // [
-            //     'category_id' => [25, 32],
-            //     'page' => 17,
+            //     'category_id' => [25, 31],
+            //     'page' => 73,
             //     'url' => [
-            //         'https://phongreviews.com/chuyen-muc/du-lich/'
+            //         'https://phongreviews.com/chuyen-muc/am-thuc/'
             //     ]
             // ],
+            [
+                'category_id' => [25, 32],
+                'page' => 17,
+                'url' => [
+                    'https://phongreviews.com/chuyen-muc/du-lich/'
+                ]
+            ],
             // [
             //     'category_id' => 1,
             //     'page' => 24,
