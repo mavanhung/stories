@@ -74,7 +74,7 @@ class PostRepository extends RepositoriesAbstract implements PostInterface
             ->join('categories', 'post_categories.category_id', '=', 'categories.id')
             ->whereIn('post_categories.category_id', $categoryId)
             ->select('posts.*')
-            ->distinct()
+            ->distinct(['posts.id'])
             ->with('slugable')
             ->orderBy('posts.created_at', 'desc');
 
