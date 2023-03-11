@@ -65,6 +65,11 @@ class crawlers extends Command
         //Cần xem xét lại hình ảnh và btn
         // https://phongreviews.com/may-chay-bo-impulse
 
+        //Lỗi phongreviews crawler ngày 10/03/2023 danh mục mẹ và bé
+        // https://phongreviews.com/sua-non/
+        // https://phongreviews.com/sua-tam-cho-be/
+
+
 
         $website = $this->argument('website');
         if($website == 'phongreviews'){

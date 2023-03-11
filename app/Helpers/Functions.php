@@ -223,13 +223,13 @@ trait Functions
             //         'https://phongreviews.com/chuyen-muc/do-gia-dung/'
             //     ]
             // ],
-            // [
-            //     'category_id' => 23,
-            //     'page' => 29,
-            //     'url' => [
-            //         'https://phongreviews.com/chuyen-muc/nha-cua-doi-song/'
-            //     ]
-            // ],
+            [
+                'category_id' => 23,
+                'page' => 29,
+                'url' => [
+                    'https://phongreviews.com/chuyen-muc/nha-cua-doi-song/'
+                ]
+            ],
             // [
             //     'category_id' => 37,
             //     'page' => 4,
@@ -237,13 +237,13 @@ trait Functions
             //         'https://phongreviews.com/chuyen-muc/the-thao-da-ngoai/'
             //     ]
             // ],
-            [
-                'category_id' => 21,
-                'page' => 24,
-                'url' => [
-                    'https://phongreviews.com/chuyen-muc/me-be/'
-                ]
-            ],
+            // [
+            //     'category_id' => 21,
+            //     'page' => 24,
+            //     'url' => [
+            //         'https://phongreviews.com/chuyen-muc/me-be/'
+            //     ]
+            // ],
             // [
             //     'category_id' => 1,
             //     'page' => 27,
@@ -434,7 +434,10 @@ trait Functions
                                     return $node->outerHtml();
                                 });
                                 $content = preg_replace('/id=".*?"/', '', $content);
-            $description = mb_substr(strip_tags($content[0]), 0, 300, 'utf-8');
+            $search = ['phongreviews.com', 'phongreviews', 'PhongReviews', 'Phongreviews', 'Phong Reviews', 'Phong reviews', 'phong reviews', 'Phong Review', 'Phong review', 'phong review'];
+            $replace = ['xoaichua.com', 'xoaichua', 'XoaiChua', 'XoaiChua', 'XoaiChua', 'XoaiChua', 'XoaiChua', 'XoaiChua', 'XoaiChua', 'XoaiChua'];
+            $description = str_replace($search, $replace, $content[0]);
+            $description = mb_substr(strip_tags($description), 0, 300, 'utf-8');
             $data = [];
             $slug_components = parse_url($url);
             $slug_components = explode('/', $slug_components['path'])[1];
@@ -635,8 +638,6 @@ trait Functions
                         $dom = preg_replace('/data-was-processed=".*?"/', '', $dom);
                         $dom = preg_replace('/sizes=".*?"/', '', $dom);
                         $dom = preg_replace('/srcset=".*?"/', '', $dom);
-                        $search = ['phongreviews.com', 'phongreviews', 'PhongReviews', 'Phongreviews', 'Phong Reviews', 'Phong reviews', 'phong reviews', '.html'];
-                        $replace = ['xoaichua.com', 'xoaichua', 'XoaiChua', 'XoaiChua', 'XoaiChua', 'XoaiChua', 'XoaiChua', ''];
                         $dom = str_replace($search, $replace, $dom);
                         if($imgExists){
                             $data[] = $dom;
@@ -662,8 +663,6 @@ trait Functions
                     }else {
                         $c = preg_replace('/style=".*?"/', '', $c);
                         $c = preg_replace('/class=".*?"/', '', $c);
-                        $search = ['phongreviews.com', 'phongreviews', 'PhongReviews', 'Phongreviews', 'Phong Reviews', 'Phong reviews', 'phong reviews', '.html'];
-                        $replace = ['xoaichua.com', 'xoaichua', 'XoaiChua', 'XoaiChua', 'XoaiChua', 'XoaiChua', 'XoaiChua', ''];
                         $data[] = str_replace($search, $replace, $c);
                     }
                 }
