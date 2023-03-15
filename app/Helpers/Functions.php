@@ -1541,13 +1541,13 @@ trait Functions
         // url là danh sách url page
         // url_item là danh sách url chi tiết tin của danh mục đó
         $UrlList = [
-            // [
-            //     'category_id' => 19,
-            //     'page' => 44,
-            //     'url' => [
-            //         'https://tuvanmuasam.com/suc-khoe-lam-dep'
-            //     ]
-            // ],
+            [
+                'category_id' => 19,
+                'page' => 44,
+                'url' => [
+                    'https://tuvanmuasam.com/suc-khoe-lam-dep'
+                ]
+            ],
             // [
             //     'category_id' => 19,
             //     'page' => 9,
@@ -1563,7 +1563,7 @@ trait Functions
             //     ]
             // ],
             // [
-            //     'category_id' => 30,
+            //     'category_id' => [33, 30],
             //     'page' => 3,
             //     'url' => [
             //         'https://tuvanmuasam.com/sach'
@@ -1584,7 +1584,7 @@ trait Functions
             //     ]
             // ],
             // [
-            //     'category_id' => 32,
+            //     'category_id' => 37,
             //     'page' => 8,
             //     'url' => [
             //         'https://tuvanmuasam.com/the-thao-da-ngoai'
@@ -1612,14 +1612,14 @@ trait Functions
             //     ]
             // ],
             // [
-            //     'category_id' => 20,
+            //     'category_id' => 22,
             //     'page' => 4,
             //     'url' => [
             //         'https://tuvanmuasam.com/thiet-bi-van-phong'
             //     ]
             // ],
             // [
-            //     'category_id' => 23,
+            //     'category_id' => [25, 31],
             //     'page' => 1,
             //     'url' => [
             //         'https://tuvanmuasam.com/thuc-pham-do-uong'
@@ -1632,13 +1632,13 @@ trait Functions
             //         'https://tuvanmuasam.com/cam-nang-san-pham'
             //     ]
             // ],
-            [
-                'category_id' => 25,
-                'page' => 35,
-                'url' => [
-                    'https://tuvanmuasam.com/tu-van'
-                ]
-            ],
+            // [
+            //     'category_id' => 25,
+            //     'page' => 35,
+            //     'url' => [
+            //         'https://tuvanmuasam.com/tu-van'
+            //     ]
+            // ],
         ];
         $client = new Client();
 
