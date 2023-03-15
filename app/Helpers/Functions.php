@@ -1555,20 +1555,20 @@ trait Functions
         // url là danh sách url page
         // url_item là danh sách url chi tiết tin của danh mục đó
         $UrlList = [
-            [
-                'category_id' => 19,
-                'page' => 44,
-                'url' => [
-                    'https://tuvanmuasam.com/suc-khoe-lam-dep'
-                ]
-            ],
             // [
             //     'category_id' => 19,
-            //     'page' => 9,
+            //     'page' => 44,
             //     'url' => [
-            //         'https://tuvanmuasam.com/suc-khoe'
+            //         'https://tuvanmuasam.com/suc-khoe-lam-dep'
             //     ]
             // ],
+            [
+                'category_id' => 19,
+                'page' => 9,
+                'url' => [
+                    'https://tuvanmuasam.com/suc-khoe'
+                ]
+            ],
             // [
             //     'category_id' => 21,
             //     'page' => 10,
@@ -1750,8 +1750,8 @@ trait Functions
                                     return $node->outerHtml();
                                 });
 
-            $search = ['tuvanmuasam.com', 'tuvanmuasam'];
-            $replace = ['xoaichua.com', 'XoaiChua'];
+            $search = ['tuvanmuasam.com', 'tuvanmuasam', 'Tuvanmuasam'];
+            $replace = ['xoaichua.com', 'XoaiChua', 'XoaiChua'];
             $description = str_replace($search, $replace, $content[0]);
             $description = mb_substr(strip_tags($description), 0, 300, 'utf-8');
             $data = [];
