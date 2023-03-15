@@ -3,6 +3,7 @@
 namespace Botble\Blog\Tables;
 
 use BaseHelper;
+use Botble\ACL\Models\User;
 use Botble\Base\Enums\BaseStatusEnum;
 use Botble\Blog\Exports\PostExport;
 use Botble\Blog\Models\Post;
@@ -142,6 +143,7 @@ class PostTable extends TableAbstract
             'posts.updated_at',
             'posts.author_id',
             'posts.author_type',
+            'posts.website',
         ];
 
         $query = $model
@@ -260,6 +262,22 @@ class PostTable extends TableAbstract
                 'type'     => 'date',
                 'validate' => 'required',
             ],
+            'posts.author_id' => [
+                'title'    => trans('plugins/blog::posts.author'),
+                'type'     => 'select-search',
+                'validate' => 'required',
+                'callback' => 'getAuthors',
+            ],
+            'posts.website' => [
+                'title'    => trans('plugins/blog::posts.website'),
+                'type'     => 'select',
+                'choices'  => [
+                    'trustreview.vn' =>'trustreview.vn',
+                    'phongreviews.com' => 'phongreviews.com',
+                    'tuvanmuasam.com' => 'tuvanmuasam.com'
+                ],
+                'validate' => 'required',
+            ],
         ];
     }
 
@@ -269,6 +287,21 @@ class PostTable extends TableAbstract
     public function getCategories(): array
     {
         return $this->categoryRepository->pluck('categories.name', 'categories.id');
+    }
+
+    /**
+     * @return array
+     */
+    public function getAuthors(): array
+    {
+        $users = User::all();
+        $arr = collect();
+        foreach ($users as $key => $user) {
+            $id = $user->id;
+            $name = $user->getFullName();
+            $arr->put($id, $name);
+        }
+        return $arr->all();
     }
 
     /**

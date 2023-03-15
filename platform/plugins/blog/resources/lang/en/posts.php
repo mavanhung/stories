@@ -27,4 +27,5 @@ return [
     'categories'          => 'Categories',
     'category'            => 'Category',
     'author'              => 'Author',
+    'website'             => 'Website'
 ];

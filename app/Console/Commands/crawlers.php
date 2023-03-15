@@ -78,7 +78,51 @@ class crawlers extends Command
         if($website == 'trustreview'){
             $this->crawlersTrustReview();
         }
-        // $this->crawlersPhongReviewsDetail(32, 'https://phongreviews.com/sach-ngay-xua-co-mot-chuyen-tinh', 'https://phongreviews.com/wp-content/uploads/2022/06/dung-cu-tap-yoga-336x220.jpg');
+        if($website == 'tuvanmuasam'){
+            // https://tuvanmuasam.com/co-rua-binh-sua
+            // https://tuvanmuasam.com/gang-tay-tap-gym
+            // https://tuvanmuasam.com/kem-tri-tham-mong  //có chứa thẻ a khác
+            // https://tuvanmuasam.com/dau-goi-phu-bac //có link khác
+            // https://tuvanmuasam.com/chuot-bay-tot-nhat
+            // url: https://tuvanmuasam.com/usb-wifi
+            // https://tuvanmuasam.com/tong-do-cat-toc-cho-be //sai url
+
+            //////////// Những link có chứa shorten.asia ///////////
+            // https://tuvanmuasam.com/may-rua-mat
+            // https://tuvanmuasam.com/collagen-nhat-tot-nhat
+            // https://tuvanmuasam.com/coc-nguyet-san
+            // https://tuvanmuasam.com/dai-nit-bung
+            // https://tuvanmuasam.com/tinh-dau-toi
+            // https://tuvanmuasam.com/bot-can-tay-giam-can
+            // https://tuvanmuasam.com/dau-goi-phu-bac
+            // https://tuvanmuasam.com/may-massage-chan
+            // https://tuvanmuasam.com/noi-chien-hoi-nuoc
+            // https://tuvanmuasam.com/rong-bien-ngon-nhat
+            // https://tuvanmuasam.com/may-rua-mat-halio
+            // https://tuvanmuasam.com/khau-trang-wakamono
+            // https://tuvanmuasam.com/review-rong-nho-yukibudo
+            // https://tuvanmuasam.com/dau-goi-phu-bac-sin-hair
+            // https://tuvanmuasam.com/dau-goi-dego-pharma
+            // https://tuvanmuasam.com/noi-chien-khong-dau-lotte
+            // https://tuvanmuasam.com/rong-nho-sabudo
+            // https://tuvanmuasam.com/coc-nguyet-san-ovacup
+            // https://tuvanmuasam.com/coc-nguyet-san-beucup
+            // https://tuvanmuasam.com/tien-dinh-khang
+            // https://tuvanmuasam.com/may-tam-nuoc-iris-care
+            // https://tuvanmuasam.com/sua-non-colomi
+            // https://tuvanmuasam.com/com-tri-nao-gbrain
+
+            // https://tuvanmuasam.com/chuot-bay-tot-nhat //có link google search
+
+            //https://tuvanmuasam.com/kem-chong-nang-han-quoc //Lỗi hình ảnh
+            //https://tuvanmuasam.com/keo-dan-go //Lỗi hình ảnh
+            //https://tuvanmuasam.com/android-tv-box //Lỗi hình ảnh
+            //https://tuvanmuasam.com/quat-dieu-hoa-sunhouse //Lỗi hình ảnh
+            //https://tuvanmuasam.com/bang-ve-dien-tu //Lỗi hình ảnh
+
+            $this->crawlersTuVanMuaSam();
+        }
+        // $this->crawlersTuVanMuaSamDetail(19, 'https://tuvanmuasam.com/co-rua-binh-sua', 'https://tuvanmuasam.com/wp-content/uploads/2022/12/co-rua-binh-sua.png');
         return 0;
     }
 }
