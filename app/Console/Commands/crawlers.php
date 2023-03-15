@@ -122,7 +122,12 @@ class crawlers extends Command
 
             $this->crawlersTuVanMuaSam();
         }
-        // $this->crawlersTuVanMuaSamDetail(19, 'https://tuvanmuasam.com/co-rua-binh-sua', 'https://tuvanmuasam.com/wp-content/uploads/2022/12/co-rua-binh-sua.png');
+        if($website == 'removefolder'){
+            $this->removefolder();
+        }
+        // $this->crawlersPhongReviewsDetail(19, 'https://phongreviews.com/thuoc-nhuom-toc-han-quoc/', 'https://phongreviews.com/wp-content/uploads/2022/02/thuoc-nhuom-toc-han-quoc-0-1024x841.jpg');
+        // $this->crawlersTrustReviewDetail(19, 'https://trustreview.vn/noi-chien-khong-dau-loai-nao-tot.html', 'https://trustreview.vn/wp-content/uploads/2020/11/noi-chien-khong-dau-loai-nao-tot-11-1-300x171.jpg');
+        // $this->crawlersTuVanMuaSamDetail(19, 'https://tuvanmuasam.com/quay-cui-cho-be', 'https://tuvanmuasam.com/wp-content/uploads/2023/03/quay-cui-cho-be-300x240.jpg');
         return 0;
     }
 }

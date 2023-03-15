@@ -101,16 +101,30 @@ trait Functions
 
     public function removeSizeImgSrc($src)
     {
-        $arr = explode('-', $src);
-        $ext = '.'.array_reverse(explode('.', $src))[0];
-        if(count($arr) > 1){
-            $arrAfter = array_slice($arr, 0, count($arr) -1);
-            $srcAfter = implode('-', $arrAfter) . $ext;
+        // $arr = explode('-', $src);
+        // $ext = '.'.array_reverse(explode('.', $src))[0];
+        // if(count($arr) > 1){
+        //     $arrAfter = array_slice($arr, 0, count($arr) -1);
+        //     $srcAfter = implode('-', $arrAfter) . $ext;
+        //     $exists = $this->remoteFileExists($srcAfter);
+        //     if(!$exists){
+        //         return $src;
+        //     }
+        //     return $srcAfter;
+        // }
+        // return $src;
+
+        $name = pathinfo($src)['filename'];
+        $ext = pathinfo($src)['extension'];
+        if(count(explode('-', $name)) > 1){
+            $newName = implode('-', array_slice(explode('-', $name), 0, count(explode('-', $name)) -1)).'.'.$ext;
+            $size = array_reverse(explode('-', $name))[0];
+            $srcAfter = pathinfo($src)['dirname'].'/'.$newName;
             $exists = $this->remoteFileExists($srcAfter);
-            if(!$exists){
-                return $src;
+            if(count(explode('x', $size)) == 2 && $exists){
+                return $srcAfter;
             }
-            return $srcAfter;
+            return $src;
         }
         return $src;
     }
@@ -1831,6 +1845,7 @@ trait Functions
                         //     }
                         // }
                         $src = $imageTags[0]->getAttribute('data-lazy-src');
+                        $src = $this->removeSizeImgSrc($src);
                         $srcName = Str::slug(pathinfo($src)['filename']).'.'.pathinfo($src)['extension'];
                         $alt = $imageTags[0]->getAttribute('alt');
                         $widthAt = $imageTags[0]->getAttribute('width');
@@ -1949,6 +1964,7 @@ trait Functions
                             // $src = $tag->getAttribute('data-lazy-src');
                         // }
                         $src = $imageTags[0]->getAttribute('data-lazy-src');
+                        $src = $this->removeSizeImgSrc($src);
                         $srcName = Str::slug(pathinfo($src)['filename']).'.'.pathinfo($src)['extension'];
                         $imgExists = $this->remoteFileExists($src);
                         if(!$imgExists){
@@ -2038,6 +2054,32 @@ trait Functions
             return true;
         } catch (\Throwable $th) {
             DB::rollBack();
+            $this->error('Có lỗi xảy ra: '.$th->getMessage().', file: '.$th->getFile().', dòng: '.$th->getLine());
+            Log::channel('Crawlers')->error([
+                $th->getMessage(),
+                $th->getFile(),
+                $th->getLine()
+            ]);
+        }
+    }
+
+    public function removeFolder(){
+        try {
+            $path = 'news';
+            $directories = Storage::directories($path);
+            foreach ($directories as $directorie) {
+                $postId = array_reverse(explode('/', $directorie))[0];
+                $post = Post::find($postId);
+                if(blank($post)){
+                    $newPath = 'public/news/'.$postId;
+                    if(!Storage::exists($newPath)){
+                        dump('delete folder: '.$postId);
+                        Storage::deleteDirectory('news/'.$postId);
+                    }
+                }
+            }
+            dd('done');
+        } catch (\Throwable $th) {
             $this->error('Có lỗi xảy ra: '.$th->getMessage().', file: '.$th->getFile().', dòng: '.$th->getLine());
             Log::channel('Crawlers')->error([
                 $th->getMessage(),
