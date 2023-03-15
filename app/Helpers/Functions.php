@@ -1555,13 +1555,13 @@ trait Functions
         // url là danh sách url page
         // url_item là danh sách url chi tiết tin của danh mục đó
         $UrlList = [
-            // [
-            //     'category_id' => 19,
-            //     'page' => 44,
-            //     'url' => [
-            //         'https://tuvanmuasam.com/suc-khoe-lam-dep'
-            //     ]
-            // ],
+            [
+                'category_id' => 19,
+                'page' => 44,
+                'url' => [
+                    'https://tuvanmuasam.com/suc-khoe-lam-dep'
+                ]
+            ],
             [
                 'category_id' => 19,
                 'page' => 9,
@@ -1696,7 +1696,7 @@ trait Functions
     {
         try {
             DB::beginTransaction();
-            dump($url);
+            // dump($url);
             $client = new Client();
             $crawler = $client->request('GET', $url);
 
@@ -1762,6 +1762,7 @@ trait Functions
                                         ->first();
 
             if(blank($slug)) {
+                dump($url);
                 $post = Post::create([
                     'name' => $title[0],
                     'description' => $description,
@@ -1802,7 +1803,7 @@ trait Functions
                     ]);
                 }
             }else {
-                $this->sendNotificationTelegram('Crawler web tuvanmuasam.com đã tồn tại slug, link crawler: '.$url);
+                // $this->sendNotificationTelegram('Crawler web tuvanmuasam.com đã tồn tại slug, link crawler: '.$url);
             }
 
             if(isset($post)) {
