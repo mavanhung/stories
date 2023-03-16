@@ -1569,27 +1569,27 @@ trait Functions
             //         'https://tuvanmuasam.com/suc-khoe'
             //     ]
             // ],
+            // [
+            //     'category_id' => 21,
+            //     'page' => 10,
+            //     'url' => [
+            //         'https://tuvanmuasam.com/me-be'
+            //     ]
+            // ],
             [
-                'category_id' => 21,
-                'page' => 10,
+                'category_id' => [33, 30],
+                'page' => 3,
                 'url' => [
-                    'https://tuvanmuasam.com/me-be'
+                    'https://tuvanmuasam.com/sach'
                 ]
             ],
-            // [
-            //     'category_id' => [33, 30],
-            //     'page' => 3,
-            //     'url' => [
-            //         'https://tuvanmuasam.com/sach'
-            //     ]
-            // ],
-            // [
-            //     'category_id' => 23,
-            //     'page' => 14,
-            //     'url' => [
-            //         'https://tuvanmuasam.com/nha-cua-doi-song'
-            //     ]
-            // ],
+            [
+                'category_id' => 23,
+                'page' => 14,
+                'url' => [
+                    'https://tuvanmuasam.com/nha-cua-doi-song'
+                ]
+            ],
             // [
             //     'category_id' => 20,
             //     'page' => 16,
@@ -1696,7 +1696,7 @@ trait Functions
     {
         try {
             DB::beginTransaction();
-            // dump($url);
+            dump($url);
             $client = new Client();
             $crawler = $client->request('GET', $url);
 
@@ -1802,11 +1802,10 @@ trait Functions
                     ]);
                 }
             }else {
-                // $this->sendNotificationTelegram('Crawler web tuvanmuasam.com đã tồn tại slug, link crawler: '.$url);
+                $this->sendNotificationTelegram('Crawler web tuvanmuasam.com đã tồn tại slug, link crawler: '.$url);
             }
 
             if(isset($post)) {
-                dump($url);
                 foreach($content as $k => $c) {
                     $checkBtnTiki = strpos($c, '<a class="tiki"');
                     $checkBtnLazada = strpos($c, '<a class="lazada"');
