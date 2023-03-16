@@ -1611,48 +1611,48 @@ trait Functions
             //         'https://tuvanmuasam.com/dien-thoai-may-tinh'
             //     ]
             // ],
-            [
-                'category_id' => 22,
-                'page' => 11,
-                'url' => [
-                    'https://tuvanmuasam.com/dien-tu-cong-nghe'
-                ]
-            ],
-            [
-                'category_id' => 20,
-                'page' => 11,
-                'url' => [
-                    'https://tuvanmuasam.com/thiet-bi-gia-dinh'
-                ]
-            ],
-            [
-                'category_id' => 22,
-                'page' => 4,
-                'url' => [
-                    'https://tuvanmuasam.com/thiet-bi-van-phong'
-                ]
-            ],
-            [
-                'category_id' => [25, 31],
-                'page' => 1,
-                'url' => [
-                    'https://tuvanmuasam.com/thuc-pham-do-uong'
-                ]
-            ],
-            [
-                'category_id' => 23,
-                'page' => 8,
-                'url' => [
-                    'https://tuvanmuasam.com/cam-nang-san-pham'
-                ]
-            ],
             // [
-            //     'category_id' => 25,
-            //     'page' => 35,
+            //     'category_id' => 22,
+            //     'page' => 11,
             //     'url' => [
-            //         'https://tuvanmuasam.com/tu-van'
+            //         'https://tuvanmuasam.com/dien-tu-cong-nghe'
             //     ]
             // ],
+            // [
+            //     'category_id' => 20,
+            //     'page' => 11,
+            //     'url' => [
+            //         'https://tuvanmuasam.com/thiet-bi-gia-dinh'
+            //     ]
+            // ],
+            // [
+            //     'category_id' => 22,
+            //     'page' => 4,
+            //     'url' => [
+            //         'https://tuvanmuasam.com/thiet-bi-van-phong'
+            //     ]
+            // ],
+            // [
+            //     'category_id' => [25, 31],
+            //     'page' => 1,
+            //     'url' => [
+            //         'https://tuvanmuasam.com/thuc-pham-do-uong'
+            //     ]
+            // ],
+            // [
+            //     'category_id' => 23,
+            //     'page' => 8,
+            //     'url' => [
+            //         'https://tuvanmuasam.com/cam-nang-san-pham'
+            //     ]
+            // ],
+            [
+                'category_id' => 25,
+                'page' => 35,
+                'url' => [
+                    'https://tuvanmuasam.com/tu-van'
+                ]
+            ],
         ];
         $client = new Client();
 
@@ -1696,7 +1696,7 @@ trait Functions
     {
         try {
             DB::beginTransaction();
-            // dump($url);
+            dump($url);
             $client = new Client();
             $crawler = $client->request('GET', $url);
 
@@ -1802,11 +1802,10 @@ trait Functions
                     ]);
                 }
             }else {
-                // $this->sendNotificationTelegram('Crawler web tuvanmuasam.com đã tồn tại slug, link crawler: '.$url);
+                $this->sendNotificationTelegram('Crawler web tuvanmuasam.com đã tồn tại slug, link crawler: '.$url);
             }
 
             if(isset($post)) {
-                dump($url);
                 foreach($content as $k => $c) {
                     $checkBtnTiki = strpos($c, '<a class="tiki"');
                     $checkBtnLazada = strpos($c, '<a class="lazada"');
