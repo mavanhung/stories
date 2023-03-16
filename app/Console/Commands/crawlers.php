@@ -48,7 +48,7 @@ class crawlers extends Command
             $content = $post->content;
             $check = strpos($content, 'Tư Vấn Mua Sắm');
             if(!($check === false)){
-                $ids[] = $content->id;
+                $ids[] = $post->id;
                 $count++;
                 // $search = ['Tư Vấn Mua Sắm'];
                 // $replace = ['XoaiChua'];
