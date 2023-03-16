@@ -1696,7 +1696,7 @@ trait Functions
     {
         try {
             DB::beginTransaction();
-            // dump($url);
+            dump($url);
             $client = new Client();
             $crawler = $client->request('GET', $url);
 
@@ -1802,11 +1802,10 @@ trait Functions
                     ]);
                 }
             }else {
-                // $this->sendNotificationTelegram('Crawler web tuvanmuasam.com đã tồn tại slug, link crawler: '.$url);
+                $this->sendNotificationTelegram('Crawler web tuvanmuasam.com đã tồn tại slug, link crawler: '.$url);
             }
 
             if(isset($post)) {
-                dump($url);
                 foreach($content as $k => $c) {
                     $checkBtnTiki = strpos($c, '<a class="tiki"');
                     $checkBtnLazada = strpos($c, '<a class="lazada"');
