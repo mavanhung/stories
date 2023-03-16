@@ -1846,6 +1846,7 @@ trait Functions
                         //     }
                         // }
                         $src = $imageTags[0]->getAttribute('data-lazy-src');
+                        dump($src);
                         $src = $this->removeSizeImgSrc($src);
                         $srcName = Str::slug(pathinfo($src)['filename']).'.'.pathinfo($src)['extension'];
                         $alt = $imageTags[0]->getAttribute('alt');
@@ -1965,6 +1966,7 @@ trait Functions
                             // $src = $tag->getAttribute('data-lazy-src');
                         // }
                         $src = $imageTags[0]->getAttribute('data-lazy-src');
+                        dump($src);
                         $src = $this->removeSizeImgSrc($src);
                         $srcName = Str::slug(pathinfo($src)['filename']).'.'.pathinfo($src)['extension'];
                         $imgExists = $this->remoteFileExists($src);
