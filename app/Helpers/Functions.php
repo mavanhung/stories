@@ -1846,32 +1846,35 @@ trait Functions
                         //     }
                         // }
                         $src = $imageTags[0]->getAttribute('data-lazy-src');
-                        dump($src);
-                        $src = $this->removeSizeImgSrc($src);
-                        $srcName = Str::slug(pathinfo($src)['filename']).'.'.pathinfo($src)['extension'];
-                        $alt = $imageTags[0]->getAttribute('alt');
-                        $widthAt = $imageTags[0]->getAttribute('width');
-                        $heightAt = $imageTags[0]->getAttribute('height');
+                        if(!empty($src)){
+                            $src = $this->removeSizeImgSrc($src);
+                            $srcName = Str::slug(pathinfo($src)['filename']).'.'.pathinfo($src)['extension'];
+                            $alt = $imageTags[0]->getAttribute('alt');
+                            $widthAt = $imageTags[0]->getAttribute('width');
+                            $heightAt = $imageTags[0]->getAttribute('height');
 
-                        $imgExists = $this->remoteFileExists($src);
-                        if(!$imgExists){
-                            $src = urldecode($src);
-                        }
-                        if($imgExists){
-                            if(isset($src)) {
-                                // Lưu hình ảnh ở local storage
-                                $imgName = pathinfo($src)['basename'];
-                                $imgExtension = 'image/' . pathinfo($src)['extension'];
-                                $imgStoragePath = 'news/'.$post->id.'/'.$srcName;
-                                $this->saveImage($src, $imgStoragePath);
-                                // Kết thúc lưu hình ảnh ở local storage
-
-                                $fileUpload = new \Illuminate\Http\UploadedFile(Storage::path($imgStoragePath), $imgName, $imgExtension, null, true);
-                                \RvMedia::handleUpload($fileUpload, $folder->id);
+                            $imgExists = $this->remoteFileExists($src);
+                            if(!$imgExists){
+                                $src = urldecode($src);
                             }
-                            $imgTagsCustom .= '<img decoding="async" loading="lazy" src="'.get_image_url($imgStoragePath).'" data-src="'.get_image_url($imgStoragePath).'" width="'.$widthAt.'" height="'.$heightAt.'" alt="'.$alt.'" >';
+                            if($imgExists){
+                                if(isset($src)) {
+                                    // Lưu hình ảnh ở local storage
+                                    $imgName = pathinfo($src)['basename'];
+                                    $imgExtension = 'image/' . pathinfo($src)['extension'];
+                                    $imgStoragePath = 'news/'.$post->id.'/'.$srcName;
+                                    $this->saveImage($src, $imgStoragePath);
+                                    // Kết thúc lưu hình ảnh ở local storage
+
+                                    $fileUpload = new \Illuminate\Http\UploadedFile(Storage::path($imgStoragePath), $imgName, $imgExtension, null, true);
+                                    \RvMedia::handleUpload($fileUpload, $folder->id);
+                                }
+                                $imgTagsCustom .= '<img decoding="async" loading="lazy" src="'.get_image_url($imgStoragePath).'" data-src="'.get_image_url($imgStoragePath).'" width="'.$widthAt.'" height="'.$heightAt.'" alt="'.$alt.'" >';
+                            }
+                            $imgTagsCustom .= '</p>';
+                        }else{
+                            $imgTagsCustom = '';
                         }
-                        $imgTagsCustom .= '</p>';
 
                         //Xử lý thẻ a
                         $aTags = $doc->getElementsByTagName('a');
@@ -1966,49 +1969,50 @@ trait Functions
                             // $src = $tag->getAttribute('data-lazy-src');
                         // }
                         $src = $imageTags[0]->getAttribute('data-lazy-src');
-                        dump($src);
-                        $src = $this->removeSizeImgSrc($src);
-                        $srcName = Str::slug(pathinfo($src)['filename']).'.'.pathinfo($src)['extension'];
-                        $imgExists = $this->remoteFileExists($src);
-                        if(!$imgExists){
-                            $src = urldecode($src);
-                        }
-                        if($imgExists){
-                            if(isset($src)) {
-                                // Lưu hình ảnh ở local storage
-                                $imgName = pathinfo($src)['basename'];
-                                $imgExtension = 'image/' . pathinfo($src)['extension'];
-                                $imgStoragePath = 'news/'.$post->id.'/'.$srcName;
-                                $this->saveImage($src, $imgStoragePath);
-                                // Kết thúc lưu hình ảnh ở local storage
-
-                                $fileUpload = new \Illuminate\Http\UploadedFile(Storage::path($imgStoragePath), $imgName, $imgExtension, null, true);
-                                \RvMedia::handleUpload($fileUpload, $folder->id);
+                        if(!empty($src)){
+                            $src = $this->removeSizeImgSrc($src);
+                            $srcName = Str::slug(pathinfo($src)['filename']).'.'.pathinfo($src)['extension'];
+                            $imgExists = $this->remoteFileExists($src);
+                            if(!$imgExists){
+                                $src = urldecode($src);
                             }
-                            $imageTags[0]->setAttribute('loading', 'lazy');
-                            $imageTags[0]->setAttribute('src', get_image_url($imgStoragePath));
-                            $imageTags[0]->setAttribute('data-src', get_image_url($imgStoragePath));
-                        }
-                        foreach($noscripts as $nos => $noscr) {
-                            $noscript = $noscripts->item($nos);
-                            $noscript->parentNode->removeChild($noscript);
-                        }
-                        $dom = $doc->saveHTML();
-                        $dom = preg_replace('/data-mil=".*?"/', '', $dom);
-                        $dom = preg_replace('/data-wpel-link=".*?"/', '', $dom);
-                        $dom = preg_replace('/data-ll-status=".*?"/', '', $dom);
-                        $dom = preg_replace('/data-lazy-srcset=".*?"/', '', $dom);
-                        $dom = preg_replace('/data-lazy-src=".*?"/', '', $dom);
-                        $dom = preg_replace('/data-lazy-sizes=".*?"/', '', $dom);
-                        $dom = preg_replace('/srcset=".*?"/', '', $dom);
-                        $dom = preg_replace('/class=".*?"/', '', $dom);
-                        $dom = preg_replace('/id=".*?"/', '', $dom);
-                        $dom = preg_replace('/sizes=".*?"/', '', $dom);
-                        $dom = preg_replace('/style=".*?"/', '', $dom);
+                            if($imgExists){
+                                if(isset($src)) {
+                                    // Lưu hình ảnh ở local storage
+                                    $imgName = pathinfo($src)['basename'];
+                                    $imgExtension = 'image/' . pathinfo($src)['extension'];
+                                    $imgStoragePath = 'news/'.$post->id.'/'.$srcName;
+                                    $this->saveImage($src, $imgStoragePath);
+                                    // Kết thúc lưu hình ảnh ở local storage
 
-                        $dom = str_replace($search, $replace, $dom);
-                        if($imgExists){
-                            $data[] = $dom;
+                                    $fileUpload = new \Illuminate\Http\UploadedFile(Storage::path($imgStoragePath), $imgName, $imgExtension, null, true);
+                                    \RvMedia::handleUpload($fileUpload, $folder->id);
+                                }
+                                $imageTags[0]->setAttribute('loading', 'lazy');
+                                $imageTags[0]->setAttribute('src', get_image_url($imgStoragePath));
+                                $imageTags[0]->setAttribute('data-src', get_image_url($imgStoragePath));
+                            }
+                            foreach($noscripts as $nos => $noscr) {
+                                $noscript = $noscripts->item($nos);
+                                $noscript->parentNode->removeChild($noscript);
+                            }
+                            $dom = $doc->saveHTML();
+                            $dom = preg_replace('/data-mil=".*?"/', '', $dom);
+                            $dom = preg_replace('/data-wpel-link=".*?"/', '', $dom);
+                            $dom = preg_replace('/data-ll-status=".*?"/', '', $dom);
+                            $dom = preg_replace('/data-lazy-srcset=".*?"/', '', $dom);
+                            $dom = preg_replace('/data-lazy-src=".*?"/', '', $dom);
+                            $dom = preg_replace('/data-lazy-sizes=".*?"/', '', $dom);
+                            $dom = preg_replace('/srcset=".*?"/', '', $dom);
+                            $dom = preg_replace('/class=".*?"/', '', $dom);
+                            $dom = preg_replace('/id=".*?"/', '', $dom);
+                            $dom = preg_replace('/sizes=".*?"/', '', $dom);
+                            $dom = preg_replace('/style=".*?"/', '', $dom);
+
+                            $dom = str_replace($search, $replace, $dom);
+                            if($imgExists){
+                                $data[] = $dom;
+                            }
                         }
                     }else {
                         $c = preg_replace('/data-mil=".*?"/', '', $c);
