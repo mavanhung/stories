@@ -46,7 +46,7 @@ class crawlers extends Command
         $ids = [];
         foreach ($posts as $post) {
             $content = $post->content;
-            $check = strpos($content, 'Tư Vấn Mua Sắm');
+            $check = strpos($content, 'Tư vấn mua sắm');
             if(!($check === false)){
                 $ids[] = $post->id;
                 $count++;
