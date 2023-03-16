@@ -50,8 +50,8 @@ class crawlers extends Command
             if(!($check === false)){
                 $ids[] = $post->id;
                 $count++;
-                $search = ['Tư Vấn Mua Sắm'];
-                $replace = ['XoaiChua'];
+                $search = ['Tư Vấn Mua Sắm', 'Tư vấn mua sắm'];
+                $replace = ['XoaiChua', 'XoaiChua'];
                 $result = str_replace($search, $replace, $content);
                 $post->update([
                     'content' => $result
