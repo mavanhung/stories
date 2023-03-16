@@ -1576,41 +1576,41 @@ trait Functions
             //         'https://tuvanmuasam.com/me-be'
             //     ]
             // ],
+            // [
+            //     'category_id' => [33, 30],
+            //     'page' => 3,
+            //     'url' => [
+            //         'https://tuvanmuasam.com/sach'
+            //     ]
+            // ],
+            // [
+            //     'category_id' => 23,
+            //     'page' => 14,
+            //     'url' => [
+            //         'https://tuvanmuasam.com/nha-cua-doi-song'
+            //     ]
+            // ],
             [
-                'category_id' => [33, 30],
-                'page' => 3,
+                'category_id' => 20,
+                'page' => 16,
                 'url' => [
-                    'https://tuvanmuasam.com/sach'
+                    'https://tuvanmuasam.com/gia-dung-nha-bep'
                 ]
             ],
             [
-                'category_id' => 23,
-                'page' => 14,
+                'category_id' => 37,
+                'page' => 8,
                 'url' => [
-                    'https://tuvanmuasam.com/nha-cua-doi-song'
+                    'https://tuvanmuasam.com/the-thao-da-ngoai'
                 ]
             ],
-            // [
-            //     'category_id' => 20,
-            //     'page' => 16,
-            //     'url' => [
-            //         'https://tuvanmuasam.com/gia-dung-nha-bep'
-            //     ]
-            // ],
-            // [
-            //     'category_id' => 37,
-            //     'page' => 8,
-            //     'url' => [
-            //         'https://tuvanmuasam.com/the-thao-da-ngoai'
-            //     ]
-            // ],
-            // [
-            //     'category_id' => 22,
-            //     'page' => 6,
-            //     'url' => [
-            //         'https://tuvanmuasam.com/dien-thoai-may-tinh'
-            //     ]
-            // ],
+            [
+                'category_id' => 22,
+                'page' => 6,
+                'url' => [
+                    'https://tuvanmuasam.com/dien-thoai-may-tinh'
+                ]
+            ],
             // [
             //     'category_id' => 22,
             //     'page' => 11,
@@ -1696,7 +1696,7 @@ trait Functions
     {
         try {
             DB::beginTransaction();
-            // dump($url);
+            dump($url);
             $client = new Client();
             $crawler = $client->request('GET', $url);
 
@@ -1802,11 +1802,10 @@ trait Functions
                     ]);
                 }
             }else {
-                // $this->sendNotificationTelegram('Crawler web tuvanmuasam.com đã tồn tại slug, link crawler: '.$url);
+                $this->sendNotificationTelegram('Crawler web tuvanmuasam.com đã tồn tại slug, link crawler: '.$url);
             }
 
             if(isset($post)) {
-                dump($url);
                 foreach($content as $k => $c) {
                     $checkBtnTiki = strpos($c, '<a class="tiki"');
                     $checkBtnLazada = strpos($c, '<a class="lazada"');
