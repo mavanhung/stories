@@ -41,13 +41,14 @@ class crawlers extends Command
      */
     public function handle()
     {
-
-        $posts = Post::where('website', 'tuvanmuasam.com')->select('content')->get();
+        $posts = Post::where('website', 'tuvanmuasam.com')->select('id', 'content')->get();
         $count = 0;
+        $ids = [];
         foreach ($posts as $post) {
             $content = $post->content;
             $check = strpos($content, 'Tư Vấn Mua Sắm');
             if(!($check === false)){
+                $ids[] = $content->id;
                 $count++;
                 // $search = ['Tư Vấn Mua Sắm'];
                 // $replace = ['XoaiChua'];
@@ -57,7 +58,8 @@ class crawlers extends Command
                 // ]);
             }
         }
-        dump($count);
+        $this->sendNotificationTelegram(implode(', ', $ids));
+        dump($count, $ids);
 
         // https://phongreviews.com/sua-rua-mat-sk-ii/    click
         // https://phongreviews.com/son-espoir/   rutgon
