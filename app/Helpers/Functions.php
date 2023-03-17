@@ -2073,18 +2073,17 @@ trait Functions
         try {
             $path = 'news';
             $directories = Storage::directories($path);
-            dd(count($directories));
-            // foreach ($directories as $directorie) {
-            //     $postId = array_reverse(explode('/', $directorie))[0];
-            //     $post = Post::find($postId);
-            //     if(blank($post)){
-            //         $newPath = 'public/news/'.$postId;
-            //         if(!Storage::exists($newPath)){
-            //             dump('delete folder: '.$postId);
-            //             Storage::deleteDirectory('news/'.$postId);
-            //         }
-            //     }
-            // }
+            foreach ($directories as $directorie) {
+                $postId = array_reverse(explode('/', $directorie))[0];
+                $post = Post::find($postId);
+                if(blank($post)){
+                    $newPath = 'public/news/'.$postId;
+                    if(!Storage::exists($newPath)){
+                        dump('delete folder: '.$postId);
+                        Storage::deleteDirectory('news/'.$postId);
+                    }
+                }
+            }
             dd('done');
         } catch (\Throwable $th) {
             $this->error('Có lỗi xảy ra: '.$th->getMessage().', file: '.$th->getFile().', dòng: '.$th->getLine());
