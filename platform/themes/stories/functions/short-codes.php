@@ -54,6 +54,10 @@ if (is_plugin_active('blog')) {
                 }
             }
 
+            $categories = Cache::remember('blog-categories-posts', 60, function () use ($categories) {
+                return $categories;
+            });
+
             return Theme::partial('short-codes.blog-categories-posts', compact('categories'));
         });
 
@@ -83,6 +87,10 @@ if (is_plugin_active('blog')) {
                     $categories[] = $category;
                 }
             }
+
+            $categories = Cache::remember('blog-categories-posts-big', 60, function () use ($categories) {
+                return $categories;
+            });
 
             return Theme::partial('short-codes.blog-categories-posts-big', compact('categories'));
         });
@@ -123,6 +131,10 @@ if (is_plugin_active('blog')) {
                 $categories[] = $category;
             }
         }
+
+        $categories = Cache::remember('categories-with-posts', 60, function () use ($categories) {
+            return $categories;
+        });
 
         return Theme::partial('short-codes.categories-with-posts', compact('categories'));
     });
