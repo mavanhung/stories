@@ -332,20 +332,20 @@ trait Functions
             //         'https://phongreviews.com/chuyen-muc/cong-nghe/'
             //     ]
             // ],
-            // [
-            //     'category_id' => 19,
-            //     'page' => 142,
-            //     'url' => [
-            //         'https://phongreviews.com/chuyen-muc/suc-khoe/'
-            //     ]
-            // ],
             [
-                'category_id' => 20,
-                'page' => 52,
+                'category_id' => 19,
+                'page' => 142,
                 'url' => [
-                    'https://phongreviews.com/chuyen-muc/do-gia-dung/'
+                    'https://phongreviews.com/chuyen-muc/suc-khoe/'
                 ]
             ],
+            // [
+            //     'category_id' => 20,
+            //     'page' => 52,
+            //     'url' => [
+            //         'https://phongreviews.com/chuyen-muc/do-gia-dung/'
+            //     ]
+            // ],
             // [
             //     'category_id' => 23,
             //     'page' => 29,
