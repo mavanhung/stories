@@ -902,6 +902,13 @@ trait Functions
                     'https://trustreview.vn/category/kinh-nghiem/kien-thuc-suc-khoe-lam-dep'
                 ]
             ],
+            [
+                'category_id' => [25, 19, 31],
+                'page' => 5,
+                'url' => [
+                    'https://trustreview.vn/category/dinh-duong'
+                ]
+            ],
         ];
         $client = new Client();
 
