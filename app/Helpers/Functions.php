@@ -841,63 +841,63 @@ trait Functions
         $UrlList = [
             [
                 'category_id' => 22,
-                'page' => 5,
+                'page' => 10,
                 'url' => [
                     'https://trustreview.vn/category/thiet-bi-dien-tu'
                 ]
             ],
             [
                 'category_id' => 20,
-                'page' => 15,
+                'page' => 20,
                 'url' => [
                     'https://trustreview.vn/category/do-gia-dung'
                 ]
             ],
             [
                 'category_id' => 19,
-                'page' => 5,
+                'page' => 10,
                 'url' => [
                     'https://trustreview.vn/category/suc-khoe-lam-dep'
                 ]
             ],
             [
                 'category_id' => 19,
-                'page' => 3,
+                'page' => 10,
                 'url' => [
                     'https://trustreview.vn/category/suc-khoe'
                 ]
             ],
             [
                 'category_id' => 21,
-                'page' => 3,
+                'page' => 10,
                 'url' => [
                     'https://trustreview.vn/category/me-va-be'
                 ]
             ],
             [
                 'category_id' => 23,
-                'page' => 5,
+                'page' => 10,
                 'url' => [
                     'https://trustreview.vn/category/nha-cua-doi-song'
                 ]
             ],
             [
                 'category_id' => 25,
-                'page' => 7,
+                'page' => 15,
                 'url' => [
                     'https://trustreview.vn/category/kinh-nghiem'
                 ]
             ],
             [
                 'category_id' => 25,
-                'page' => 5,
+                'page' => 10,
                 'url' => [
                     'https://trustreview.vn/category/kinh-nghiem/kinh-nghiem-do-gia-dung'
                 ]
             ],
             [
                 'category_id' => 25,
-                'page' => 1,
+                'page' => 5,
                 'url' => [
                     'https://trustreview.vn/category/kinh-nghiem/kien-thuc-suc-khoe-lam-dep'
                 ]
