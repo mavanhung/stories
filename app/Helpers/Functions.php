@@ -839,72 +839,72 @@ trait Functions
         // url là danh sách url page
         // url_item là danh sách url chi tiết tin của danh mục đó
         $UrlList = [
-            [
-                'category_id' => 22,
-                'page' => 10,
-                'url' => [
-                    'https://trustreview.vn/category/thiet-bi-dien-tu'
-                ]
-            ],
-            [
-                'category_id' => 20,
-                'page' => 20,
-                'url' => [
-                    'https://trustreview.vn/category/do-gia-dung'
-                ]
-            ],
-            [
-                'category_id' => 19,
-                'page' => 10,
-                'url' => [
-                    'https://trustreview.vn/category/suc-khoe-lam-dep'
-                ]
-            ],
-            [
-                'category_id' => 19,
-                'page' => 10,
-                'url' => [
-                    'https://trustreview.vn/category/suc-khoe'
-                ]
-            ],
-            [
-                'category_id' => 21,
-                'page' => 10,
-                'url' => [
-                    'https://trustreview.vn/category/me-va-be'
-                ]
-            ],
-            [
-                'category_id' => 23,
-                'page' => 10,
-                'url' => [
-                    'https://trustreview.vn/category/nha-cua-doi-song'
-                ]
-            ],
-            [
-                'category_id' => 25,
-                'page' => 15,
-                'url' => [
-                    'https://trustreview.vn/category/kinh-nghiem'
-                ]
-            ],
-            [
-                'category_id' => 25,
-                'page' => 10,
-                'url' => [
-                    'https://trustreview.vn/category/kinh-nghiem/kinh-nghiem-do-gia-dung'
-                ]
-            ],
-            [
-                'category_id' => 25,
-                'page' => 5,
-                'url' => [
-                    'https://trustreview.vn/category/kinh-nghiem/kien-thuc-suc-khoe-lam-dep'
-                ]
-            ],
+            // [
+            //     'category_id' => 22,
+            //     'page' => 10,
+            //     'url' => [
+            //         'https://trustreview.vn/category/thiet-bi-dien-tu'
+            //     ]
+            // ],
+            // [
+            //     'category_id' => 20,
+            //     'page' => 20,
+            //     'url' => [
+            //         'https://trustreview.vn/category/do-gia-dung'
+            //     ]
+            // ],
+            // [
+            //     'category_id' => 19,
+            //     'page' => 10,
+            //     'url' => [
+            //         'https://trustreview.vn/category/suc-khoe-lam-dep'
+            //     ]
+            // ],
+            // [
+            //     'category_id' => 19,
+            //     'page' => 10,
+            //     'url' => [
+            //         'https://trustreview.vn/category/suc-khoe'
+            //     ]
+            // ],
+            // [
+            //     'category_id' => 21,
+            //     'page' => 10,
+            //     'url' => [
+            //         'https://trustreview.vn/category/me-va-be'
+            //     ]
+            // ],
+            // [
+            //     'category_id' => 23,
+            //     'page' => 10,
+            //     'url' => [
+            //         'https://trustreview.vn/category/nha-cua-doi-song'
+            //     ]
+            // ],
+            // [
+            //     'category_id' => 25,
+            //     'page' => 15,
+            //     'url' => [
+            //         'https://trustreview.vn/category/kinh-nghiem'
+            //     ]
+            // ],
+            // [
+            //     'category_id' => 25,
+            //     'page' => 10,
+            //     'url' => [
+            //         'https://trustreview.vn/category/kinh-nghiem/kinh-nghiem-do-gia-dung'
+            //     ]
+            // ],
+            // [
+            //     'category_id' => 25,
+            //     'page' => 5,
+            //     'url' => [
+            //         'https://trustreview.vn/category/kinh-nghiem/kien-thuc-suc-khoe-lam-dep'
+            //     ]
+            // ],
             [
                 'category_id' => [25, 19, 31],
-                'page' => 5,
+                'page' => 1,
                 'url' => [
                     'https://trustreview.vn/category/dinh-duong'
                 ]
@@ -935,6 +935,9 @@ trait Functions
                             $thumbnail = '';
                             if(count($node->filter('img')) > 0){
                                 $thumbnail = $node->filter('img')->attr('data-src');
+                                if(empty($thumbnail)){
+                                    $thumbnail = $node->filter('img')->attr('data-lazy-src');
+                                }
                             }
                             return [
                                 'href' => $url,
@@ -1226,10 +1229,19 @@ trait Functions
                         'description' => mb_substr(strip_tags($data[0]), 0, 300, 'utf-8'),
                         'content' => implode('', $data)
                     ]);
-                    PostCategory::create([
-                        'category_id' => $categoryId,
-                        'post_id' => $post->id
-                    ]);
+                    if(is_array($categoryId)){
+                        foreach ($categoryId as $key => $cateId) {
+                            PostCategory::create([
+                                'category_id' => $cateId,
+                                'post_id' => $post->id
+                            ]);
+                        }
+                    }else {
+                        PostCategory::create([
+                            'category_id' => $categoryId,
+                            'post_id' => $post->id
+                        ]);
+                    }
                     Slug::create([
                         'key' => $slug_components,
                         'reference_id' => $post->id,
@@ -1523,10 +1535,19 @@ trait Functions
                         'description' => strip_tags($data[0]),
                         'content' => implode('', $data)
                     ]);
-                    PostCategory::create([
-                        'category_id' => $categoryId,
-                        'post_id' => $post->id
-                    ]);
+                    if(is_array($categoryId)){
+                        foreach ($categoryId as $key => $cateId) {
+                            PostCategory::create([
+                                'category_id' => $cateId,
+                                'post_id' => $post->id
+                            ]);
+                        }
+                    }else {
+                        PostCategory::create([
+                            'category_id' => $categoryId,
+                            'post_id' => $post->id
+                        ]);
+                    }
                     Slug::create([
                         'key' => $slug_components,
                         'reference_id' => $post->id,
